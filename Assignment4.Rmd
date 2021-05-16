@@ -1,0 +1,66 @@
+---
+title: "ETC513 Assignment 3: Comparison of Energy and Pollution by Country"
+author:
+- familyname: Chen
+  othernames: Shaohu
+  address: Monash Universtidy
+  email: sche0232@student.monash.edu
+  correspondingauthor: true
+  qualifications:  Master of Business Analytics(In Progress)
+- familyname: Duan
+  othernames: Qian
+  address: Monash Universtidy
+  email: qdua0005@student.monash.edu
+  correspondingauthor: true
+  qualifications:  Master of Business Analytics(In Progress)
+- familyname: Tsou
+  othernames: Tina
+  address: Monash Universtidy
+  email: ttso0004@student.monash.edu
+  correspondingauthor: true
+  qualifications:  Master of Business Analytics(In Progress)
+department: Our consultancy \newline add names &\newline add names
+organization: Australian Government 
+bibliography: references.bib
+biblio-style: authoryear-comp
+linestretch: 1.5
+output:
+  bookdown::pdf_document2:
+    template: monashreport2.tex
+    fig_caption: yes
+    fig_height: 5
+    fig_width: 8
+    includes:
+      in_header: preamble.tex
+    keep_tex: yes
+    number_sections: yes
+    citation_package: biblatex
+    toc: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r ,echo = FALSE, message = FALSE, warning = FALSE}
+# Libraries
+library(tidyverse)
+library(readr)
+library(kableExtra)
+library(bookdown)
+drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
+```
+
+\section*{Introduction}
+
+
+
+
+\section*{Step 1}
+
+
+
+
+\section*{Step 2}
+
+
+\section*{Step 3}
+
