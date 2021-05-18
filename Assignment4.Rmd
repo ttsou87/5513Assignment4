@@ -59,8 +59,18 @@ drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
 ```{r}
 num_drive <- drive %>% select(Month,`Local Government Authority`) %>% count(Month,`Local Government Authority`)%>% arrange(desc(Month)) 
 
-pass_drive_percentage <- drive %>% select(Month,`Local Government Authority`,`Exam Result`) %>% count(Month,`Local Government Authority`,`Exam Result`) %>% arrange(desc(Month)) %>% rename(num = n) %>% right_join(num_drive) %>% mutate(percentage = num/n) %>% filter(`Exam Result` == 'PASS') %>% rename(pass_num = num, tatal_num = n) %>% select(-`Exam Result`)
+pass_drive_percentage <- drive %>% select(Month,`Local Government Authority`,`Exam Result`) %>% count(Month,`Local Government Authority`,`Exam Result`) %>% arrange(desc(Month)) %>% rename(num = n) %>% right_join(num_drive) %>% mutate(percentage = num/n) %>% filter(`Exam Result` == 'PASS') %>% rename(pass_num = num, tatal_num = n) %>% select(-`Exam Result`) %>%
+ separate(col = Month, into = c("Year","Month"),"-")
 ```
+
+```{r}
+num_month_drive <- drive %>% select(Month,`Local Government Authority`) %>% count(Month)
+
+num_month_drive_percentage <- drive %>% select(Month,`Local Government Authority`,`Exam Result`) %>% count(Month,`Exam Result`)%>% arrange(desc(Month)) %>% rename(num = n) %>% right_join(num_month_drive)%>% mutate(month_percentage = num/n) %>% filter(`Exam Result` == 'PASS') %>% rename(pass_num = num, tatal_num = n) %>% select(-`Exam Result`) %>%
+ separate(col = Month, into = c("Year","Month"),"-")
+```
+
+
 
 This is the first section
 
