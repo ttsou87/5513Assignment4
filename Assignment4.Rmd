@@ -56,7 +56,13 @@ drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
 
 \section*{Step 1}
 
-This is the first section 
+```{r}
+num_drive <- drive %>% select(Month,`Local Government Authority`) %>% count(Month,`Local Government Authority`)%>% arrange(desc(Month)) 
+
+pass_drive_percentage <- drive %>% select(Month,`Local Government Authority`,`Exam Result`) %>% count(Month,`Local Government Authority`,`Exam Result`) %>% arrange(desc(Month)) %>% rename(num = n) %>% right_join(num_drive) %>% mutate(percentage = num/n) %>% filter(`Exam Result` == 'PASS') %>% rename(pass_num = num, tatal_num = n) %>% select(-`Exam Result`)
+```
+
+This is the first section
 
 
 
