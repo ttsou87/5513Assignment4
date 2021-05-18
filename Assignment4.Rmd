@@ -46,7 +46,7 @@ library(tidyverse)
 library(readr)
 library(kableExtra)
 library(bookdown)
-drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
+drive <- read_csv(here::here("Data/practicaldrivingexaminationresults.csv"))
 ```
 
 \section*{Introduction}
@@ -60,6 +60,15 @@ drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
 
 
 \section*{Step 2}
+```{r}
+# select the age group
+age <- drive %>%
+  select(`Product Type Name`, `Driver Age Group`, `Exam Result`, `Number of Examinations`) %>%
+# count the pass rate by different product type
+  group_by(`Product Type Name`, `Driver Age Group`, `Exam Result`) %>%
+  count()
+```
+
 
 
 \section*{Step 3}
