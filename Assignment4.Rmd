@@ -72,9 +72,6 @@ num_month_drive_percentage <- drive %>% select(Month,`Local Government Authority
 
 
 
-This is the first section
-
-
 
 \section*{Step 2}
 
