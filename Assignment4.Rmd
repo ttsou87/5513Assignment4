@@ -46,6 +46,8 @@ library(tidyverse)
 library(readr)
 library(kableExtra)
 library(bookdown)
+library(fastDummies)
+library(ggResidpanel)
 drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
 ```
 
@@ -63,4 +65,32 @@ drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
 
 
 \section*{Step 3}
+```{r}
+drive3 <- drive %>%
+  mutate(`Exam Result` = as.factor(`Exam Result`),
+         `Booking Type` = as.factor(`Booking Type`))
+regmodel <- glm(`Exam Result` ~ `Booking Type` + `Number of Examinations`, data = drive3)
+
+miss_var_summary(drive)
+```
+
+
+```{r}
+drivedum <- dummy_cols(drive, select_columns =  c('Booking Type', 'Exam Result', 'Product Type Name'),
+                       remove_selected_columns = TRUE)
+train <- drivedum[1:252813,]
+test <- drivedum[252814:337084,]
+
+logmodel <- glm(`Exam Result_PASS` ~`Booking Type_Private` + `Number of Examinations` + `Product Type Name_CLASS C - CAR (MANUAL)`+ `Product Type Name_CLASS CA - CAR (AUTOMATIC)`+ `Product Type Name_CLASS HC - HEAVY COMBINATION VEHICLE`+ `Product Type Name_CLASS HR - HEAVY RIGID VEHICLE`+ `Product Type Name_CLASS LR - LIGHT RIGID VEHICLE`+ `Product Type Name_CLASS MR - MEDIUM RIGID VEHICLE`+ `Product Type Name_CLASS R - MOTORCYCLE (OVER 250CC)`, family=binomial(link='logit'),data=train)
+
+summary(logmodel)
+anova(logmodel, test="Chisq")
+```
+
+```{r accuracy}
+fitted.results <- predict(logmodel,newdata=test,type='response')
+fitted.results <- ifelse(fitted.results > 0.5,1,0)
+misClasificError <- mean(fitted.results != test$`Exam Result_PASS`)
+print(paste('Accuracy',1-misClasificError))
+```
 
