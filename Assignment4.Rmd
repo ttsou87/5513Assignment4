@@ -61,14 +61,48 @@ drive <- read_csv(here::here("Data/practicaldrivingexaminationresults.csv"))
 
 \section*{Step 2}
 ```{r}
+library(plotly)
+```
+
+```{r}
 # select the age group
 age <- drive %>%
   select(`Product Type Name`, `Driver Age Group`, `Exam Result`, `Number of Examinations`) %>%
+  mutate(Age_group1 = str_remove(`Driver Age Group`, "Aged"),
+         Age_group2 = str_remove(Age_group1, "years")) %>%
+  rename(age_group = Age_group2) %>%
 # count the pass rate by different product type
-  group_by(`Product Type Name`, `Driver Age Group`, `Exam Result`) %>%
+  group_by(`Product Type Name`, age_group, `Exam Result`) %>%
   count()
 ```
 
+```{r}
+# plot the age group by license
+ggplot(age)+
+  geom_bar(aes(y = age_group,
+               x = n,
+               fill = `Exam Result`),
+           stat = "identity",
+           position = "fill")+
+  geom_vline(xintercept = 0.5, color = "yellow")+
+  facet_wrap(~`Product Type Name`, nrow = 4,
+             scale = "free_y")
+
+  
+```
+This graph illustrates all the driver license pass rate according to different age group. Most pass rate is higher than fail rate, except the manual car in older age. This is because it's too hard to pass in 80 years old. Same as automatic car with higher fall rate when the age above 45 years old.
+
+
+```{r}
+# count the pass rate 
+pass_rate <- drive %>%
+  select(`Product Type Name`, `Driver Age Group`, `Exam Result`, `Number of Examinations`) %>%
+  filter(`Exam Result` == "PASS") %>%
+# There are 211,717 people recorded pass
+  pivot_wider(names_from = `Driver Age Group`,
+              values_from = `Number of Examinations`)
+  
+```
 
 
 \section*{Step 3}
