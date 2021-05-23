@@ -36,8 +36,8 @@ output:
     number_sections: yes
     citation_package: biblatex
     toc: false
-editor_options: 
-  chunk_output_type: console
+# editor_options: 
+#   chunk_output_type: console
 ---
 
 ```{r ,echo = FALSE, message = FALSE, warning = FALSE}
@@ -65,15 +65,6 @@ drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
 
 
 \section*{Step 3}
-```{r}
-drive3 <- drive %>%
-  mutate(`Exam Result` = as.factor(`Exam Result`),
-         `Booking Type` = as.factor(`Booking Type`))
-regmodel <- glm(`Exam Result` ~ `Booking Type` + `Number of Examinations`, data = drive3)
-
-miss_var_summary(drive)
-```
-
 
 ```{r}
 drivedum <- dummy_cols(drive, select_columns =  c('Booking Type', 'Exam Result', 'Product Type Name'),
@@ -81,7 +72,7 @@ drivedum <- dummy_cols(drive, select_columns =  c('Booking Type', 'Exam Result',
 train <- drivedum[1:252813,]
 test <- drivedum[252814:337084,]
 
-logmodel <- glm(`Exam Result_PASS` ~`Booking Type_Private` + `Number of Examinations` + `Product Type Name_CLASS C - CAR (MANUAL)`+ `Product Type Name_CLASS CA - CAR (AUTOMATIC)`+ `Product Type Name_CLASS HC - HEAVY COMBINATION VEHICLE`+ `Product Type Name_CLASS HR - HEAVY RIGID VEHICLE`+ `Product Type Name_CLASS LR - LIGHT RIGID VEHICLE`+ `Product Type Name_CLASS MR - MEDIUM RIGID VEHICLE`+ `Product Type Name_CLASS R - MOTORCYCLE (OVER 250CC)`, family=binomial(link='logit'),data=train)
+logmodel <- glm(`Exam Result_PASS` ~`Booking Type_Private`, family=binomial(link='logit'),data=train)
 
 summary(logmodel)
 anova(logmodel, test="Chisq")
@@ -92,5 +83,18 @@ fitted.results <- predict(logmodel,newdata=test,type='response')
 fitted.results <- ifelse(fitted.results > 0.5,1,0)
 misClasificError <- mean(fitted.results != test$`Exam Result_PASS`)
 print(paste('Accuracy',1-misClasificError))
+```
+// end of logistic regression model testing
+
+```{r frequency table}
+table <- table(drive$`Booking Type`,drive$`Exam Result`)
+tab.prop <-  prop.table(table, 2)
+
+chisq.test(drive$`Booking Type`,drive$`Exam Result`)
+```
+P-value is 0.0121 so we have statistical evidence that there is a relationship between *Booking Type* and *Exam Result*.
+
+```{r}
+
 ```
 
