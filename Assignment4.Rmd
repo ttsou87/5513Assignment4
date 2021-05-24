@@ -70,20 +70,22 @@ drive3 <- drive %>%
   mutate(`Exam Result` = as.factor(`Exam Result`),
          `Booking Type` = as.factor(`Booking Type`))
 regmodel <- glm(`Exam Result` ~ `Booking Type` + `Number of Examinations`, data = drive3)
-
-miss_var_summary(drive)
 ```
 
-
 ```{r}
-drivedum <- dummy_cols(drive, select_columns =  c('Booking Type', 'Exam Result', 'Product Type Name'),
+drivedum <- dummy_cols(drive, select_columns =  c('Booking Type', 'Exam Result', 
+                                                  'Product Type Name'),
                        remove_selected_columns = TRUE)
 train <- drivedum[1:252813,]
 test <- drivedum[252814:337084,]
 
-logmodel <- glm(`Exam Result_PASS` ~`Booking Type_Private` + `Number of Examinations` + `Product Type Name_CLASS C - CAR (MANUAL)`+ `Product Type Name_CLASS CA - CAR (AUTOMATIC)`+ `Product Type Name_CLASS HC - HEAVY COMBINATION VEHICLE`+ `Product Type Name_CLASS HR - HEAVY RIGID VEHICLE`+ `Product Type Name_CLASS LR - LIGHT RIGID VEHICLE`+ `Product Type Name_CLASS MR - MEDIUM RIGID VEHICLE`+ `Product Type Name_CLASS R - MOTORCYCLE (OVER 250CC)`, family=binomial(link='logit'),data=train)
+logmodel <- glm(`Exam Result_PASS` ~`Booking Type_Private` + `Number of Examinations`,  family=binomial(link='logit'),data=train)
 
 summary(logmodel)
+
+```
+Looking at the p value, we see that both variables have p-value close to 0 which means they are both statistically significant when it comes to the regression. From the table above, we wee that *Booking Type_Private* affects the passing of an exam negatively compared to *Booking Type_Driving School*. The *Number of Examinations* have a very small but positive affect on the passing of an exam. So from the logistic regression we can conclude that by booking Privately it will negatively affect the passing of the exam in relations to booking by Driving School and that the number of examinations taken prior will have a very small but positive affect on the outcome.
+```{r}
 anova(logmodel, test="Chisq")
 ```
 
