@@ -66,20 +66,14 @@ drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
 
 \section*{Step 3}
 ```{r}
-drive3 <- drive %>%
-  mutate(`Exam Result` = as.factor(`Exam Result`),
-         `Booking Type` = as.factor(`Booking Type`))
-regmodel <- glm(`Exam Result` ~ `Booking Type` + `Number of Examinations`, data = drive3)
-```
-
-```{r}
 drivedum <- dummy_cols(drive, select_columns =  c('Booking Type', 'Exam Result', 
                                                   'Product Type Name'),
                        remove_selected_columns = TRUE)
 train <- drivedum[1:252813,]
 test <- drivedum[252814:337084,]
 
-logmodel <- glm(`Exam Result_PASS` ~`Booking Type_Private` + `Number of Examinations`,  family=binomial(link='logit'),data=train)
+logmodel <- glm(`Exam Result_PASS` ~`Booking Type_Private` + `Number of Examinations`,
+                family=binomial(link='logit'),data=train)
 
 summary(logmodel)
 
