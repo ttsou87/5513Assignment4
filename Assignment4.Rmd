@@ -48,6 +48,7 @@ library(kableExtra)
 library(bookdown)
 library(fastDummies)
 library(scales)
+library(broom)
 drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
 ```
 
@@ -105,5 +106,44 @@ names(tab.df) <- c("Booking Type", "Result", "frequency")
 ggplot(tab.df, 
        aes(x=`Booking Type`, y = frequency, fill=Result)) + 
         geom_col() +theme_minimal()
+```
+
+```{r}
+plot_df <- augment(logmodel, type.predict = "response")
+
+base <-
+  ggplot(plot_df, aes(x = `Booking Type_Private`)) +
+  geom_line(aes(y = .fitted), color = "blue") +
+  labs(x = "Booking Type", y = "Pass")
+
+base + geom_point(aes(y = `Exam Result_PASS`), alpha = 0.2)
+```
+
+```{r}
+times <- glm(`Exam Result_PASS` ~`Number of Examinations`, family=binomial(link='logit'),data=train)
+
+plotit <- augment(times, type.predict = "response")
+
+plotit <- plotit %>% 
+  mutate(Passed = ifelse(`Exam Result_PASS` == 1, 
+                         `Number of Examinations`, NA),
+         Failed = ifelse(`Exam Result_PASS` == 0,
+                         `Number of Examinations`, NA))
+
+base2 <-
+  ggplot(plotit, aes(x = `Number of Examinations`)) +
+  geom_line(aes(y = .fitted), color = "blue") +
+  labs(x = "Booking Type", y = "Pass/Fail")
+
+base2 + 
+  geom_rug(aes(x = Failed), sides = "b", alpha = 0.2) +
+  geom_rug(aes(x = Passed), sides = "t", alpha = 0.2)
+
+anova(times, test="Chisq")
+
+fitted.results2 <- predict(times,newdata=test,type='response')
+fitted.results2 <- ifelse(fitted.results2 > 0.5,1,0)
+misClasificError2 <- mean(fitted.results2 != test$`Exam Result_PASS`)
+print(paste('Accuracy',1-misClasificError))
 ```
 
