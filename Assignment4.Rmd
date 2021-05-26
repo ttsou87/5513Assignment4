@@ -48,7 +48,7 @@ library(kableExtra)
 library(bookdown)
 library(ggplot2)
 library(plotly)
-drive <- read_csv("practicaldrivingexaminationresults.csv")
+drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
 ```
 
 \section*{Introduction}
@@ -96,6 +96,30 @@ percentage_num_drive <- drive %>%
 num_dict <- percentage_num_drive %>% count(Year) %>% rename(total_num = n)
 ```
 
+```{r Tab1, message = FALSE, warning= FALSE, echo=FALSE, fig.width= 15,fig.cap="The number of times the Local Government Authority obtains the highest or lowest pass rate per year"}
+count_function <- function(x){percentage_num_drive %>% 
+  select(Year,`Local Government Authority`,percentage) %>% 
+  group_by(Year) %>% 
+  filter(percentage == x(percentage)) %>% 
+  group_by(`Local Government Authority`) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count))}
+
+max_percetage <- count_function(max) %>% head(6)
+min_percetage <- count_function(min) %>% head(6)
+
+knitr::kable(max_percetage,
+             caption = "Number of time getteing the highest pass rate per year",
+             booktabs = TRUE) %>%
+   kable_styling(bootstrap_options  = c("striped", "hold_position")) 
+
+knitr::kable(min_percetage,
+             caption = "Number of time getteing the lowest pass rate per year",
+             booktabs = TRUE) %>%
+   kable_styling(bootstrap_options  = c("striped", "hold_position"))
+```
+
+In the table \@ref(tab:Tab1), BLACKALL-TAMBO REGIONAL COUNCIL has the most number of first (`r max_percetage$count[1]` times), MAREEBA SHIRE COUNCIL, NAPRANUM ABORIGINAL SHIRE COUNCIL, REDLAND CITY COUNCIL have won the last `r min_percetage$count[1]` times. 
 
 \section*{Step 2}
 
