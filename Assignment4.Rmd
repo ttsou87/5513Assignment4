@@ -40,13 +40,15 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r ,echo = FALSE, message = FALSE, warning = FALSE}
+```{r setup, include=FALSE,echo = FALSE, message = FALSE, warning = FALSE,fig.align='center'}
 # Libraries
 library(tidyverse)
 library(readr)
 library(kableExtra)
 library(bookdown)
-drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
+library(ggplot2)
+library(plotly)
+drive <- read_csv("practicaldrivingexaminationresults.csv")
 ```
 
 \section*{Introduction}
@@ -55,19 +57,43 @@ drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
 
 
 \section*{Step 1}
+```{r,echo = FALSE, message = FALSE}
+year_drive <- drive %>% 
+ separate(col = Month, into = c("Year","Month"),"-") %>% 
+  select(Year,`Local Government Authority`)  
+num_year_drive <- year_drive %>% count(Year)
 
-```{r}
-num_drive <- drive %>% select(Month,`Local Government Authority`) %>% count(Month,`Local Government Authority`)%>% arrange(desc(Month)) 
-
-pass_drive_percentage <- drive %>% select(Month,`Local Government Authority`,`Exam Result`) %>% count(Month,`Local Government Authority`,`Exam Result`) %>% arrange(desc(Month)) %>% rename(num = n) %>% right_join(num_drive) %>% mutate(percentage = num/n) %>% filter(`Exam Result` == 'PASS') %>% rename(pass_num = num, tatal_num = n) %>% select(-`Exam Result`) %>%
- separate(col = Month, into = c("Year","Month"),"-")
+num_year_drive_percentage <- drive %>% 
+  separate(col = Month, into = c("Year","Month"),"-") %>% 
+  select(Year,Month,`Local Government Authority`,`Exam Result`) %>% 
+  count(Year,`Exam Result`) %>% 
+  arrange(desc(Year)) %>% 
+  rename(num = n) %>% 
+  right_join(num_year_drive) %>% 
+  mutate(year_percentage = num/n) %>% 
+  filter(`Exam Result` == 'PASS') %>% 
+  rename(pass_num = num, total_num = n) %>% 
+  select(Year,year_percentage)
 ```
 
-```{r}
-num_month_drive <- drive %>% select(Month,`Local Government Authority`) %>% count(Month)
+```{r,echo = FALSE, message = FALSE}
+num_drive <- year_drive %>% 
+  count(Year,`Local Government Authority`) %>% 
+  arrange(desc(Year)) 
 
-num_month_drive_percentage <- drive %>% select(Month,`Local Government Authority`,`Exam Result`) %>% count(Month,`Exam Result`)%>% arrange(desc(Month)) %>% rename(num = n) %>% right_join(num_month_drive)%>% mutate(month_percentage = num/n) %>% filter(`Exam Result` == 'PASS') %>% rename(pass_num = num, tatal_num = n) %>% select(-`Exam Result`) %>%
- separate(col = Month, into = c("Year","Month"),"-")
+percentage_num_drive <- drive %>% 
+ separate(col = Month, into = c("Year","Month"),"-") %>% 
+  select(Year,Month,`Local Government Authority`,`Exam Result`) %>% 
+  count(Year,`Local Government Authority`,`Exam Result`) %>% 
+  arrange(desc(Year)) %>% 
+  rename(num = n) %>% 
+  right_join(num_drive)  %>% 
+  mutate(percentage = num/n)%>% 
+  filter(`Exam Result` == 'PASS') %>% 
+  rename(pass_num = num, total_num = n)%>% 
+  left_join(num_year_drive_percentage)
+
+num_dict <- percentage_num_drive %>% count(Year) %>% rename(total_num = n)
 ```
 
 
