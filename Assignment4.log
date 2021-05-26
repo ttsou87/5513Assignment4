@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.5.8)  26 MAY 2021 23:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.5.8)  26 MAY 2021 23:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1708,14 +1708,20 @@ ut line 321.
 (pdftex.def)             Requested size: 455.24828pt x 212.44919pt.
 [2 <./Assignment4_files/figure-latex/Fig1-1.pdf> <./Assignment4_files/figure-la
 tex/Fig2-1.pdf>]
+<Assignment4_files/figure-latex/Fig3-1.pdf, id=36, 1084.05pt x 505.89pt>
+File: Assignment4_files/figure-latex/Fig3-1.pdf Graphic file (type pdf)
+<use Assignment4_files/figure-latex/Fig3-1.pdf>
+Package pdftex.def Info: Assignment4_files/figure-latex/Fig3-1.pdf  used on inp
+ut line 329.
+(pdftex.def)             Requested size: 455.24828pt x 212.44919pt.
 
-LaTeX Warning: Empty bibliography on input line 331.
+LaTeX Warning: Empty bibliography on input line 339.
 
 
 Package caption Warning: Unused \captionsetup[table] on input line 70.
 See the caption package documentation for explanation.
 
-[3] (./Assignment4.aux)
+[3 <./Assignment4_files/figure-latex/Fig3-1.pdf>] (./Assignment4.aux)
 Package rerunfilecheck Info: File `Assignment4.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 Package logreq Info: Writing requests to 'Assignment4.run.xml'.
@@ -1723,11 +1729,11 @@ Package logreq Info: Writing requests to 'Assignment4.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 25875 strings out of 480806
- 436009 string characters out of 5902737
- 1171325 words of memory out of 5000000
- 42614 multiletter control sequences out of 15000+600000
- 503466 words of font info for 233 fonts, out of 8000000 for 9000
+ 25892 strings out of 480806
+ 436434 string characters out of 5902737
+ 1171456 words of memory out of 5000000
+ 42621 multiletter control sequences out of 15000+600000
+ 504019 words of font info for 239 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,14n,93p,744b,808s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/ly
@@ -1742,10 +1748,10 @@ inyTeX/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb><c:/Users/Administra
 tor/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/bera/fvsb8a.pfb><c:/U
 sers/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/bera/f
 vsr8a.pfb>
-Output written on Assignment4.pdf (3 pages, 7511895 bytes).
+Output written on Assignment4.pdf (3 pages, 7517426 bytes).
 PDF statistics:
- 65 PDF objects out of 1000 (max. 8388607)
- 48 compressed objects within 1 object stream
- 6 named destinations out of 1000 (max. 500000)
- 77840 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 75 PDF objects out of 1000 (max. 8388607)
+ 56 compressed objects within 1 object stream
+ 7 named destinations out of 1000 (max. 500000)
+ 77845 words of extra memory for PDF output out of 89155 (max. 10000000)
 
