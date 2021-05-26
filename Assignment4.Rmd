@@ -48,7 +48,7 @@ library(kableExtra)
 library(bookdown)
 library(ggplot2)
 library(plotly)
-drive <- read_csv("practicaldrivingexaminationresults.csv")
+drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
 ```
 
 \section*{Introduction}
@@ -96,6 +96,33 @@ percentage_num_drive <- drive %>%
 num_dict <- percentage_num_drive %>% count(Year) %>% rename(total_num = n)
 ```
 
+```{r Fig1, message = FALSE, warning= FALSE, echo=FALSE, fig.height= 7, fig.width=15,fig.cap="Year Pass Percentage(year_percentage) and Percentage of Local Government Authority annual passing rates exceeding the total annual passing rate(num_percentage)"}
+over_percentage <- percentage_num_drive %>% 
+  filter(percentage > year_percentage) %>% 
+  count(Year,year_percentage) %>% 
+  left_join(num_dict) %>% 
+  mutate(num_percentage = n / total_num) %>% 
+  select(-n,-total_num) 
+
+over_percentage_longer <-over_percentage %>% 
+  pivot_longer(cols = year_percentage:num_percentage,
+               names_to = "percentage",
+               values_to = "vlues")
+
+ggplot(over_percentage_longer) +
+  geom_line(aes(x= as.numeric(Year),
+                y = vlues*100,
+                colour = percentage,
+                group = percentage))+
+  xlab("Year")+
+  ylab("Percentage")+
+  ggtitle("Year Pass Percentage and Number Percentage per year ")+
+scale_y_continuous(labels = scales::percent_format(scale = 1))+
+   theme_minimal() 
+
+```
+
+In the figure \@ref(fig:Fig1), as for the annual pass rate, it does not fluctuate greatly, and basically remained at 62.5% but the percentage of the number exceeding the annual pass rate fluctuates greatly, which may be due to missing data in some regions, however, from the data point of view, it has been in an upward phase in recent years.
 
 \section*{Step 2}
 

@@ -32,6 +32,15 @@
 \usepackage{longtable,booktabs}
 % Fix footnotes in tables (requires footnote package)
 \IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 \IfFileExists{parskip.sty}{%
 \usepackage{parskip}
 }{% else
@@ -298,6 +307,14 @@
 \section*{Introduction}
 
 \section*{Step 1}
+
+\begin{figure}
+\centering
+\includegraphics{Assignment4_files/figure-latex/Fig1-1.pdf}
+\caption{\label{fig:Fig1}Year Pass Percentage(year\_percentage) and Percentage of Local Government Authority annual passing rates exceeding the total annual passing rate(num\_percentage)}
+\end{figure}
+
+In the figure \ref{fig:Fig1}, as for the annual pass rate, it does not fluctuate greatly, and basically remained at 62.5\% but the percentage of the number exceeding the annual pass rate fluctuates greatly, which may be due to missing data in some regions, however, from the data point of view, it has been in an upward phase in recent years.
 
 \section*{Step 2}
 
