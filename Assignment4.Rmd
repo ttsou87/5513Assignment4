@@ -122,7 +122,7 @@ fail <- drive %>%
   select(age_group, fail_rate) 
 ```
 
-```{r fail_rate}
+```{r fail_rate, fig.align='center'}
 # plot the fail rate 
 ggplot(fail,
        aes(x = age_group,
@@ -137,11 +137,32 @@ ggplot(fail,
 
 Figure \@ref(fig:fail_rate) describes the failing rate of different age groups. It can be seen that the fail rate is increasing with the age grows older. Because people is 81 years old and over has the highest fail rate, which means it is hard for people to pass the driving license after 61 years old. However, there is one interesting point for young people with high rate at 41%. Basically, the people in this range takes the highest number of examinations. While in the original data set, some young people around these ages have 200- or 300-times test, but still failed. Australia government has more restrictions on young people driving license, so the rate is high.
 
+```{r}
+# select the age group
+age <- drive %>%
+  select(`Product Type Name`, `Driver Age Group`, `Exam Result`, `Number of Examinations`) %>%
+  mutate(Age_group1 = str_remove(`Driver Age Group`, "Aged"),
+         Age_group2 = str_remove(Age_group1, "years"),
+         licence = str_remove(`Product Type Name`, "CLASS")) %>%
+  rename(age_group = Age_group2) %>%
+# count the pass rate by different product type
+  group_by(licence, age_group, `Exam Result`) %>%
+  count()
+```
 
-
-
-
-  
+```{r license}
+# plot the age group by license
+ggplot(age,
+       aes(x = age_group,
+           y = n,
+           fill = `Exam Result`))+
+  geom_bar(stat = "identity", position = "fill", width=2)+
+  geom_hline(yintercept = 0.5, color = "black")+
+  facet_wrap(~licence, scales = "free_x", nrow = 2)+
+  scale_fill_manual(values=c("#6E7783", "#77AAAD"))+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90))
+ 
 ```
 
 
