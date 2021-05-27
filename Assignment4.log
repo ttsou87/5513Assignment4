@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.5.26)  27 MAY 2021 11:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.5.26)  27 MAY 2021 14:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1245,7 +1245,11 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 )
 \@quotelevel=\count441
 \@quotereset=\count442
-(./Assignment4.aux)
+(./Assignment4.aux
+
+LaTeX Warning: Label `tab:Tab1' multiply defined.
+
+)
 \openout1 = `Assignment4.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 304.
@@ -1700,28 +1704,27 @@ LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
 (Font)              scaled to size 10.51207pt on input line 314.
 LaTeX Font Info:    Font shape `T1/mdbch/m/it' will be
 (Font)              scaled to size 10.51207pt on input line 314.
-<Assignment4_files/figure-latex/Fig2-1.pdf, id=15, 1084.05pt x 505.89pt>
+<Assignment4_files/figure-latex/Fig2-1.pdf, id=16, 1084.05pt x 505.89pt>
 File: Assignment4_files/figure-latex/Fig2-1.pdf Graphic file (type pdf)
 <use Assignment4_files/figure-latex/Fig2-1.pdf>
 Package pdftex.def Info: Assignment4_files/figure-latex/Fig2-1.pdf  used on inp
-ut line 321.
+ut line 361.
 (pdftex.def)             Requested size: 455.24828pt x 212.44919pt.
-[2 <./Assignment4_files/figure-latex/Fig1-1.pdf> <./Assignment4_files/figure-la
-tex/Fig2-1.pdf>]
-<Assignment4_files/figure-latex/Fig3-1.pdf, id=36, 1084.05pt x 505.89pt>
+[2 <./Assignment4_files/figure-latex/Fig1-1.pdf>]
+<Assignment4_files/figure-latex/Fig3-1.pdf, id=34, 1084.05pt x 505.89pt>
 File: Assignment4_files/figure-latex/Fig3-1.pdf Graphic file (type pdf)
 <use Assignment4_files/figure-latex/Fig3-1.pdf>
 Package pdftex.def Info: Assignment4_files/figure-latex/Fig3-1.pdf  used on inp
-ut line 329.
+ut line 369.
 (pdftex.def)             Requested size: 455.24828pt x 212.44919pt.
 
-LaTeX Warning: Empty bibliography on input line 339.
+LaTeX Warning: Empty bibliography on input line 379.
 
+[3 <./Assignment4_files/figure-latex/Fig2-1.pdf>] [4 <./Assignment4_files/figur
+e-latex/Fig3-1.pdf>] (./Assignment4.aux)
 
-Package caption Warning: Unused \captionsetup[table] on input line 70.
-See the caption package documentation for explanation.
+LaTeX Warning: There were multiply-defined labels.
 
-[3 <./Assignment4_files/figure-latex/Fig3-1.pdf>] (./Assignment4.aux)
 Package rerunfilecheck Info: File `Assignment4.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 Package logreq Info: Writing requests to 'Assignment4.run.xml'.
@@ -1729,11 +1732,11 @@ Package logreq Info: Writing requests to 'Assignment4.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 25892 strings out of 480714
- 436434 string characters out of 5901166
- 1172949 words of memory out of 5000000
- 42713 multiletter control sequences out of 15000+600000
- 504019 words of font info for 239 fonts, out of 8000000 for 9000
+ 25901 strings out of 480714
+ 436542 string characters out of 5901166
+ 1177068 words of memory out of 5000000
+ 42715 multiletter control sequences out of 15000+600000
+ 504254 words of font info for 242 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,14n,93p,744b,808s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/ly
@@ -1748,10 +1751,10 @@ inyTeX/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb><c:/Users/Administra
 tor/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/bera/fvsb8a.pfb><c:/U
 sers/Administrator/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/bera/f
 vsr8a.pfb>
-Output written on Assignment4.pdf (3 pages, 7517564 bytes).
+Output written on Assignment4.pdf (4 pages, 7520191 bytes).
 PDF statistics:
- 75 PDF objects out of 1000 (max. 8388607)
- 56 compressed objects within 1 object stream
- 7 named destinations out of 1000 (max. 500000)
+ 82 PDF objects out of 1000 (max. 8388607)
+ 62 compressed objects within 1 object stream
+ 10 named destinations out of 1000 (max. 500000)
  77845 words of extra memory for PDF output out of 89155 (max. 10000000)
 
