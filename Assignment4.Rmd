@@ -61,8 +61,27 @@ drive <- read_csv(here::here("Data/practicaldrivingexaminationresults.csv"))
 
 \section*{Step 2}
 ```{r}
-library(plotly)
+library(scales)
 ```
+
+```{r}
+### The whole pass rate of Queensland
+wholerate <- drive %>%
+  group_by(`Exam Result`) %>%
+  count() %>%
+  pivot_wider(id_cols = `Exam Result`,
+              names_from = `Exam Result`,
+              values_from = n) %>%
+  mutate(passrate = PASS/(FAIL+PASS))
+head(percent(wholerate$passrate))
+```
+
+The driving examination pass rate of Queensland is `r head(percent(wholerate$passrate))` .
+
+
+
+
+
 
 ```{r}
 # select the age group
