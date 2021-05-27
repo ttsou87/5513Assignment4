@@ -78,7 +78,7 @@ head(percent(wholerate$passrate))
 
 The driving examination pass rate of Queensland is `r head(percent(wholerate$passrate))` .
 
-```{r}
+```{r pass_rate}
 #count the pass rate of each product type
 type <- drive %>%
   group_by(`Product Type Name`, `Exam Result`) %>%
@@ -95,10 +95,11 @@ type <- drive %>%
 knitr::kable(type, caption = "The pass rate of each product type",
              booktabs = TRUE) %>%
    kable_styling(latex_options = c("striped", "hold_position"))
-
-
 ```
 
++ The table \@ref(tab:pass_rate) is the pass rate of different licenses. Above all, the automatic car has the lowest passing rate with 53%, Since the car has the largest amount of popularity to meet people’s daily command, so there are more people to join the test of cars. 
+
++ While the motorcycle over 250cc has the largest pass rate with 86%. The motorcycle is much more professional, and it required people got the license up to 250cc who can take part in the test. Therefore, these people are professional so got a higher rate.
 
 
 
