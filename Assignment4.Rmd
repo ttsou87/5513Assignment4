@@ -78,6 +78,27 @@ head(percent(wholerate$passrate))
 
 The driving examination pass rate of Queensland is `r head(percent(wholerate$passrate))` .
 
+```{r}
+#count the pass rate of each product type
+type <- drive %>%
+  group_by(`Product Type Name`, `Exam Result`) %>%
+  count() %>%
+  pivot_wider(id_cols = -`Exam Result`,
+              names_from = `Exam Result`,
+              values_from = n) %>%
+  mutate(sum = FAIL + PASS,
+         pass_rate = round(PASS /sum,2))%>%
+  select(`Product Type Name`, pass_rate) %>%
+  arrange(pass_rate) %>%
+  mutate(pass_rate = percent(pass_rate))
+
+knitr::kable(type, caption = "The pass rate of each product type",
+             booktabs = TRUE) %>%
+   kable_styling(latex_options = c("striped", "hold_position"))
+
+
+```
+
 
 
 

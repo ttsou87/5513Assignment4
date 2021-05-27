@@ -29,9 +29,58 @@
 \geometry{a4paper, centering, text={16cm,24cm}}
 \usepackage[style=authoryear-comp,]{biblatex}
 \addbibresource{references.bib}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
 % Fix footnotes in tables (requires footnote package)
 \IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 \IfFileExists{parskip.sty}{%
 \usepackage{parskip}
 }{% else
@@ -300,6 +349,142 @@
 \section*{Step 1}
 
 \section*{Step 2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(scales)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'scales'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     discard
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:readr':
+## 
+##     col_factor
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# The whole pass rate of Queensland}
+\NormalTok{wholerate }\OtherTok{\textless{}{-}}\NormalTok{ drive }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Exam Result}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_wider}\NormalTok{(}\AttributeTok{id\_cols =} \StringTok{\textasciigrave{}}\AttributeTok{Exam Result}\StringTok{\textasciigrave{}}\NormalTok{,}
+              \AttributeTok{names\_from =} \StringTok{\textasciigrave{}}\AttributeTok{Exam Result}\StringTok{\textasciigrave{}}\NormalTok{,}
+              \AttributeTok{values\_from =}\NormalTok{ n) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{passrate =}\NormalTok{ PASS}\SpecialCharTok{/}\NormalTok{(FAIL}\SpecialCharTok{+}\NormalTok{PASS))}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{percent}\NormalTok{(wholerate}\SpecialCharTok{$}\NormalTok{passrate))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "63%"
+\end{verbatim}
+
+The driving examination pass rate of Queensland is 63\% .
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#count the pass rate of each product type}
+\NormalTok{type }\OtherTok{\textless{}{-}}\NormalTok{ drive }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Product Type Name}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{Exam Result}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_wider}\NormalTok{(}\AttributeTok{id\_cols =} \SpecialCharTok{{-}}\StringTok{\textasciigrave{}}\AttributeTok{Exam Result}\StringTok{\textasciigrave{}}\NormalTok{,}
+              \AttributeTok{names\_from =} \StringTok{\textasciigrave{}}\AttributeTok{Exam Result}\StringTok{\textasciigrave{}}\NormalTok{,}
+              \AttributeTok{values\_from =}\NormalTok{ n) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{sum =}\NormalTok{ FAIL }\SpecialCharTok{+}\NormalTok{ PASS,}
+         \AttributeTok{pass\_rate =} \FunctionTok{round}\NormalTok{(PASS }\SpecialCharTok{/}\NormalTok{sum,}\DecValTok{2}\NormalTok{))}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Product Type Name}\StringTok{\textasciigrave{}}\NormalTok{, pass\_rate) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(pass\_rate) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{pass\_rate =} \FunctionTok{percent}\NormalTok{(pass\_rate))}
+
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(type, }\AttributeTok{caption =} \StringTok{"The pass rate of each product type"}\NormalTok{,}
+             \AttributeTok{booktabs =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+   \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \FunctionTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"hold\_position"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-4}The pass rate of each product type}
+\centering
+\begin{tabular}[t]{ll}
+\toprule
+Product Type Name & pass\_rate\\
+\midrule
+\cellcolor{gray!6}{CLASS CA - CAR (AUTOMATIC)} & \cellcolor{gray!6}{53\%}\\
+CLASS C - CAR (MANUAL) & 56\%\\
+\cellcolor{gray!6}{CLASS HR - HEAVY RIGID VEHICLE} & \cellcolor{gray!6}{70\%}\\
+CLASS MR - MEDIUM RIGID VEHICLE & 77\%\\
+\cellcolor{gray!6}{CLASS RE - MOTORCYCLE (UP TO 250CC} & \cellcolor{gray!6}{77\%}\\
+\addlinespace
+CLASS HC - HEAVY COMBINATION VEHICLE & 79\%\\
+\cellcolor{gray!6}{CLASS LR - LIGHT RIGID VEHICLE} & \cellcolor{gray!6}{83\%}\\
+CLASS R - MOTORCYCLE (OVER 250CC) & 86\%\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# select the age group}
+\NormalTok{age }\OtherTok{\textless{}{-}}\NormalTok{ drive }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Product Type Name}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{Driver Age Group}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{Exam Result}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{Number of Examinations}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Age\_group1 =} \FunctionTok{str\_remove}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Driver Age Group}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{"Aged"}\NormalTok{),}
+         \AttributeTok{Age\_group2 =} \FunctionTok{str\_remove}\NormalTok{(Age\_group1, }\StringTok{"years"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{age\_group =}\NormalTok{ Age\_group2) }\SpecialCharTok{\%\textgreater{}\%}
+\CommentTok{\# count the pass rate by different product type}
+  \FunctionTok{group\_by}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Product Type Name}\StringTok{\textasciigrave{}}\NormalTok{, age\_group, }\StringTok{\textasciigrave{}}\AttributeTok{Exam Result}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# plot the age group by license}
+\FunctionTok{ggplot}\NormalTok{(age)}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ age\_group,}
+               \AttributeTok{x =}\NormalTok{ n,}
+               \AttributeTok{fill =} \StringTok{\textasciigrave{}}\AttributeTok{Exam Result}\StringTok{\textasciigrave{}}\NormalTok{),}
+           \AttributeTok{stat =} \StringTok{"identity"}\NormalTok{,}
+           \AttributeTok{position =} \StringTok{"fill"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{color =} \StringTok{"yellow"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\StringTok{\textasciigrave{}}\AttributeTok{Product Type Name}\StringTok{\textasciigrave{}}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{4}\NormalTok{,}
+             \AttributeTok{scale =} \StringTok{"free\_y"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Assignment4_files/figure-latex/unnamed-chunk-6-1.pdf}
+This graph illustrates all the driver license pass rate according to different age group. Most pass rate is higher than fail rate, except the manual car in older age. This is because it's too hard to pass in 80 years old. Same as automatic car with higher fall rate when the age above 45 years old.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# count the pass rate }
+\NormalTok{pass\_rate }\OtherTok{\textless{}{-}}\NormalTok{ drive }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Product Type Name}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{Driver Age Group}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{Exam Result}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{Number of Examinations}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Exam Result}\StringTok{\textasciigrave{}} \SpecialCharTok{==} \StringTok{"PASS"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+\CommentTok{\# There are 211,717 people recorded pass}
+  \FunctionTok{pivot\_wider}\NormalTok{(}\AttributeTok{names\_from =} \StringTok{\textasciigrave{}}\AttributeTok{Driver Age Group}\StringTok{\textasciigrave{}}\NormalTok{,}
+              \AttributeTok{values\_from =} \StringTok{\textasciigrave{}}\AttributeTok{Number of Examinations}\StringTok{\textasciigrave{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Values are not uniquely identified; output will contain list-cols.
+## * Use `values_fn = list` to suppress this warning.
+## * Use `values_fn = length` to identify where the duplicates arise
+## * Use `values_fn = {summary_fun}` to summarise duplicates
+\end{verbatim}
 
 \section*{Step 3}
 
