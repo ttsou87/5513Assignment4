@@ -60,7 +60,8 @@ drive <- read_csv(here::here("Data/practicaldrivingexaminationresults.csv"))
 
 
 \section*{Step 2}
-```{r}
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, include = TRUE, message = FALSE, warning = FALSE)
 library(scales)
 ```
 
@@ -73,12 +74,11 @@ wholerate <- drive %>%
               names_from = `Exam Result`,
               values_from = n) %>%
   mutate(passrate = PASS/(FAIL+PASS))
-head(percent(wholerate$passrate))
 ```
 
 The driving examination pass rate of Queensland is `r head(percent(wholerate$passrate))` .
 
-```{r pass_rate}
+```{r passrate}
 #count the pass rate of each product type
 type <- drive %>%
   group_by(`Product Type Name`, `Exam Result`) %>%
@@ -97,11 +97,11 @@ knitr::kable(type, caption = "The pass rate of each product type",
    kable_styling(latex_options = c("striped", "hold_position"))
 ```
 
-+ The table \@ref(tab:pass_rate) is the pass rate of different licenses. Above all, the automatic car has the lowest passing rate with 53%, Since the car has the largest amount of popularity to meet people’s daily command, so there are more people to join the test of cars. 
++ The table \@ref(tab:passrate) is the pass rate of different licenses. Above all, the automatic car has the lowest passing rate with 53%, Since the car has the largest amount of popularity to meet people daily command, so there are more people to join the test of cars. 
 
 + While the motorcycle over 250cc has the largest pass rate with 86%. The motorcycle is much more professional, and it required people got the license up to 250cc who can take part in the test. Therefore, these people are professional so got a higher rate.
 
-```{r}
+```{r failrate, fig.align='center', warnings = FALSE, fig.cap="Queensland driving test fail rates by age"}
 fail <- drive %>%
  separate(col = Month,
           into = c("year",
@@ -120,9 +120,7 @@ fail <- drive %>%
          Age_group2 = str_remove(Age_group1, "years")) %>%
   rename(age_group = Age_group2) %>%
   select(age_group, fail_rate) 
-```
 
-```{r fail_rate, fig.align='center'}
 # plot the fail rate 
 ggplot(fail,
        aes(x = age_group,
@@ -130,12 +128,13 @@ ggplot(fail,
            group = 1))+
   geom_line(color = "#8FBC94", size = 1)+
   geom_point(color = "#548687", size = 2)+
-  ggtitle("Queensland driving test fail rates by age")+
   theme_bw()+
   theme(axis.text.x = element_text(angle = 90))
+
 ```
 
-Figure \@ref(fig:fail_rate) describes the failing rate of different age groups. It can be seen that the fail rate is increasing with the age grows older. Because people is 81 years old and over has the highest fail rate, which means it is hard for people to pass the driving license after 61 years old. However, there is one interesting point for young people with high rate at 41%. Basically, the people in this range takes the highest number of examinations. While in the original data set, some young people around these ages have 200- or 300-times test, but still failed. Australia government has more restrictions on young people driving license, so the rate is high.
+Figure \@ref(fig:failrate), describes the failing rate of different age groups. It can be seen that the fail rate is increasing with the age grows older. Because people is 81 years old and over has the highest fail rate, which means it is hard for people to pass the driving license after 61 years old. However, there is one interesting point for young people with high rate at 41%. Basically, the people in this range takes the highest number of examinations. While in the original data set, some young people around these ages have 200- or 300-times test, but still failed. Australia government has more restrictions on young people driving license, so the rate is high.
+
 
 ```{r}
 # select the age group
@@ -150,7 +149,8 @@ age <- drive %>%
   count()
 ```
 
-```{r license}
+
+```{r license, fig.cap="Compare the fail and pass in different license"}
 # plot the age group by license
 ggplot(age,
        aes(x = age_group,
@@ -165,7 +165,7 @@ ggplot(age,
  
 ```
 
-In \@ref(fig:license), for most drive license, the number of pass all exceeds 50% of all age, except the automatic car license. People who fails at an older age. The number of fails is much more than pass. 
+In Figure \@ref(fig:license), for most drive license, the number of pass all exceeds 50% of all age, except the automatic car license. People who fails at an older age. The number of fails is much more than pass. 
 Another interesting point is that in motorcycle and heavy vehicle, people over 70 years old get 100% pass rate. This is mainly because there are only one or two people join the test and he pass. So, the pass rate is 100%. This doesn’t mean all old people can get the license for one time.
 
 \section*{Step 3}
