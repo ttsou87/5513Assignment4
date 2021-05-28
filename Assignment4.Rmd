@@ -48,7 +48,7 @@ library(kableExtra)
 library(bookdown)
 library(ggplot2)
 library(plotly)
-drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
+drive <- read_csv(here::here("Data/practicaldrivingexaminationresults.csv"))
 ```
 
 \section*{Introduction}
@@ -209,7 +209,113 @@ Therefore, the annual pass rate has not changed much, the percentage of the numb
 
 
 \section*{Step 2}
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, include = TRUE, message = FALSE, warning = FALSE)
+library(scales)
+```
 
+```{r}
+### The whole pass rate of Queensland
+wholerate <- drive %>%
+  group_by(`Exam Result`) %>%
+  count() %>%
+  pivot_wider(id_cols = `Exam Result`,
+              names_from = `Exam Result`,
+              values_from = n) %>%
+  mutate(passrate = PASS/(FAIL+PASS))
+```
+
+The driving examination pass rate of Queensland is `r head(percent(wholerate$passrate))` .
+
+```{r passrate}
+#count the pass rate of each product type
+type <- drive %>%
+  group_by(`Product Type Name`, `Exam Result`) %>%
+  count() %>%
+  pivot_wider(id_cols = -`Exam Result`,
+              names_from = `Exam Result`,
+              values_from = n) %>%
+  mutate(sum = FAIL + PASS,
+         pass_rate = round(PASS /sum,2))%>%
+  select(`Product Type Name`, pass_rate) %>%
+  arrange(pass_rate) %>%
+  mutate(pass_rate = percent(pass_rate))
+
+knitr::kable(type, caption = "The pass rate of each product type",
+             booktabs = TRUE) %>%
+   kable_styling(latex_options = c("striped", "hold_position"))
+```
+
++ The table \@ref(tab:passrate) is the pass rate of different licenses. Above all, the automatic car has the lowest passing rate with 53%, Since the car has the largest amount of popularity to meet people daily command, so there are more people to join the test of cars. 
+
++ While the motorcycle over 250cc has the largest pass rate with 86%. The motorcycle is much more professional, and it required people got the license up to 250cc who can take part in the test. Therefore, these people are professional so got a higher rate.
+
+```{r failrate, fig.align='center', warnings = FALSE, fig.cap="Queensland driving test fail rates by age"}
+fail <- drive %>%
+ separate(col = Month,
+          into = c("year",
+                   "month"),
+          "-") %>%
+  mutate(year = as.numeric(year)) %>%
+  filter(year %in% c("2005" : "2019" ))%>%
+  group_by(`Driver Age Group`, `Exam Result`) %>%
+  count() %>%
+  pivot_wider(id_cols = -`Exam Result`,
+              names_from = `Exam Result`,
+              values_from = n) %>%
+  mutate(sum = FAIL + PASS,
+         fail_rate = round(FAIL /sum * 100, 3)) %>%
+  mutate(Age_group1 = str_remove(`Driver Age Group`, "Aged"),
+         Age_group2 = str_remove(Age_group1, "years")) %>%
+  rename(age_group = Age_group2) %>%
+  select(age_group, fail_rate) 
+
+# plot the fail rate 
+ggplot(fail,
+       aes(x = age_group,
+           y = fail_rate,
+           group = 1))+
+  geom_line(color = "#8FBC94", size = 1)+
+  geom_point(color = "#548687", size = 2)+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90))
+
+```
+
+Figure \@ref(fig:failrate), describes the failing rate of different age groups. It can be seen that the fail rate is increasing with the age grows older. Because people is 81 years old and over has the highest fail rate, which means it is hard for people to pass the driving license after 61 years old. However, there is one interesting point for young people with high rate at 41%. Basically, the people in this range takes the highest number of examinations. While in the original data set, some young people around these ages have 200- or 300-times test, but still failed. Australia government has more restrictions on young people driving license, so the rate is high.
+
+
+```{r}
+# select the age group
+age <- drive %>%
+  select(`Product Type Name`, `Driver Age Group`, `Exam Result`, `Number of Examinations`) %>%
+  mutate(Age_group1 = str_remove(`Driver Age Group`, "Aged"),
+         Age_group2 = str_remove(Age_group1, "years"),
+         licence = str_remove(`Product Type Name`, "CLASS")) %>%
+  rename(age_group = Age_group2) %>%
+# count the pass rate by different product type
+  group_by(licence, age_group, `Exam Result`) %>%
+  count()
+```
+
+
+```{r license, fig.cap="Compare the fail and pass in different license"}
+# plot the age group by license
+ggplot(age,
+       aes(x = age_group,
+           y = n,
+           fill = `Exam Result`))+
+  geom_bar(stat = "identity", position = "fill", width=2)+
+  geom_hline(yintercept = 0.5, color = "black")+
+  facet_wrap(~licence, scales = "free_x", nrow = 2)+
+  scale_fill_manual(values=c("#6E7783", "#77AAAD"))+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90))
+ 
+```
+
+In Figure \@ref(fig:license), for most drive license, the number of pass all exceeds 50% of all age, except the automatic car license. People who fails at an older age. The number of fails is much more than pass. 
+Another interesting point is that in motorcycle and heavy vehicle, people over 70 years old get 100% pass rate. This is mainly because there are only one or two people join the test and he pass. So, the pass rate is 100%. This doesn’t mean all old people can get the license for one time.
 
 \section*{Step 3}
 
