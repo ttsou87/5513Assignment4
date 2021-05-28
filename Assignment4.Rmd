@@ -53,11 +53,22 @@ drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
 
 \section*{Introduction}
 
++ Data Description:
 
+This data set is [Practical driving examination results for customers](https://data.gov.au/dataset/ds-qld-3f90a4c3-23df-49dc-b243-9a29c0b23dd5/details?q=Practical%20driving) which is provided by local government authority (LGA) of Queensland. It records the license class, booking type, examination results and driver age group during 2005 to 2019.
+
++ Research aims:
+
+We divided into three parts, the first part focuses on the annual pass rate of different local government authority. 
+
+The second part mainly aims to compare the age group with different license. 
+
+The third part calculates the correlation between the examination results and booking type.
 
 
 \section*{Step 1}
 
+The first part focuses on the annual pass rate of different local government authority. 
 
 ```{r,echo = FALSE, message = FALSE}
 year_drive <- drive %>% 
@@ -191,7 +202,7 @@ ggplot()+
 
 In the figure \@ref(fig:Fig3), the number of pass for three government authorities basically has little fluctuation. Interestingly, the ranking of the number of passes and the ranking of the pass rate are completely opposite. 
 
-Therefore, The annual pass rate has not changed much, the percentage of the number exceeding the annual pass rate fluctuates greatly. Areas with sparsely populated areas may have fewer people participating, resulting in a higher overall pass rate than areas with densely populated areas.
+Therefore, the annual pass rate has not changed much, the percentage of the number exceeding the annual pass rate fluctuates greatly. Areas with sparsely populated areas may have fewer people participating, resulting in a higher overall pass rate than areas with densely populated areas.
 
 
 \section*{Step 2}
