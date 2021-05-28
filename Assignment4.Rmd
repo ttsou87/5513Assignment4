@@ -191,7 +191,8 @@ ggplot()+
 
 In the figure \@ref(fig:Fig3), the number of pass for three government authorities basically has little fluctuation. Interestingly, the ranking of the number of passes and the ranking of the pass rate are completely opposite. 
 
-Hence, The annual pass rate has not changed much, the percentage of the number exceeding the annual pass rate fluctuates greatly. Areas with sparsely populated areas may have fewer people participating, resulting in a higher overall pass rate than areas with densely populated areas.
+Therefore, The annual pass rate has not changed much, the percentage of the number exceeding the annual pass rate fluctuates greatly. Areas with sparsely populated areas may have fewer people participating, resulting in a higher overall pass rate than areas with densely populated areas.
+
 
 \section*{Step 2}
 
