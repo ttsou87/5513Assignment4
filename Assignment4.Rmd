@@ -139,7 +139,7 @@ scale_y_continuous(labels = scales::percent_format(scale = 1))+
 
 In the figure \@ref(fig:Fig1), as for the annual pass rate, it does not fluctuate greatly, and basically remained at 62.5% but the percentage of the number exceeding the annual pass rate fluctuates greatly, which may be due to missing data in some regions, however, from the data point of view, it has been in an upward phase in recent years.
 
-```{r Tab1, message = FALSE, warning= FALSE, echo=FALSE,fig.width= 15,fig.cap="The number of times the Local Government Authority obtains the highest or lowest pass rate per year"}
+```{r Tab1, message = FALSE, warning= FALSE, echo=FALSE,fig.width= 15}
 count_function <- function(x){percentage_num_drive %>% 
   select(Year,`Local Government Authority`,percentage) %>% 
   group_by(Year) %>% 
@@ -156,13 +156,16 @@ knitr::kable(max_percetage,
              booktabs = TRUE) %>%
    kable_styling(bootstrap_options  = c("striped", "hold_position")) 
 
+```
+
+```{r Tab2, message = FALSE, warning= FALSE, echo=FALSE,fig.width= 15,}
 knitr::kable(min_percetage,
              caption = "Number of time getteing the lowest pass rate per year",
              booktabs = TRUE) %>%
    kable_styling(bootstrap_options  = c("striped", "hold_position"))
 ```
 
-In the table \@ref(tab:Tab1), BLACKALL-TAMBO REGIONAL COUNCIL has the most number of first (`r max_percetage$count[1]` times), MAREEBA SHIRE COUNCIL, NAPRANUM ABORIGINAL SHIRE COUNCIL, REDLAND CITY COUNCIL have won the last `r min_percetage$count[1]` times. 
+In the table \@ref(tab:Tab1), BLACKALL-TAMBO REGIONAL COUNCIL has the most number of first (`r max_percetage$count[1]` times). In the table \@ref(tab:Tab2), MAREEBA SHIRE COUNCIL, NAPRANUM ABORIGINAL SHIRE COUNCIL, REDLAND CITY COUNCIL have won the last `r min_percetage$count[1]` times.
 
 ```{r,echo = FALSE, message = FALSE}
 max_min_percentage2 <- percentage_num_drive %>% 
@@ -209,4 +212,5 @@ Therefore, the annual pass rate has not changed much, the percentage of the numb
 
 
 \section*{Step 3}
+
 
