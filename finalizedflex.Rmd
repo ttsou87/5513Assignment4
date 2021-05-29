@@ -3,7 +3,6 @@ title: "PANDA"
 output: 
   flexdashboard::flex_dashboard:
     vertical_layout: fill
-    runtime: shiny
     source_code: embed
 ---
 
@@ -34,17 +33,19 @@ Column {data-width=600}
 
 ### Introduction about our analysis:
 
-+ Data Description:
+**Data Description**:
 
-This data set is Practical driving examination results for customers which is provided by local government authority (LGA) of Queensland. It records the license class, booking type, examination results and driver age group during 2005 to 2019.
+This data set is [Practical driving examination results for customers](https://data.gov.au/dataset/ds-qld-3f90a4c3-23df-49dc-b243-9a29c0b23dd5/details?q=Practical%20driving) which is provided by local government authority (LGA) of Queensland. It records the license class, booking type, examination results and driver age group during 2005 to 2019.
 
-+ Research aims:
+**Research aims**:
 
-We divided into three parts, the first part focuses on the annual pass rate of different local government authority. 
+We divided into three parts:
 
-The second part mainly aims to compare the age group with different license. 
+  + First part focuses on the annual pass rate of different local government authority. 
 
-The third part caculates the correlation between the examination results and booking type.
+  + Second part mainly aims to compare the age group with different license. 
+
+  + Third part calculates the correlation between the examination results and booking type.
 
 Column {data-width=400}
 -------------------------------------------
@@ -96,7 +97,7 @@ num_dict <- percentage_num_drive %>% count(Year) %>% rename(total_num = n)
 ```
 
 
-### Fig1:  Year Pass Percentage(year_percentage) and Percentage of Local Government Authority annual passing rates exceeding the total annual passing rate(num_percentage)
+### Figure 1.1:  Year Pass Percentage(year_percentage) and Percentage of Local Government Authority annual passing rates exceeding the total annual passing rate(num_percentage)
 ```{r Fig8, message = FALSE, warning= FALSE, echo=FALSE, fig.height= 15, fig.width=10}
 over_percentage <- percentage_num_drive %>% 
   filter(percentage > year_percentage) %>% 
@@ -123,7 +124,9 @@ ggplotly(total_year)
 ```
 
 
-### Table1: The number of times the Local Government Authority obtains the highest or lowest pass rate per year
+Column {data-width=400}
+---------------------------------------------------
+### Table1.1: The number of times the Local Government Authority obtains the highest or lowest pass rate per year
 ```{r Tab5, message = FALSE, warning= FALSE, echo=FALSE, fig.width= 8}
 count_function <- function(x){percentage_num_drive %>% 
   select(Year,`Local Government Authority`,percentage) %>% 
@@ -154,7 +157,7 @@ Part B {data-navmenu="Pass Rate"}
 Column {data-height=450}
 -------------------------------------
 
-### Fig2:  Year Pass Percentage in BLACKALL-TAMBO REGIONAL COUNCIL, BLACKALL-TAMBO REGIONAL COUNCIL, and REDLAND CITY COUNCIL
+### Figure 1.2:  Year Pass Percentage in BLACKALL-TAMBO REGIONAL COUNCIL, BLACKALL-TAMBO REGIONAL COUNCIL, and REDLAND CITY COUNCIL
 ```{r Fig9, fig.height= 10, fig.width=18, message = FALSE, warning= FALSE, echo=FALSE}
 max_min_percentage2 <- percentage_num_drive %>% 
   filter(`Local Government Authority` %in% c("BLACKALL-TAMBO REGIONAL COUNCIL",
@@ -166,7 +169,7 @@ percentage_rate <- ggplot()+
                 group = `Local Government Authority`,
                 colour = `Local Government Authority`))+
   geom_line(over_percentage,mapping = aes(x = as.numeric(Year), y = year_percentage*100), 
-            size = 1, color = "gold")+
+            size = 1, color = "gold", linetype = "dashed")+
   scale_y_continuous(name = "Year Pass Percentage",labels = scales::percent_format(scale = 1))+ 
   xlab("Year")+
    theme_minimal()
@@ -175,7 +178,7 @@ ggplotly(percentage_rate)
 
 ```
 
-### Fig3:  Year Pass Number in BLACKALL-TAMBO REGIONAL COUNCIL, MAREEBA SHIRE COUNCIL, and REDLAND CITY COUNCIL
+### Figure 1.3:  Year Pass Number in BLACKALL-TAMBO REGIONAL COUNCIL, MAREEBA SHIRE COUNCIL, and REDLAND CITY COUNCIL
 ```{r Tab6, message = FALSE, warning= FALSE, echo=FALSE, fig.height= 10, fig.width=18,}
 pass_percentage <- ggplot()+
   geom_line(max_min_percentage2,mapping = aes(x= as.numeric(Year),
@@ -196,19 +199,19 @@ Column {data-height=270}
 ### Analyisis
 
 
-+ From Fig1, The annual pass rate did not fluctuate greatly, and basically remained at 0.625. The percentage of the number exceeding the annual pass rate fluctuates greatly, which may be due to missing data in some regions in some years, but from the data point of view, it has been in an upward phase in recent years.
++ From Figure 1.1, The annual pass rate did not fluctuate greatly, and basically remained at 62.5% The percentage of the number exceeding the annual pass rate fluctuates greatly, which may be due to missing data in some regions in some years, but from the data point of view, it has been in an upward phase in recent years.
 
 
-+ From Fig2, The annual pass rate of BLACKALL-TAMBO REGIONAL COUNCIL has been on the rise after 2007, even reaching 100%, while the annual pass rate of MAREEBA SHIRE COUNCIL is in a downward state as a whole, and the annual pass rate of REDLAND CITY COUNCIL basically fluctuates at 0.55.
++ From Figure 1.2, The annual pass rate of BLACKALL-TAMBO REGIONAL COUNCIL has been on the rise after 2007, even reaching 100%, while the annual pass rate of MAREEBA SHIRE COUNCIL is in a downward state as a whole, and the annual pass rate of REDLAND CITY COUNCIL basically fluctuates at 55%.
 
-+ From Fig3, The number of passes for BLACKALL-TAMBO REGIONAL COUNCIL, MAREEBA SHIRE COUNCIL, and REDLAND CITY COUNCIL basically has little fluctuation. BLACKALL-TAMBO REGIONAL COUNCIL rises briefly and then falls again.
++ From Figure 1.3, The number of passes for BLACKALL-TAMBO REGIONAL COUNCIL, MAREEBA SHIRE COUNCIL, and REDLAND CITY COUNCIL basically has little fluctuation. BLACKALL-TAMBO REGIONAL COUNCIL rises briefly and then falls again.
 
 + Hence, The annual pass rate has not changed much, the percentage of the number exceeding the annual pass rate fluctuates greatly. Areas with sparsely populated areas may have fewer people participating, resulting in a higher overall pass rate than areas with densely populated areas.
 
 Age {data-icon="fa-birthday-cake"}
 ==================================
 
-Column {data-width=400}
+Column {data-width=300}
 -----------------------------------------------------------
 ### passrate
 ```{r}
@@ -228,7 +231,7 @@ valueBox(passrate,icon = "fa-user-plus",caption = "The driving examination pass 
 
 
 
-### The pass rate of different licence
+### Tab 2.1: The pass rate of different license
 ```{r}
 #count the pass rate of each product type
 type <- drive %>%
@@ -248,9 +251,9 @@ kable(type)
 
 ```
 
-Column {data-width=400}
+Column {data-width=700}
 -----------------------------------------------------------
-### The fail rate of different ages
+### Figure 2.1: The fail rate of different ages
 ```{r}
 fail <- drive %>%
  separate(col = Month,
@@ -293,7 +296,7 @@ License {data-icon="fa-id-badge"}
 Row
 ---------------------------------------------------------
 
-### Compare the pass and fail in different driver licence
+### Figure 2.2: Compare the pass and fail in different driver license
 ```{r}
 # select the age group
 age <- drive %>%
@@ -309,7 +312,7 @@ age <- drive %>%
 
 ```{r}
 # plot the age group by license
-licence <- ggplot(age,
+license <- ggplot(age,
        aes(x = age_group,
            y = n,
            fill = `Exam Result`))+
@@ -319,14 +322,14 @@ licence <- ggplot(age,
   scale_fill_manual(values=c("#6E7783", "#77AAAD"))+
   theme_bw()+
   theme(axis.text.x = element_text(angle = 90))
-ggplotly(licence) 
+ggplotly(license) 
 ```
 
 Part A {data-navmenu="Booking Type" data-icon="fa-id-schhol"}
 ==================================
 Column {data-width=400}
 -----------------------------------------------------------
-### Frequency Table
+### Table 3.1: Frequency Table
 A quick look at the frequency table between *Booking Type* and *Exam Result* and we saw that the number of people who passed the exam is similar for both driving school and private.
 ```{r frequency table}
 table <- table(drive$`Booking Type`,drive$`Exam Result`)
@@ -342,7 +345,7 @@ chisq.test(drive$`Booking Type`,drive$`Exam Result`)
 
 Column {data-width=600}
 -----------------------------------------------------------
-### Frequency Plotted
+### Figure 3.1: Frequency Plotted
 ```{r}
 tab.df <- as.data.frame(tab.prop)#make frequency table into data frame
 names(tab.df) <- c("Booking Type", "Result", "frequency")
@@ -376,15 +379,42 @@ Column {data-width=500}
 -----------------------------------------------------------
 
 ### ANOVA
-```{r}
+```{r ANOVA}
 anova(logmodel, test="Chisq")
+```
+
+### Accuracy Test
+```{r Accuracy}
+fitted.results <- predict(logmodel,newdata=test,type='response')
+fitted.results <- ifelse(fitted.results > 0.5,1,0)
+misClasificError <- mean(fitted.results != test$`Exam Result_PASS`)
+print(paste('Accuracy',1-misClasificError))
 ```
 
 
 Conclusion {data-icon="fa-id-flag-checkered"}
 ==================================
-![Retrieved from: https://images.pexels.com/photos/13861/IMG_3496bfree.jpg](https://images.pexels.com/photos/13861/IMG_3496bfree.jpg)
+Column {data-width=400}
+-----------------------------------------------
 
+### Conclusion:
+
++ Higher pass rate in certain districts is not always an absolute reflection on whether the district has better driving program. 
+
++ Automatic cars have the lowest pass rate overall, and that motorcycle (over 250cc) has the highest pass rate. 
+
++ Older people (66 and above) also tend to fail their vehicle tests more. But ultimately pass rate for each vehicle type and majority of the age group is over 50%.
+
++ Statistical relationship between the booking type and the exam outcome, the effect is pretty small. 
+
++ This is also a shortcoming with the data we currently have. Because it contains very limited variables, it is hard to create a better fit model that can predict the outcome accurately.
+
+Column {data-width=600}
+-------------------------------------------
+
+### Image
+
+![Retrieved from: https://images.pexels.com/photos/13861/IMG_3496bfree.jpg](https://images.pexels.com/photos/13861/IMG_3496bfree.jpg)
 
 Reference {data-icon="fa-adjust"}
 ==================================

@@ -66,7 +66,10 @@ drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
 
 
 \section*{Step 3}
+In the following section, we will be analyzing the relationship between *Booking Type* and *Exam Result*. Since the variables are categorical variables, they will have to be converted into dummy variables. Then, using logistic regression to analyze their relationship, we get the following equation:
 
+    + $Y ~ B(p)$, $log(\frac{p}{1-p}) = \beta_0 +\beta_1 X + \epsilon$
+    
 ```{r}
 drivedum <- dummy_cols(drive, select_columns =  c('Booking Type', 'Exam Result', 'Product Type Name'),
                        remove_selected_columns = TRUE)
