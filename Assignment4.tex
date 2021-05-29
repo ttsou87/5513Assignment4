@@ -277,20 +277,6 @@
 
 %% Any special functions or other packages can be loaded here.
 \usepackage{dcolumn} 
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{wrapfig}
-\usepackage{float}
-\usepackage{colortbl}
-\usepackage{pdflscape}
-\usepackage{tabu}
-\usepackage{threeparttable}
-\usepackage{threeparttablex}
-\usepackage[normalem]{ulem}
-\usepackage{makecell}
-\usepackage{xcolor}
 
 
 \begin{document}
@@ -317,9 +303,9 @@ In the following section, we will be analyzing the relationship between \emph{Bo
 
 The frequency plot, Figure \ref{fig:frequency}, between \emph{Booking Type} and \emph{Exam Result} shows that the percentages of people who passed the exam are similar for both driving school and private.
 
-Since the response variable and predictor variable are categorical variables, they will have to be converted into dummy variables(0 \& 1). Then, using logistic regression to analyze their relationship, we get the following equation for \emph{logmodel}:
+Since the response variable and predictor variable are categorical variables, they will have to be converted into dummy variables(0 \& 1). Then, following \textcite{logisticregregression}, I ran a logistic regression to analyze their relationship. The following is the formula for the regression \emph{logmodel}:
 
-\(Y ~ B(p)\), \(log(\frac{p}{1-p}) = \beta_0 +\beta_1 X + \epsilon\)
+\(Y\)\textasciitilde{}\(B(p)\), \(log(\frac{p}{1-p}) = \beta_0 +\beta_1 X + \epsilon\)
 
 \begin{itemize}
 \item
@@ -372,9 +358,26 @@ NULL & NA & NA & 252812 & 333534.7 & NA\\
 \end{tabular}
 \end{table}
 
-ANOVA test, table \ref{tab:anova}, on the \emph{logmodel} analyzes the table of deviance which shows how well the x variable is doing in comparison to the null model. Here we can see that the drop in deviance is quite small despite having low p-value. We try to improve the model by adding more variables to the function:
+ANOVA test, table \ref{tab:anova}, on the \emph{logmodel} analyzes the table of deviance which shows how well the x variable is doing in comparison to the null model. Here we can see that the drop in deviance is quite small despite having low p-value.
 
-\(Y ~ B(p)\), \(log(\frac{p}{1-p}) = \beta_0 +\beta_1 X_1 +\beta_2 X_2 + \epsilon\)
+Next, we test the fit of the model by looking at the receiver operating characteristic (ROC) curve.
+
+\begin{figure}
+
+{\centering \includegraphics{Assignment4_files/figure-latex/roc-1} 
+
+}
+
+\caption{ROC Cuve of logmodel1}\label{fig:roc}
+\end{figure}
+
+Figure \ref{fig:roc} shows the ROC curve of the \emph{logmodel}. It is basically a 45 degree diagonal line which indicates the model has no discrimination ability.
+
+Area under the curve ``\ldots gives the probability that the model correctly ranks such pairs of observations'' \textcite{bartlett_2014}. The area under the curve for this model is 0.5022363. In conclusion, the predictor just makes random guesses.
+
+We try to improve the model by adding more variables to the function:
+
+\(Y\)\textasciitilde{}\(B(p)\), \(log(\frac{p}{1-p}) = \beta_0 +\beta_1 X_1 +\beta_2 X_2 + \epsilon\)
 
 \(X_2\) is \emph{Number of Examinations} taken by each examinee.
 
@@ -405,9 +408,21 @@ Akaike Inf. Crit. & \multicolumn{1}{c}{333,483.300} & \multicolumn{1}{c}{333,404
 \end{tabular} 
 \end{table}
 
-Table \ref{tab:comparison} shows the two regression summary side-by-side. The regression with \emph{Number of Examinations} has AIC of 333404. It is slightly lower than the AIC of the previous regression which was 333483. Thus, in comparison, having this one extra variable improved the function significantly (statistically).
+Table \ref{tab:comparison} shows the two regression summary side-by-side. The regression with \emph{Number of Examinations} has AIC of 333404. It is slightly lower than the AIC of the previous regression which was 333483. Thus, in comparison, having this one extra variable improved the function significantly (statistically). However, a simple calculation of area under ROC curve for logmodel2 indicates that the model is even worse than the first.
 
-// end of logistic regression model testing
+\begin{verbatim}
+## Area under the curve: 0.486
+\end{verbatim}
+
+\section*{Conclusion}
+
+In conclusion, we've shown that higher pass rate in certain districts is not always an absolute reflection on whether the district has better driving program. Rather, it is an outcome of locations with lower examinees in general. For locations with more examinees, there would be more variations in their outcome thus more fails.
+
+Next, we shown that automatic cars have the lowest pass rate overall, and that motorcycle (over 250cc) has the highest pass rate. Older people (66 and above) also tend to fail their vehicle tests more. But ultimately pass rate for each vehicle type and majority of the age group is over 50\%.
+
+Last but not least, although, there is statistical relationship between the booking type and the exam outcome, the affect is pretty small. Furthermore, the current variables are inadequate in creating a good model to predict the outcome.
+
+This is also a shortcoming with the data we currently have. Because it contains very limited variables, it is hard to create a better fit model that can predict the outcome accurately.
 
 \printbibliography
 
