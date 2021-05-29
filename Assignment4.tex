@@ -29,6 +29,46 @@
 \geometry{a4paper, centering, text={16cm,24cm}}
 \usepackage[style=authoryear-comp,]{biblatex}
 \addbibresource{references.bib}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
 % Fix footnotes in tables (requires footnote package)
 \IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
@@ -302,6 +342,86 @@
 \section*{Step 2}
 
 \section*{Step 3}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{drivedum }\OtherTok{\textless{}{-}} \FunctionTok{dummy\_cols}\NormalTok{(drive, }\AttributeTok{select\_columns =}  \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Booking Type\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Exam Result\textquotesingle{}}\NormalTok{, }
+                                                  \StringTok{\textquotesingle{}Product Type Name\textquotesingle{}}\NormalTok{),}
+                       \AttributeTok{remove\_selected\_columns =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{train }\OtherTok{\textless{}{-}}\NormalTok{ drivedum[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{252813}\NormalTok{,]}
+\NormalTok{test }\OtherTok{\textless{}{-}}\NormalTok{ drivedum[}\DecValTok{252814}\SpecialCharTok{:}\DecValTok{337084}\NormalTok{,]}
+
+\NormalTok{logmodel }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Exam Result\_PASS}\StringTok{\textasciigrave{}} \SpecialCharTok{\textasciitilde{}}\StringTok{\textasciigrave{}}\AttributeTok{Booking Type\_Private}\StringTok{\textasciigrave{}} \SpecialCharTok{+} \StringTok{\textasciigrave{}}\AttributeTok{Number of Examinations}\StringTok{\textasciigrave{}}\NormalTok{,  }\AttributeTok{family=}\FunctionTok{binomial}\NormalTok{(}\AttributeTok{link=}\StringTok{\textquotesingle{}logit\textquotesingle{}}\NormalTok{),}\AttributeTok{data=}\NormalTok{train)}
+
+\FunctionTok{summary}\NormalTok{(logmodel)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = `Exam Result_PASS` ~ `Booking Type_Private` + `Number of Examinations`, 
+##     family = binomial(link = "logit"), data = train)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.6008  -1.3915   0.9544   0.9764   0.9796  
+## 
+## Coefficients:
+##                            Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)               0.5417475  0.0062682  86.428  < 2e-16 ***
+## `Booking Type_Private`   -0.0595670  0.0082481  -7.222 5.13e-13 ***
+## `Number of Examinations`  0.0027617  0.0003107   8.889  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 333535  on 252812  degrees of freedom
+## Residual deviance: 333398  on 252810  degrees of freedom
+## AIC: 333404
+## 
+## Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+Looking at the p value, we see that both variables have p-value close to 0 which means they are both statistically significant when it comes to the regression. From the table above, we wee that \emph{Booking Type\_Private} affects the passing of an exam negatively compared to \emph{Booking Type\_Driving School}. The \emph{Number of Examinations} have a very small but positive affect on the passing of an exam. So from the logistic regression we can conclude that by booking Privately it will negatively affect the passing of the exam in relations to booking by Driving School and that the number of examinations taken prior will have a very small but positive affect on the outcome.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{anova}\NormalTok{(logmodel, }\AttributeTok{test=}\StringTok{"Chisq"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Deviance Table
+## 
+## Model: binomial, link: logit
+## 
+## Response: Exam Result_PASS
+## 
+## Terms added sequentially (first to last)
+## 
+## 
+##                          Df Deviance Resid. Df Resid. Dev  Pr(>Chi)    
+## NULL                                    252812     333535              
+## `Booking Type_Private`    1   55.472    252811     333479 9.478e-14 ***
+## `Number of Examinations`  1   81.045    252810     333398 < 2.2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fitted.results }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(logmodel,}\AttributeTok{newdata=}\NormalTok{test,}\AttributeTok{type=}\StringTok{\textquotesingle{}response\textquotesingle{}}\NormalTok{)}
+\NormalTok{fitted.results }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(fitted.results }\SpecialCharTok{\textgreater{}} \FloatTok{0.5}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{misClasificError }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(fitted.results }\SpecialCharTok{!=}\NormalTok{ test}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Exam Result\_PASS}\StringTok{\textasciigrave{}}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}Accuracy\textquotesingle{}}\NormalTok{,}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{misClasificError))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Accuracy 0.626253396779438"
+\end{verbatim}
 
 \printbibliography
 

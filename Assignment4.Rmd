@@ -66,19 +66,34 @@ drive <- read_csv("Data/practicaldrivingexaminationresults.csv")
 
 
 \section*{Step 3}
+<<<<<<< HEAD
 In the following section, we will be analyzing the relationship between *Booking Type* and *Exam Result*. Since the variables are categorical variables, they will have to be converted into dummy variables. Then, using logistic regression to analyze their relationship, we get the following equation:
 
     + $Y ~ B(p)$, $log(\frac{p}{1-p}) = \beta_0 +\beta_1 X + \epsilon$
     
 ```{r}
 drivedum <- dummy_cols(drive, select_columns =  c('Booking Type', 'Exam Result', 'Product Type Name'),
+=======
+```{r}
+drivedum <- dummy_cols(drive, select_columns =  c('Booking Type', 'Exam Result', 
+                                                  'Product Type Name'),
+>>>>>>> tina_logit
                        remove_selected_columns = TRUE)
 train <- drivedum[1:252813,]
 test <- drivedum[252814:337084,]
 
+<<<<<<< HEAD
 logmodel <- glm(`Exam Result_PASS` ~`Booking Type_Private`, family=binomial(link='logit'),data=train)
+=======
+logmodel <- glm(`Exam Result_PASS` ~`Booking Type_Private` + `Number of Examinations`,
+                family=binomial(link='logit'),data=train)
+>>>>>>> tina_logit
 
 summary(logmodel)
+
+```
+Looking at the p value, we see that both variables have p-value close to 0 which means they are both statistically significant when it comes to the regression. From the table above, we wee that *Booking Type_Private* affects the passing of an exam negatively compared to *Booking Type_Driving School*. The *Number of Examinations* have a very small but positive affect on the passing of an exam. So from the logistic regression we can conclude that by booking Privately it will negatively affect the passing of the exam in relations to booking by Driving School and that the number of examinations taken prior will have a very small but positive affect on the outcome.
+```{r}
 anova(logmodel, test="Chisq")
 ```
 
