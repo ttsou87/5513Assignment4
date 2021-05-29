@@ -21,7 +21,7 @@
 \PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
 \usepackage[unicode=true]{hyperref}
 \hypersetup{
-            pdftitle={ETC513 Assignment 3: Comparison of Energy and Pollution by Country},
+            pdftitle={ETC513 Assignment 4: Practical Driving Tests in Queensland},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -58,7 +58,7 @@
 \makeatother
 
 
-\title{ETC513 Assignment 3: Comparison of Energy and Pollution by Country}
+\title{ETC513 Assignment 4: Practical Driving Tests in Queensland}
 
 %% MONASH STUFF
 
@@ -214,9 +214,9 @@
 \def\telephone#1{\gdef\@telephone{#1}}
 \def\email#1{\gdef\@email{#1}}
 \makeatother
-  \organization{Australian Government COVID19}
+  \organization{Queensland Government}
 
-  \def\name{Our consultancy \newline add names \&\newline add names}
+  \def\name{Practical Driving Examination Board}
 
   \telephone{(03) 9905 2478}
 
@@ -306,19 +306,11 @@
 
 \section*{Introduction}
 
-\begin{itemize}
-\tightlist
-\item
-  Data Description:
-\end{itemize}
+\textbf{Data Description:}
 
 This data set is \href{https://data.gov.au/dataset/ds-qld-3f90a4c3-23df-49dc-b243-9a29c0b23dd5/details?q=Practical\%20driving}{Practical driving examination results for customers} which is provided by local government authority (LGA) of Queensland. It records the license class, booking type, examination results and driver age group during 2005 to 2019.
 
-\begin{itemize}
-\tightlist
-\item
-  Research aims:
-\end{itemize}
+\textbf{Research aims:}
 
 We divided into three parts, the first part focuses on the annual pass rate of different local government authority.
 
@@ -326,7 +318,9 @@ The second part mainly aims to compare the age group with different license.
 
 The third part calculates the correlation between the examination results and booking type.
 
-\section*{Step 1}
+Using \textcite{R}, we ran analysis to explore our research goals. This analysis uses R packages \textcite{tidyverse}, \textcite{readr}, \textcite{kableExtra}, \textcite{bookdown}, \textcite{ggplot2}, \textcite{fastDummies}, \textcite{scales}, \textcite{stargazer}, \textcite{broom}, and \textcite{pROC}.
+
+\section*{Part 1}
 
 The first part focuses on the annual pass rate of different local government authority.
 
@@ -396,7 +390,7 @@ In the figure \ref{fig:Fig3}, the number of pass for three government authoritie
 
 Therefore, the annual pass rate has not changed much, the percentage of the number exceeding the annual pass rate fluctuates greatly. Areas with sparsely populated areas may have fewer people participating, resulting in a higher overall pass rate than areas with densely populated areas.
 
-\section*{Step 2}
+\section*{Part 2}
 
 The driving examination pass rate of Queensland is 63\% .
 
@@ -448,7 +442,7 @@ Figure \ref{fig:failrate}, describes the failing rate of different age groups. I
 In Figure \ref{fig:license}, for most drive license, the number of pass all exceeds 50\% of all age, except the automatic car license. People who fails at an older age. The number of fails is much more than pass.
 Another interesting point is that in motorcycle and heavy vehicle, people over 70 years old get 100\% pass rate. This is mainly because there are only one or two people join the test and he pass. So, the pass rate is 100\%. This doesn't mean all old people can get the license for one time.
 
-\section*{Step 3}
+\section*{Part 3}
 
 \printbibliography
 
