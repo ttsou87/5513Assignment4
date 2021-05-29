@@ -39,7 +39,7 @@ output:
 editor_options: 
   chunk_output_type: console
 ---
-```{r setup}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = FALSE, 
                       message = FALSE, 
                       warning = FALSE,
@@ -53,6 +53,7 @@ library(tidyverse)
 library(readr)
 library(kableExtra)
 library(bookdown)
+library(ggplot2)
 library(fastDummies)
 library(scales)
 library(broom)
@@ -81,7 +82,7 @@ drive <- read_csv(here::here("Data/practicaldrivingexaminationresults.csv"))
 
 In the following section, we will be analyzing the relationship between *Booking Type* and *Exam Result*. 
 
-```{r frequency, fig.cap= "Frequency Plot between Booking Type and Exam Result", fig.width= 5, fig.height= 6}
+```{r frequency, fig.cap= "Frequency Plot between Booking Type and Exam Result", fig.width= 5, fig.height= 4}
 table <- table(drive$`Booking Type`,drive$`Exam Result`)
 tab.prop <-  prop.table(table, 1)
 tab.df <- as.data.frame(tab.prop) #make frequency table into data frame
@@ -94,7 +95,7 @@ ggplot(tab.df,
 
 The frequency plot, Figure \@ref(fig:frequency), between *Booking Type* and *Exam Result* shows that the percentages of people who passed the exam are similar for both driving school and private.
 
-Since the response variable and predictor variable are categorical variables, they will have to be converted into dummy variables(0 & 1). Then, using logistic regression to analyze their relationship, we get the following equation:
+Since the response variable and predictor variable are categorical variables, they will have to be converted into dummy variables(0 & 1). Then, using logistic regression to analyze their relationship, we get the following equation for *logmodel*:
 
 $Y ~ B(p)$, $log(\frac{p}{1-p}) = \beta_0 +\beta_1 X + \epsilon$
   
@@ -104,33 +105,36 @@ $Y ~ B(p)$, $log(\frac{p}{1-p}) = \beta_0 +\beta_1 X + \epsilon$
 
 + X is *Booking Type_Private* taking values 0 or 1
 
-```{r dummyvariables}
+```{r regression}
 drivedum <- dummy_cols(drive, select_columns =  c('Booking Type', 'Exam Result'),
                        remove_selected_columns = TRUE)
 train <- drivedum[1:252813,]
 test <- drivedum[252814:337084,]
-```
 
-
-```{r regression1, results = "asis", tab.caption = "Regression Summary of Model 1"}
 logmodel <- glm(`Exam Result_PASS` ~`Booking Type_Private`, 
                 family=binomial(link='logit'), data=train)
+```
 
+```{r results1, tab.caption = "Regression with *Booking Type_Private*", results = "asis"}
 stargazer(logmodel,
           title= "Regression with *Booking Type_Private*",
-          label="tab1",
           align = TRUE,
           type = "latex",
+          style = "default",
           header = FALSE,
-          style = "default")
+          no.space=TRUE)
 ```
-Table \@ref(tab:regression1) shows the regression summary. *Booking Type_Private* has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that *Booking Type_Private* affects the passing of an exam negatively compared to *Booking Type_Driving School*. Private booking reduces the log odds by 0.061.
+
+Table \@ref(tab:results1) shows the regression summary. *Booking Type_Private* has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that *Booking Type_Private* affects the passing of an exam negatively compared to *Booking Type_Driving School*. Private booking reduces the log odds by 0.061.
 
 ```{r anova, tab.caption = "ANOVA for logmodel1"}
-anova(logmodel, test="Chisq") %>% kable() %>% kable_styling(position = "center")
+anova(logmodel, test="Chisq") %>% 
+  kable(booktabs =TRUE,
+        caption = "Anova for logmodel") %>% 
+  kable_styling(position = "center")
 ```
 
-A quick run of ANOVA test on the *logmodel* to analyze the table of deviance shows how well the x variable is doing in comparison to the null model. Here we can see that the drop in deviance is quite small despite having low p-value. We try to improve the model by adding more variables to the function: 
+ANOVA test, table \@ref(tab:anova), on the *logmodel* analyzes the table of deviance which shows how well the x variable is doing in comparison to the null model. Here we can see that the drop in deviance is quite small despite having low p-value. We try to improve the model by adding more variables to the function: 
 
 $Y ~ B(p)$, $log(\frac{p}{1-p}) = \beta_0 +\beta_1 X_1 +\beta_2 X_2 + \epsilon$
 
@@ -140,18 +144,18 @@ $X_2$ is *Number of Examinations* taken by each examinee.
 logmodel2 <- glm(`Exam Result_PASS` ~`Booking Type_Private` + `Number of Examinations`,
                 family=binomial(link='logit'),data=train)
 ```
-The regression with *Number of Examinations* has AIC of 333404. It is slightly lower than the AIC of the previous regression which was 333483. In comparison, having this one extra variable improved the function significantly (statistically).
 
 ```{r comparison, tab.caption= "Regression Results",results = "asis"}
-regressions <- stargazer(logmodel, logmodel2,
+stargazer(logmodel, logmodel2,
           title="Regression Results",
           align=TRUE,
           type = "latex",
           style = "default",
-          header = FALSE)
-kable(regressions)
+          header = FALSE,
+          no.space=TRUE)
 ```
 
+Table \@ref(tab:comparison) shows the two regression summary side-by-side. The regression with *Number of Examinations* has AIC of 333404. It is slightly lower than the AIC of the previous regression which was 333483. Thus, in comparison, having this one extra variable improved the function significantly (statistically).
 
 ```{r accuracy, eval = FALSE}
 fitted.results <- predict(logmodel,newdata=test,type='response')
@@ -159,24 +163,6 @@ fitted.results <- ifelse(fitted.results > 0.5,1,0)
 misClasificError <- mean(fitted.results != test$`Exam Result_PASS`)
 print(paste('Accuracy',1-misClasificError))
 ```
-// end of logistic regression model testing
 
-
-```{r chisq.test}
-chisq.test(drive$`Booking Type`,drive$`Exam Result`)
-```
-However, when we run a chi-square test, the p-value is 0.0121 so we have statistical evidence that there is a relationship between *Booking Type* and *Exam Result*.
-
-
-```{r plot_bookingtype_model, echo = FALSE}
-plot_df <- augment(logmodel, type.predict = "response")
-
-base <-
-  ggplot(plot_df, aes(x = `Booking Type_Private`)) +
-  geom_line(aes(y = .fitted), color = "blue") +
-  labs(x = "Booking Type", y = "Pass")
-
-base + geom_point(aes(y = `Exam Result_PASS`), alpha = 0.2)
-```
 
 

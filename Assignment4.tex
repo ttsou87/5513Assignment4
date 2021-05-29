@@ -29,46 +29,6 @@
 \geometry{a4paper, centering, text={16cm,24cm}}
 \usepackage[style=authoryear-comp,]{biblatex}
 \addbibresource{references.bib}
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
 % Fix footnotes in tables (requires footnote package)
 \IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
@@ -336,16 +296,6 @@
 \begin{document}
 \titlepage
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\NormalTok{opts\_chunk}\SpecialCharTok{$}\FunctionTok{set}\NormalTok{(}\AttributeTok{echo =} \ConstantTok{FALSE}\NormalTok{, }
-                      \AttributeTok{message =} \ConstantTok{FALSE}\NormalTok{, }
-                      \AttributeTok{warning =} \ConstantTok{FALSE}\NormalTok{,}
-                      \AttributeTok{fig.align =} \StringTok{\textquotesingle{}center\textquotesingle{}}\NormalTok{,}
-                      \AttributeTok{cache =} \ConstantTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \section*{Introduction}
 
 \section*{Step 1}
@@ -367,7 +317,7 @@ In the following section, we will be analyzing the relationship between \emph{Bo
 
 The frequency plot, Figure \ref{fig:frequency}, between \emph{Booking Type} and \emph{Exam Result} shows that the percentages of people who passed the exam are similar for both driving school and private.
 
-Since the response variable and predictor variable are categorical variables, they will have to be converted into dummy variables(0 \& 1). Then, using logistic regression to analyze their relationship, we get the following equation:
+Since the response variable and predictor variable are categorical variables, they will have to be converted into dummy variables(0 \& 1). Then, using logistic regression to analyze their relationship, we get the following equation for \emph{logmodel}:
 
 \(Y ~ B(p)\), \(log(\frac{p}{1-p}) = \beta_0 +\beta_1 X + \epsilon\)
 
@@ -382,7 +332,7 @@ Since the response variable and predictor variable are categorical variables, th
 
 \textbackslash begin\{table\}{[}!htbp{]} \centering 
 \textbackslash caption\{Regression with \emph{Booking Type\_Private}\}
-\label{tab1}
+\label{}
 
 \begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} } 
 \\[-1.8ex]\hline 
@@ -393,11 +343,9 @@ Since the response variable and predictor variable are categorical variables, th
 \hline \\[-1.8ex] 
  `Booking Type\_Private` & -0.061^{***} \\ 
   & (0.008) \\ 
-  & \\ 
- Constant & 0.559^{***} \\ 
+  Constant & 0.559^{***} \\ 
   & (0.006) \\ 
-  & \\ 
-\hline \\[-1.8ex] 
+ \hline \\[-1.8ex] 
 Observations & \multicolumn{1}{c}{252,813} \\ 
 Log Likelihood & \multicolumn{1}{c}{-166,739.600} \\ 
 Akaike Inf. Crit. & \multicolumn{1}{c}{333,483.300} \\ 
@@ -407,28 +355,28 @@ Akaike Inf. Crit. & \multicolumn{1}{c}{333,483.300} \\
 \end{tabular}
 
 \textbackslash end\{table\}
-Table \ref{tab:regression1} shows the regression summary. \emph{Booking Type\_Private} has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that \emph{Booking Type\_Private} affects the passing of an exam negatively compared to \emph{Booking Type\_Driving School}. Private booking reduces the log odds by 0.061.
+
+Table \ref{tab:results1} shows the regression summary. \emph{Booking Type\_Private} has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that \emph{Booking Type\_Private} affects the passing of an exam negatively compared to \emph{Booking Type\_Driving School}. Private booking reduces the log odds by 0.061.
 
 \begin{table}
+
+\caption{\label{tab:anova}Anova for logmodel}
 \centering
-\begin{tabular}{l|r|r|r|r|r}
-\hline
+\begin{tabular}[t]{lrrrrr}
+\toprule
   & Df & Deviance & Resid. Df & Resid. Dev & Pr(>Chi)\\
-\hline
+\midrule
 NULL & NA & NA & 252812 & 333534.7 & NA\\
-\hline
 `Booking Type\_Private` & 1 & 55.47238 & 252811 & 333479.3 & 0\\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
-A quick run of ANOVA test on the \emph{logmodel} to analyze the table of deviance shows how well the x variable is doing in comparison to the null model. Here we can see that the drop in deviance is quite small despite having low p-value. We try to improve the model by adding more variables to the function:
+ANOVA test, table \ref{tab:anova}, on the \emph{logmodel} analyzes the table of deviance which shows how well the x variable is doing in comparison to the null model. Here we can see that the drop in deviance is quite small despite having low p-value. We try to improve the model by adding more variables to the function:
 
 \(Y ~ B(p)\), \(log(\frac{p}{1-p}) = \beta_0 +\beta_1 X_1 +\beta_2 X_2 + \epsilon\)
 
 \(X_2\) is \emph{Number of Examinations} taken by each examinee.
-
-The regression with \emph{Number of Examinations} has AIC of 333404. It is slightly lower than the AIC of the previous regression which was 333483. In comparison, having this one extra variable improved the function significantly (statistically).
 
 \begin{table}[!htbp] \centering 
   \caption{Regression Results} 
@@ -443,14 +391,11 @@ The regression with \emph{Number of Examinations} has AIC of 333404. It is sligh
 \hline \\[-1.8ex] 
  `Booking Type\_Private` & -0.061^{***} & -0.060^{***} \\ 
   & (0.008) & (0.008) \\ 
-  & & \\ 
- `Number of Examinations` &  & 0.003^{***} \\ 
+  `Number of Examinations` &  & 0.003^{***} \\ 
   &  & (0.0003) \\ 
-  & & \\ 
- Constant & 0.559^{***} & 0.542^{***} \\ 
+  Constant & 0.559^{***} & 0.542^{***} \\ 
   & (0.006) & (0.006) \\ 
-  & & \\ 
-\hline \\[-1.8ex] 
+ \hline \\[-1.8ex] 
 Observations & \multicolumn{1}{c}{252,813} & \multicolumn{1}{c}{252,813} \\ 
 Log Likelihood & \multicolumn{1}{c}{-166,739.600} & \multicolumn{1}{c}{-166,699.100} \\ 
 Akaike Inf. Crit. & \multicolumn{1}{c}{333,483.300} & \multicolumn{1}{c}{333,404.200} \\ 
@@ -460,85 +405,9 @@ Akaike Inf. Crit. & \multicolumn{1}{c}{333,483.300} & \multicolumn{1}{c}{333,404
 \end{tabular} 
 \end{table}
 
-\begin{tabular}{l}
-\hline
-x\\
-\hline
-\\
-\hline
-\textbackslash{}begin\{table\}[!htbp] \textbackslash{}centering\\
-\hline
-\textbackslash{}caption\{Regression Results\}\\
-\hline
-\textbackslash{}label\{\}\\
-\hline
-\textbackslash{}begin\{tabular\}\{@\{\textbackslash{}extracolsep\{5pt\}\}lD\{.\}\{.\}\{-3\} D\{.\}\{.\}\{-3\} \}\\
-\hline
-\textbackslash{}\textbackslash{}[-1.8ex]\textbackslash{}hline\\
-\hline
-\textbackslash{}hline \textbackslash{}\textbackslash{}[-1.8ex]\\
-\hline
-\& \textbackslash{}multicolumn\{2\}\{c\}\{\textbackslash{}textit\{Dependent variable:\}\} \textbackslash{}\textbackslash{}\\
-\hline
-\textbackslash{}cline\{2-3\}\\
-\hline
-\textbackslash{}\textbackslash{}[-1.8ex] \& \textbackslash{}multicolumn\{2\}\{c\}\{`Exam Result\textbackslash{}\_PASS`\} \textbackslash{}\textbackslash{}\\
-\hline
-\textbackslash{}\textbackslash{}[-1.8ex] \& \textbackslash{}multicolumn\{1\}\{c\}\{(1)\} \& \textbackslash{}multicolumn\{1\}\{c\}\{(2)\}\textbackslash{}\textbackslash{}\\
-\hline
-\textbackslash{}hline \textbackslash{}\textbackslash{}[-1.8ex]\\
-\hline
-`Booking Type\textbackslash{}\_Private` \& -0.061\textasciicircum{}\{***\} \& -0.060\textasciicircum{}\{***\} \textbackslash{}\textbackslash{}\\
-\hline
-\& (0.008) \& (0.008) \textbackslash{}\textbackslash{}\\
-\hline
-\& \& \textbackslash{}\textbackslash{}\\
-\hline
-`Number of Examinations` \&  \& 0.003\textasciicircum{}\{***\} \textbackslash{}\textbackslash{}\\
-\hline
-\&  \& (0.0003) \textbackslash{}\textbackslash{}\\
-\hline
-\& \& \textbackslash{}\textbackslash{}\\
-\hline
-Constant \& 0.559\textasciicircum{}\{***\} \& 0.542\textasciicircum{}\{***\} \textbackslash{}\textbackslash{}\\
-\hline
-\& (0.006) \& (0.006) \textbackslash{}\textbackslash{}\\
-\hline
-\& \& \textbackslash{}\textbackslash{}\\
-\hline
-\textbackslash{}hline \textbackslash{}\textbackslash{}[-1.8ex]\\
-\hline
-Observations \& \textbackslash{}multicolumn\{1\}\{c\}\{252,813\} \& \textbackslash{}multicolumn\{1\}\{c\}\{252,813\} \textbackslash{}\textbackslash{}\\
-\hline
-Log Likelihood \& \textbackslash{}multicolumn\{1\}\{c\}\{-166,739.600\} \& \textbackslash{}multicolumn\{1\}\{c\}\{-166,699.100\} \textbackslash{}\textbackslash{}\\
-\hline
-Akaike Inf. Crit. \& \textbackslash{}multicolumn\{1\}\{c\}\{333,483.300\} \& \textbackslash{}multicolumn\{1\}\{c\}\{333,404.200\} \textbackslash{}\textbackslash{}\\
-\hline
-\textbackslash{}hline\\
-\hline
-\textbackslash{}hline \textbackslash{}\textbackslash{}[-1.8ex]\\
-\hline
-\textbackslash{}textit\{Note:\}  \& \textbackslash{}multicolumn\{2\}\{r\}\{\$\textasciicircum{}\{*\}\$p\$<\$0.1; \$\textasciicircum{}\{**\}\$p\$<\$0.05; \$\textasciicircum{}\{***\}\$p\$<\$0.01\} \textbackslash{}\textbackslash{}\\
-\hline
-\textbackslash{}end\{tabular\}\\
-\hline
-\textbackslash{}end\{table\}\\
-\hline
-\end{tabular}
+Table \ref{tab:comparison} shows the two regression summary side-by-side. The regression with \emph{Number of Examinations} has AIC of 333404. It is slightly lower than the AIC of the previous regression which was 333483. Thus, in comparison, having this one extra variable improved the function significantly (statistically).
 
 // end of logistic regression model testing
-
-\begin{verbatim}
-## 
-##  Pearson's Chi-squared test with Yates' continuity correction
-## 
-## data:  drive$`Booking Type` and drive$`Exam Result`
-## X-squared = 6.2967, df = 1, p-value = 0.0121
-\end{verbatim}
-
-However, when we run a chi-square test, the p-value is 0.0121 so we have statistical evidence that there is a relationship between \emph{Booking Type} and \emph{Exam Result}.
-
-\begin{center}\includegraphics{Assignment4_files/figure-latex/plot_bookingtype_model-1} \end{center}
 
 \printbibliography
 
