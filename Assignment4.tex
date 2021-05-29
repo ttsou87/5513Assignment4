@@ -245,7 +245,7 @@
 \def\telephone#1{\gdef\@telephone{#1}}
 \def\email#1{\gdef\@email{#1}}
 \makeatother
-  \organization{Australian Government}
+  \organization{Australian Government COVID19}
 
   \def\name{Our consultancy \newline add names \&\newline add names}
 
@@ -316,6 +316,7 @@
 \setstretch{1.5}
 
 %% Any special functions or other packages can be loaded here.
+\usepackage{dcolumn} 
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -335,6 +336,16 @@
 \begin{document}
 \titlepage
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\NormalTok{opts\_chunk}\SpecialCharTok{$}\FunctionTok{set}\NormalTok{(}\AttributeTok{echo =} \ConstantTok{FALSE}\NormalTok{, }
+                      \AttributeTok{message =} \ConstantTok{FALSE}\NormalTok{, }
+                      \AttributeTok{warning =} \ConstantTok{FALSE}\NormalTok{,}
+                      \AttributeTok{fig.align =} \StringTok{\textquotesingle{}center\textquotesingle{}}\NormalTok{,}
+                      \AttributeTok{cache =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \section*{Introduction}
 
 \section*{Step 1}
@@ -343,85 +354,191 @@
 
 \section*{Step 3}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{drivedum }\OtherTok{\textless{}{-}} \FunctionTok{dummy\_cols}\NormalTok{(drive, }\AttributeTok{select\_columns =}  \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Booking Type\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Exam Result\textquotesingle{}}\NormalTok{, }
-                                                  \StringTok{\textquotesingle{}Product Type Name\textquotesingle{}}\NormalTok{),}
-                       \AttributeTok{remove\_selected\_columns =} \ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{train }\OtherTok{\textless{}{-}}\NormalTok{ drivedum[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{252813}\NormalTok{,]}
-\NormalTok{test }\OtherTok{\textless{}{-}}\NormalTok{ drivedum[}\DecValTok{252814}\SpecialCharTok{:}\DecValTok{337084}\NormalTok{,]}
+In the following section, we will be analyzing the relationship between \emph{Booking Type} and \emph{Exam Result}.
 
-\NormalTok{logmodel }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Exam Result\_PASS}\StringTok{\textasciigrave{}} \SpecialCharTok{\textasciitilde{}}\StringTok{\textasciigrave{}}\AttributeTok{Booking Type\_Private}\StringTok{\textasciigrave{}} \SpecialCharTok{+} \StringTok{\textasciigrave{}}\AttributeTok{Number of Examinations}\StringTok{\textasciigrave{}}\NormalTok{,  }\AttributeTok{family=}\FunctionTok{binomial}\NormalTok{(}\AttributeTok{link=}\StringTok{\textquotesingle{}logit\textquotesingle{}}\NormalTok{),}\AttributeTok{data=}\NormalTok{train)}
+\begin{figure}
 
-\FunctionTok{summary}\NormalTok{(logmodel)}
-\end{Highlighting}
-\end{Shaded}
+{\centering \includegraphics{Assignment4_files/figure-latex/frequency-1} 
+
+}
+
+\caption{Frequency Plot between Booking Type and Exam Result}\label{fig:frequency}
+\end{figure}
+
+The frequency plot, Figure \ref{fig:frequency}, between \emph{Booking Type} and \emph{Exam Result} shows that the percentages of people who passed the exam are similar for both driving school and private.
+
+Since the response variable and predictor variable are categorical variables, they will have to be converted into dummy variables(0 \& 1). Then, using logistic regression to analyze their relationship, we get the following equation:
+
+\(Y ~ B(p)\), \(log(\frac{p}{1-p}) = \beta_0 +\beta_1 X + \epsilon\)
+
+\begin{itemize}
+\item
+  \(\beta_0\) is the intercept.
+\item
+  \(\beta_1\) is the coefficient of \emph{Booking Type\_Private}
+\item
+  X is \emph{Booking Type\_Private} taking values 0 or 1
+\end{itemize}
+
+\textbackslash begin\{table\}{[}!htbp{]} \centering 
+\textbackslash caption\{Regression with \emph{Booking Type\_Private}\}
+\label{tab1}
+
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} } 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & \multicolumn{1}{c}{`Exam Result\_PASS`} \\ 
+\hline \\[-1.8ex] 
+ `Booking Type\_Private` & -0.061^{***} \\ 
+  & (0.008) \\ 
+  & \\ 
+ Constant & 0.559^{***} \\ 
+  & (0.006) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & \multicolumn{1}{c}{252,813} \\ 
+Log Likelihood & \multicolumn{1}{c}{-166,739.600} \\ 
+Akaike Inf. Crit. & \multicolumn{1}{c}{333,483.300} \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular}
+
+\textbackslash end\{table\}
+Table \ref{tab:regression1} shows the regression summary. \emph{Booking Type\_Private} has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that \emph{Booking Type\_Private} affects the passing of an exam negatively compared to \emph{Booking Type\_Driving School}. Private booking reduces the log odds by 0.061.
+
+\begin{table}
+\centering
+\begin{tabular}{l|r|r|r|r|r}
+\hline
+  & Df & Deviance & Resid. Df & Resid. Dev & Pr(>Chi)\\
+\hline
+NULL & NA & NA & 252812 & 333534.7 & NA\\
+\hline
+`Booking Type\_Private` & 1 & 55.47238 & 252811 & 333479.3 & 0\\
+\hline
+\end{tabular}
+\end{table}
+
+A quick run of ANOVA test on the \emph{logmodel} to analyze the table of deviance shows how well the x variable is doing in comparison to the null model. Here we can see that the drop in deviance is quite small despite having low p-value. We try to improve the model by adding more variables to the function:
+
+\(Y ~ B(p)\), \(log(\frac{p}{1-p}) = \beta_0 +\beta_1 X_1 +\beta_2 X_2 + \epsilon\)
+
+\(X_2\) is \emph{Number of Examinations} taken by each examinee.
+
+The regression with \emph{Number of Examinations} has AIC of 333404. It is slightly lower than the AIC of the previous regression which was 333483. In comparison, having this one extra variable improved the function significantly (statistically).
+
+\begin{table}[!htbp] \centering 
+  \caption{Regression Results} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} } 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & \multicolumn{2}{c}{`Exam Result\_PASS`} \\ 
+\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)}\\ 
+\hline \\[-1.8ex] 
+ `Booking Type\_Private` & -0.061^{***} & -0.060^{***} \\ 
+  & (0.008) & (0.008) \\ 
+  & & \\ 
+ `Number of Examinations` &  & 0.003^{***} \\ 
+  &  & (0.0003) \\ 
+  & & \\ 
+ Constant & 0.559^{***} & 0.542^{***} \\ 
+  & (0.006) & (0.006) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Observations & \multicolumn{1}{c}{252,813} & \multicolumn{1}{c}{252,813} \\ 
+Log Likelihood & \multicolumn{1}{c}{-166,739.600} & \multicolumn{1}{c}{-166,699.100} \\ 
+Akaike Inf. Crit. & \multicolumn{1}{c}{333,483.300} & \multicolumn{1}{c}{333,404.200} \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table}
+
+\begin{tabular}{l}
+\hline
+x\\
+\hline
+\\
+\hline
+\textbackslash{}begin\{table\}[!htbp] \textbackslash{}centering\\
+\hline
+\textbackslash{}caption\{Regression Results\}\\
+\hline
+\textbackslash{}label\{\}\\
+\hline
+\textbackslash{}begin\{tabular\}\{@\{\textbackslash{}extracolsep\{5pt\}\}lD\{.\}\{.\}\{-3\} D\{.\}\{.\}\{-3\} \}\\
+\hline
+\textbackslash{}\textbackslash{}[-1.8ex]\textbackslash{}hline\\
+\hline
+\textbackslash{}hline \textbackslash{}\textbackslash{}[-1.8ex]\\
+\hline
+\& \textbackslash{}multicolumn\{2\}\{c\}\{\textbackslash{}textit\{Dependent variable:\}\} \textbackslash{}\textbackslash{}\\
+\hline
+\textbackslash{}cline\{2-3\}\\
+\hline
+\textbackslash{}\textbackslash{}[-1.8ex] \& \textbackslash{}multicolumn\{2\}\{c\}\{`Exam Result\textbackslash{}\_PASS`\} \textbackslash{}\textbackslash{}\\
+\hline
+\textbackslash{}\textbackslash{}[-1.8ex] \& \textbackslash{}multicolumn\{1\}\{c\}\{(1)\} \& \textbackslash{}multicolumn\{1\}\{c\}\{(2)\}\textbackslash{}\textbackslash{}\\
+\hline
+\textbackslash{}hline \textbackslash{}\textbackslash{}[-1.8ex]\\
+\hline
+`Booking Type\textbackslash{}\_Private` \& -0.061\textasciicircum{}\{***\} \& -0.060\textasciicircum{}\{***\} \textbackslash{}\textbackslash{}\\
+\hline
+\& (0.008) \& (0.008) \textbackslash{}\textbackslash{}\\
+\hline
+\& \& \textbackslash{}\textbackslash{}\\
+\hline
+`Number of Examinations` \&  \& 0.003\textasciicircum{}\{***\} \textbackslash{}\textbackslash{}\\
+\hline
+\&  \& (0.0003) \textbackslash{}\textbackslash{}\\
+\hline
+\& \& \textbackslash{}\textbackslash{}\\
+\hline
+Constant \& 0.559\textasciicircum{}\{***\} \& 0.542\textasciicircum{}\{***\} \textbackslash{}\textbackslash{}\\
+\hline
+\& (0.006) \& (0.006) \textbackslash{}\textbackslash{}\\
+\hline
+\& \& \textbackslash{}\textbackslash{}\\
+\hline
+\textbackslash{}hline \textbackslash{}\textbackslash{}[-1.8ex]\\
+\hline
+Observations \& \textbackslash{}multicolumn\{1\}\{c\}\{252,813\} \& \textbackslash{}multicolumn\{1\}\{c\}\{252,813\} \textbackslash{}\textbackslash{}\\
+\hline
+Log Likelihood \& \textbackslash{}multicolumn\{1\}\{c\}\{-166,739.600\} \& \textbackslash{}multicolumn\{1\}\{c\}\{-166,699.100\} \textbackslash{}\textbackslash{}\\
+\hline
+Akaike Inf. Crit. \& \textbackslash{}multicolumn\{1\}\{c\}\{333,483.300\} \& \textbackslash{}multicolumn\{1\}\{c\}\{333,404.200\} \textbackslash{}\textbackslash{}\\
+\hline
+\textbackslash{}hline\\
+\hline
+\textbackslash{}hline \textbackslash{}\textbackslash{}[-1.8ex]\\
+\hline
+\textbackslash{}textit\{Note:\}  \& \textbackslash{}multicolumn\{2\}\{r\}\{\$\textasciicircum{}\{*\}\$p\$<\$0.1; \$\textasciicircum{}\{**\}\$p\$<\$0.05; \$\textasciicircum{}\{***\}\$p\$<\$0.01\} \textbackslash{}\textbackslash{}\\
+\hline
+\textbackslash{}end\{tabular\}\\
+\hline
+\textbackslash{}end\{table\}\\
+\hline
+\end{tabular}
+
+// end of logistic regression model testing
 
 \begin{verbatim}
 ## 
-## Call:
-## glm(formula = `Exam Result_PASS` ~ `Booking Type_Private` + `Number of Examinations`, 
-##     family = binomial(link = "logit"), data = train)
+##  Pearson's Chi-squared test with Yates' continuity correction
 ## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.6008  -1.3915   0.9544   0.9764   0.9796  
-## 
-## Coefficients:
-##                            Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)               0.5417475  0.0062682  86.428  < 2e-16 ***
-## `Booking Type_Private`   -0.0595670  0.0082481  -7.222 5.13e-13 ***
-## `Number of Examinations`  0.0027617  0.0003107   8.889  < 2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## (Dispersion parameter for binomial family taken to be 1)
-## 
-##     Null deviance: 333535  on 252812  degrees of freedom
-## Residual deviance: 333398  on 252810  degrees of freedom
-## AIC: 333404
-## 
-## Number of Fisher Scoring iterations: 4
+## data:  drive$`Booking Type` and drive$`Exam Result`
+## X-squared = 6.2967, df = 1, p-value = 0.0121
 \end{verbatim}
 
-Looking at the p value, we see that both variables have p-value close to 0 which means they are both statistically significant when it comes to the regression. From the table above, we wee that \emph{Booking Type\_Private} affects the passing of an exam negatively compared to \emph{Booking Type\_Driving School}. The \emph{Number of Examinations} have a very small but positive affect on the passing of an exam. So from the logistic regression we can conclude that by booking Privately it will negatively affect the passing of the exam in relations to booking by Driving School and that the number of examinations taken prior will have a very small but positive affect on the outcome.
+However, when we run a chi-square test, the p-value is 0.0121 so we have statistical evidence that there is a relationship between \emph{Booking Type} and \emph{Exam Result}.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{anova}\NormalTok{(logmodel, }\AttributeTok{test=}\StringTok{"Chisq"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Analysis of Deviance Table
-## 
-## Model: binomial, link: logit
-## 
-## Response: Exam Result_PASS
-## 
-## Terms added sequentially (first to last)
-## 
-## 
-##                          Df Deviance Resid. Df Resid. Dev  Pr(>Chi)    
-## NULL                                    252812     333535              
-## `Booking Type_Private`    1   55.472    252811     333479 9.478e-14 ***
-## `Number of Examinations`  1   81.045    252810     333398 < 2.2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{fitted.results }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(logmodel,}\AttributeTok{newdata=}\NormalTok{test,}\AttributeTok{type=}\StringTok{\textquotesingle{}response\textquotesingle{}}\NormalTok{)}
-\NormalTok{fitted.results }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(fitted.results }\SpecialCharTok{\textgreater{}} \FloatTok{0.5}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
-\NormalTok{misClasificError }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(fitted.results }\SpecialCharTok{!=}\NormalTok{ test}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Exam Result\_PASS}\StringTok{\textasciigrave{}}\NormalTok{)}
-\FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}Accuracy\textquotesingle{}}\NormalTok{,}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{misClasificError))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "Accuracy 0.626253396779438"
-\end{verbatim}
+\begin{center}\includegraphics{Assignment4_files/figure-latex/plot_bookingtype_model-1} \end{center}
 
 \printbibliography
 
