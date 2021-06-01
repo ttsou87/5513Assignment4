@@ -284,11 +284,11 @@
 
 \section*{Introduction}
 
-\section*{Step 1}
+\section*{Part 1}
 
-\section*{Step 2}
+\section*{Part 2}
 
-\section*{Step 3}
+\section*{Part 3}
 
 In the following section, we will be analyzing the relationship between \emph{Booking Type} and \emph{Exam Result}.
 
@@ -303,9 +303,9 @@ In the following section, we will be analyzing the relationship between \emph{Bo
 
 The frequency plot, Figure \ref{fig:frequency}, between \emph{Booking Type} and \emph{Exam Result} shows that the percentages of people who passed the exam are similar for both driving school and private.
 
-Since the response variable and predictor variable are categorical variables, they will have to be converted into dummy variables(0 \& 1). Then, following \textcite{logisticregregression}, I ran a logistic regression to analyze their relationship. The following is the formula for the regression \emph{logmodel}:
+Since the response variable and predictor variable are categorical variables, they will have to be converted into dummy variables(0 \& 1). Then, following regression analysis \textcite{logisticregregression}, I ran a logistic regression to analyze their relationship. The following is the formula for the regression \emph{logmodel}:
 
-\(Y\)\textasciitilde{}\(B(p)\), \(log(\frac{p}{1-p}) = \beta_0 +\beta_1 X + \epsilon\)
+\(Y~B(p)\), \(log(\frac{p}{1-p}) = \beta_0 +\beta_1 X + \epsilon\)
 
 \begin{itemize}
 \item
@@ -316,33 +316,28 @@ Since the response variable and predictor variable are categorical variables, th
   X is \emph{Booking Type\_Private} taking values 0 or 1
 \end{itemize}
 
-\textbackslash begin\{table\}{[}!htbp{]} \centering 
-\textbackslash caption\{Regression with \emph{Booking Type\_Private}\}
-\label{}
-
-\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} } 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-2} 
-\\[-1.8ex] & \multicolumn{1}{c}{`Exam Result\_PASS`} \\ 
-\hline \\[-1.8ex] 
- `Booking Type\_Private` & -0.061^{***} \\ 
-  & (0.008) \\ 
-  Constant & 0.559^{***} \\ 
-  & (0.006) \\ 
- \hline \\[-1.8ex] 
-Observations & \multicolumn{1}{c}{252,813} \\ 
-Log Likelihood & \multicolumn{1}{c}{-166,739.600} \\ 
-Akaike Inf. Crit. & \multicolumn{1}{c}{333,483.300} \\ 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\begin{table}
+\centering
+\begin{tabular}{ll}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{1}{c}{Dependent Variable:} \\
+\cmidrule(l{3pt}r{3pt}){2-2}
+  & 'Exam Result\_PASS'\\
+\midrule
+Constant & 0.533407196218835 ***\\
+Booking Type\_Private & -0.0179325664251033 *\\
+\addlinespace[0.3em]
+\multicolumn{2}{l}{\textbf{ }}\\
+\hspace{1em}nobs & 337084\\
+\hspace{1em}AIC & 444926.751217685\\
+\hspace{1em}logLik & -222461.375608843\\
+\bottomrule
+\multicolumn{2}{l}{\rule{0pt}{1em}\textit{Note: }}\\
+\multicolumn{2}{l}{\rule{0pt}{1em}+ p≤0.1; * p≤0.5; ** p≤0.01; *** p≤0.001}\\
 \end{tabular}
+\end{table}
 
-\textbackslash end\{table\}
-
-Table \ref{tab:results1} shows the regression summary. \emph{Booking Type\_Private} has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that \emph{Booking Type\_Private} affects the passing of an exam negatively compared to \emph{Booking Type\_Driving School}. Private booking reduces the log odds by 0.061.
+Table \ref{tab:logtable1} shows the regression summary. \emph{Booking Type\_Private} has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that \emph{Booking Type\_Private} affects the passing of an exam negatively compared to \emph{Booking Type\_Driving School}. Private booking reduces the log odds by 0.061.
 
 \begin{table}
 
@@ -380,33 +375,6 @@ We try to improve the model by adding more variables to the function:
 \(Y\)\textasciitilde{}\(B(p)\), \(log(\frac{p}{1-p}) = \beta_0 +\beta_1 X_1 +\beta_2 X_2 + \epsilon\)
 
 \(X_2\) is \emph{Number of Examinations} taken by each examinee.
-
-\begin{table}[!htbp] \centering 
-  \caption{Regression Results} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} } 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-3} 
-\\[-1.8ex] & \multicolumn{2}{c}{`Exam Result\_PASS`} \\ 
-\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)}\\ 
-\hline \\[-1.8ex] 
- `Booking Type\_Private` & -0.061^{***} & -0.060^{***} \\ 
-  & (0.008) & (0.008) \\ 
-  `Number of Examinations` &  & 0.003^{***} \\ 
-  &  & (0.0003) \\ 
-  Constant & 0.559^{***} & 0.542^{***} \\ 
-  & (0.006) & (0.006) \\ 
- \hline \\[-1.8ex] 
-Observations & \multicolumn{1}{c}{252,813} & \multicolumn{1}{c}{252,813} \\ 
-Log Likelihood & \multicolumn{1}{c}{-166,739.600} & \multicolumn{1}{c}{-166,699.100} \\ 
-Akaike Inf. Crit. & \multicolumn{1}{c}{333,483.300} & \multicolumn{1}{c}{333,404.200} \\ 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-\end{tabular} 
-\end{table}
 
 Table \ref{tab:comparison} shows the two regression summary side-by-side. The regression with \emph{Number of Examinations} has AIC of 333404. It is slightly lower than the AIC of the previous regression which was 333483. Thus, in comparison, having this one extra variable improved the function significantly (statistically). However, a simple calculation of area under ROC curve for logmodel2 indicates that the model is even worse than the first.
 

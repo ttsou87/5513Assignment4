@@ -57,8 +57,8 @@ library(ggplot2)
 library(fastDummies)
 library(scales)
 library(broom)
-library(stargazer)
 library(pROC)
+library(gtools)
 ```
 
 
@@ -71,15 +71,15 @@ drive <- read_csv(here::here("Data/practicaldrivingexaminationresults.csv"))
 
 
 
-\section*{Step 1}
+\section*{Part 1}
 
 
 
 
-\section*{Step 2}
+\section*{Part 2}
 
 
-\section*{Step 3}
+\section*{Part 3}
 
 In the following section, we will be analyzing the relationship between *Booking Type* and *Exam Result*. 
 
@@ -96,9 +96,9 @@ ggplot(tab.df,
 
 The frequency plot, Figure \@ref(fig:frequency), between *Booking Type* and *Exam Result* shows that the percentages of people who passed the exam are similar for both driving school and private.
 
-Since the response variable and predictor variable are categorical variables, they will have to be converted into dummy variables(0 & 1). Then, following @logisticregregression, I ran a logistic regression to analyze their relationship. The following is the formula for the regression *logmodel*:
+Since the response variable and predictor variable are categorical variables, they will have to be converted into dummy variables(0 & 1). Then, following regression analysis @logisticregregression, I ran a logistic regression to analyze their relationship. The following is the formula for the regression *logmodel*:
 
-$Y$~$B(p)$, $log(\frac{p}{1-p}) = \beta_0 +\beta_1 X + \epsilon$
+$Y~B(p)$, $log(\frac{p}{1-p}) = \beta_0 +\beta_1 X + \epsilon$
   
 + $\beta_0$ is the intercept.
 
@@ -114,17 +114,35 @@ logmodel <- glm(`Exam Result_PASS` ~`Booking Type_Private`,
                 family=binomial(link='logit'), data=drivedum)
 ```
 
-```{r results1, tab.caption = "Regression with *Booking Type_Private*", results = "asis", message = FALSE}
-stargazer(logmodel,
-          title= "Regression with *Booking Type_Private*",
-          align = TRUE,
-          type = "latex",
-          style = "default",
-          header = FALSE,
-          no.space=TRUE)
+```{r logtable1, tab.caption = "Regression with *Booking Type_Private*"}
+logtable1 <- tidy(logmodel)%>%
+  mutate(p.value = stars.pval(p.value))%>%
+  mutate("'Exam Result_PASS'" = paste(estimate, p.value, sep = " "))%>%
+  select("'Exam Result_PASS'")%>%
+  as.data.frame()
+
+rownames(logtable1) <- c("Constant","Booking Type_Private")
+
+tabl1stat <- glance(logmodel)%>%
+  select(c(nobs, AIC, logLik))%>%
+  t() %>%
+  as.data.frame()
+colnames(tabl1stat) <- "'Exam Result_PASS'"
+
+logtable1 <- logtable1 %>%
+  rbind(tabl1stat)
+
+kable(logtable1,
+      format= "latex",
+      booktab = TRUE)%>%
+  add_header_above(c(" ", "Dependent Variable:" = 1))%>%
+  pack_rows(" ", 3, 5)%>%
+  footnote(general = "+ p≤0.1; * p≤0.5; ** p≤0.01; *** p≤0.001") %>%
+  kable_styling(bootstrap_options = "striped")
+
 ```
 
-Table \@ref(tab:results1) shows the regression summary. *Booking Type_Private* has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that *Booking Type_Private* affects the passing of an exam negatively compared to *Booking Type_Driving School*. Private booking reduces the log odds by 0.061.
+Table \@ref(tab:logtable1) shows the regression summary. *Booking Type_Private* has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that *Booking Type_Private* affects the passing of an exam negatively compared to *Booking Type_Driving School*. Private booking reduces the log odds by 0.061.
 
 ```{r anova, tab.caption = "ANOVA for logmodel1"}
 anova(logmodel, test="Chisq") %>% 
@@ -157,14 +175,8 @@ logmodel2 <- glm(`Exam Result_PASS` ~`Booking Type_Private` + `Number of Examina
                 family=binomial(link='logit'),data=drivedum)
 ```
 
-```{r comparison, tab.caption= "Regression Results",results = "asis"}
-stargazer(logmodel, logmodel2,
-          title="Regression Results",
-          align=TRUE,
-          type = "latex",
-          style = "default",
-          header = FALSE,
-          no.space=TRUE)
+```{r comparison, tab.caption= "Regression Results",results = "asis", eval =FALSE}
+
 ```
 
 Table \@ref(tab:comparison) shows the two regression summary side-by-side. The regression with *Number of Examinations* has AIC of 333404. It is slightly lower than the AIC of the previous regression which was 333483. Thus, in comparison, having this one extra variable improved the function significantly (statistically). However, a simple calculation of area under ROC curve for logmodel2 indicates that the model is even worse than the first. 

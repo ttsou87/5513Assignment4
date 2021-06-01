@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.5.29)  29 MAY 2021 22:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.6.2)  2 JUN 2021 00:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -959,11 +959,7 @@ Package: array 2020/10/01 v2.5c Tabular extension package (FMi)
 ))
 \@quotelevel=\count429
 \@quotereset=\count430
-(./Assignment4.aux
-
-LaTeX Warning: Label `' multiply defined.
-
-)
+(./Assignment4.aux)
 \openout1 = `Assignment4.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 282.
@@ -1089,8 +1085,8 @@ Package: blx-case-expl3 2020/12/31 v3.16 expl3 case changing code for biblatex
 \openout3 = `Assignment4.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'Assignment4.bbl' found.
-(./Assignment4.bbl)
+Package biblatex Info: ... file 'Assignment4.bbl' not found.
+No file Assignment4.bbl.
 Package biblatex Info: Reference section=0 on input line 282.
 Package biblatex Info: Reference segment=0 on input line 282.
 Package caption Info: Begin \AtBeginDocument code.
@@ -1395,6 +1391,10 @@ n input line 297.
 (pdftex.def)             Requested size: 361.34912pt x 289.07928pt.
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
 (Font)              scaled to size 10.51207pt on input line 301.
+
+LaTeX Warning: Citation 'logisticregregression' on page 2 undefined on input li
+ne 306.
+
 LaTeX Font Info:    Trying to load font information for TS1+mdbch on input line
  312.
 
@@ -1406,72 +1406,22 @@ LaTeX Font Info:    Font shape `TS1/mdbch/m/n' will be
 (Font)              scaled to size 10.51207pt on input line 312.
 [2 <./Assignment4_files/figure-latex/frequency-1.pdf>]
 
-LaTeX Warning: Reference `tab:results1' on page 3 undefined on input line 345.
+! Package inputenc Error: Unicode character ≤ (U+2264)
+(inputenc)                not set up for use with LaTeX.
 
-<Assignment4_files/figure-latex/roc-1.pdf, id=34, 361.35pt x 289.08pt>
-File: Assignment4_files/figure-latex/roc-1.pdf Graphic file (type pdf)
-<use Assignment4_files/figure-latex/roc-1.pdf>
-Package pdftex.def Info: Assignment4_files/figure-latex/roc-1.pdf  used on inpu
-t line 367.
-(pdftex.def)             Requested size: 361.34912pt x 289.07928pt.
-[3]
-
-LaTeX Warning: Reference `tab:comparison' on page 4 undefined on input line 411
-.
-
-LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 9.24173pt on input line 413.
-
-Underfull \hbox (badness 10000) in paragraph at lines 417--417
-|\T1/fvs/b/n/14.4 (+20) Conclusion|
- []
-
-[4 <./Assignment4_files/figure-latex/roc-1.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 428--428
-|\T1/fvs/b/n/14.4 (+20) References|
- []
-
-[5] [6] (./Assignment4.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package rerunfilecheck Info: File `Assignment4.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package logreq Info: Writing requests to 'Assignment4.run.xml'.
-\openout1 = `Assignment4.run.xml'.
-
- ) 
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.336 ...1; * p≤0.5; ** p≤0.01; *** p≤0.001}
+                                                  \\ 
 Here is how much of TeX's memory you used:
- 24857 strings out of 480714
- 416568 string characters out of 5902463
- 1153479 words of memory out of 5000000
- 41684 multiletter control sequences out of 15000+600000
- 508357 words of font info for 267 fonts, out of 8000000 for 9000
+ 24772 strings out of 480714
+ 415147 string characters out of 5902464
+ 1146167 words of memory out of 5000000
+ 41643 multiletter control sequences out of 15000+600000
+ 505816 words of font info for 245 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,16n,93p,744b,1447s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/Users/tinatsou/Library/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{/Use
-rs/tinatsou/Library/TinyTeX/texmf-dist/fonts/enc/dvips/ly1/texnansi.enc}{/Users
-/tinatsou/Library/TinyTeX/texmf-dist/fonts/enc/dvips/fontawesome/fontawesometwo
-.enc}</Users/tinatsou/Library/TinyTeX/texmf-dist/fonts/type1/public/fontawesome
-/FontAwesome.pfb></Users/tinatsou/Library/TinyTeX/texmf-dist/fonts/type1/bitstr
-ea/charter/bchb8a.pfb></Users/tinatsou/Library/TinyTeX/texmf-dist/fonts/type1/b
-itstrea/charter/bchr8a.pfb></Users/tinatsou/Library/TinyTeX/texmf-dist/fonts/ty
-pe1/bitstrea/charter/bchri8a.pfb></Users/tinatsou/Library/TinyTeX/texmf-dist/fo
-nts/type1/public/bera/fvmr8a.pfb></Users/tinatsou/Library/TinyTeX/texmf-dist/fo
-nts/type1/public/bera/fvsb8a.pfb></Users/tinatsou/Library/TinyTeX/texmf-dist/fo
-nts/type1/public/bera/fvsr8a.pfb></Users/tinatsou/Library/TinyTeX/texmf-dist/fo
-nts/type1/public/mathdesign/mdbch/md-chr7t.pfb></Users/tinatsou/Library/TinyTeX
-/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chr7y.pfb></Users/tinatsou/L
-ibrary/TinyTeX/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chr8t.pfb></Us
-ers/tinatsou/Library/TinyTeX/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-
-chri7m.pfb>
-Output written on Assignment4.pdf (6 pages, 7537191 bytes).
-PDF statistics:
- 112 PDF objects out of 1000 (max. 8388607)
- 87 compressed objects within 1 object stream
- 13 named destinations out of 1000 (max. 500000)
- 88080 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 60i,13n,93p,744b,1146s stack positions out of 5000i,500n,10000p,200000b,80000s
 
+!  ==> Fatal error occurred, no output PDF file produced!
