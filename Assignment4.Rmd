@@ -43,8 +43,7 @@ editor_options:
 knitr::opts_chunk$set(echo = FALSE, 
                       message = FALSE, 
                       warning = FALSE,
-                      fig.align = 'center',
-                      cache = TRUE)
+                      fig.align = 'center')
 ```
 
 ```{r load libraries}
@@ -114,46 +113,42 @@ logmodel <- glm(`Exam Result_PASS` ~`Booking Type_Private`,
                 family=binomial(link='logit'), data=drivedum)
 ```
 
-```{r logtable1, tab.caption = "Regression with *Booking Type_Private*"}
-logtable1 <- tidy(logmodel)%>%
+```{r results1}
+top <- tidy(logmodel) %>%
   mutate(p.value = stars.pval(p.value))%>%
   mutate("'Exam Result_PASS'" = paste(estimate, p.value, sep = " "))%>%
-  select("'Exam Result_PASS'")%>%
-  as.data.frame()
-
-rownames(logtable1) <- c("Constant","Booking Type_Private")
-
-tabl1stat <- glance(logmodel)%>%
+  select(term,"'Exam Result_PASS'")
+bottom <- glance(logmodel) %>%
   select(c(nobs, AIC, logLik))%>%
   t() %>%
-  as.data.frame()
-colnames(tabl1stat) <- "'Exam Result_PASS'"
+  as.data.frame() %>%
+  rownames_to_column(var = "term") %>%
+  rename("'Exam Result_PASS'" = V1)
 
-logtable1 <- logtable1 %>%
-  rbind(tabl1stat)
-
-kable(logtable1,
-      format= "latex",
-      booktab = TRUE)%>%
+table1 <- top %>% rbind(bottom)
+table1 %>%kable(booktabs =TRUE,
+        caption = "Regression Result for logmodel")%>%
   add_header_above(c(" ", "Dependent Variable:" = 1))%>%
   pack_rows(" ", 3, 5)%>%
-  footnote(general = "+ p≤0.1; * p≤0.5; ** p≤0.01; *** p≤0.001") %>%
-  kable_styling(bootstrap_options = "striped")
-
+  footnote(general = "p-value: '+' 0.05 - 0.1;
+           '*' 0.01 - 0.05; '**' 0.001 - 0.01; '***' 0 - 0.001") %>%
+  kable_styling(latex_options = c("striped", "hold_position"))
 ```
 
 Table \@ref(tab:logtable1) shows the regression summary. *Booking Type_Private* has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that *Booking Type_Private* affects the passing of an exam negatively compared to *Booking Type_Driving School*. Private booking reduces the log odds by 0.061.
 
 ```{r anova, tab.caption = "ANOVA for logmodel1"}
-anova(logmodel, test="Chisq") %>% 
+anova <- anova(logmodel, test="Chisq")
+anova%>% 
   kable(booktabs =TRUE,
         caption = "Anova for logmodel") %>% 
   kable_styling(position = "center")
 ```
 
-ANOVA test, table \@ref(tab:anova), on the *logmodel* analyzes the table of deviance which shows how well the x variable is doing in comparison to the null model. Here we can see that the drop in deviance is quite small despite having low p-value. 
+ANOVA test, Table \@ref(tab:anova), on the *logmodel* analyzes the table of deviance which shows how well the x variable is doing in comparison to the null model. Here we can see that the drop in deviance is quite small despite having low p-value. 
 
 Next, we test the fit of the model by looking at the receiver operating characteristic (ROC) curve.
+
 ```{r roc, fig.cap="ROC Cuve of logmodel1", fig.width=5, fig.height= 4}
 predpr <- predict(logmodel,type=c("response"))
 roccurve <- roc(drivedum$`Exam Result_PASS` ~ predpr)
@@ -168,26 +163,49 @@ We try to improve the model by adding more variables to the function:
 
 $Y$~$B(p)$, $log(\frac{p}{1-p}) = \beta_0 +\beta_1 X_1 +\beta_2 X_2 + \epsilon$
 
-$X_2$ is *Number of Examinations* taken by each examinee.
+  + $X_2$ is *Number of Examinations* taken by each examinee.
 
 ```{r, regreesion2}
 logmodel2 <- glm(`Exam Result_PASS` ~`Booking Type_Private` + `Number of Examinations`,
                 family=binomial(link='logit'),data=drivedum)
 ```
 
-```{r comparison, tab.caption= "Regression Results",results = "asis", eval =FALSE}
+```{r comparison}
+top2 <- tidy(logmodel2) %>%
+  mutate(p.value = stars.pval(p.value))%>%
+  mutate("'Exam Result_PASS' (logmodel2)" = paste(estimate, p.value, sep = " "))%>%
+  select(term,"'Exam Result_PASS' (logmodel2)")
+bottom2 <- glance(logmodel2) %>%
+  select(c(nobs, AIC, logLik))%>%
+  t() %>%
+  as.data.frame() %>%
+  rownames_to_column(var = "term") %>%
+  rename("'Exam Result_PASS' (logmodel2)" = V1)
 
+table2 <- top2 %>% rbind(bottom2)
+model1 <- c('0.533407196218835 ***', '-0.0179325664251033 *'," ", 337084, 
+                        444926.751217685, '222461.375608843')
+
+table2$"'Exam Result_PASS'(logmodel)" <- model1
+
+table2 %>%kable(booktabs =TRUE,
+        caption = "Regression Result Comparison")%>%
+  add_header_above(c(" ", "Dependent Variable:" = 2))%>%
+  pack_rows(" ", 3, 5)%>%
+  footnote("p-value: '+' 0.05 - 0.1;
+           '*' 0.01 - 0.05; '**' 0.001 - 0.01; '***' 0 - 0.001") %>%
+  kable_styling(latex_options = c("striped", "hold_position"))
 ```
 
-Table \@ref(tab:comparison) shows the two regression summary side-by-side. The regression with *Number of Examinations* has AIC of 333404. It is slightly lower than the AIC of the previous regression which was 333483. Thus, in comparison, having this one extra variable improved the function significantly (statistically). However, a simple calculation of area under ROC curve for logmodel2 indicates that the model is even worse than the first. 
-```{r roc2, fig.cap="ROC Cuve of logmodel1"}
+```{r roc2}
 predpr2 <- predict(logmodel2,type=c("response"))
 roccurve2 <- roc(drivedum$`Exam Result_PASS` ~ predpr2)
-
-auc(roccurve2)
 ```
+Table \@ref(tab:comparison) shows the two regression summary side-by-side. The regression with *Number of Examinations* has AIC of 333404. It is slightly lower than the AIC of the previous regression which was 333483. Thus, in comparison, having this one extra variable improved the function significantly (statistically). However, a simple calculation of area under ROC curve for logmodel2,`r pROC::auc(roccurve2)`,indicates that the model is even worse than the first. 
+
 
 \section*{Conclusion}
+
 In conclusion, we've shown that higher pass rate in certain districts is not always an absolute reflection on whether the district has better driving program. Rather, it is an outcome of locations with lower examinees in general. For locations with more examinees, there would be more variations in their outcome thus more fails. 
 
 Next, we shown that automatic cars have the lowest pass rate overall, and that motorcycle (over 250cc) has the highest pass rate. Older people (66 and above) also tend to fail their vehicle tests more. But ultimately pass rate for each vehicle type and majority of the age group is over 50%.
