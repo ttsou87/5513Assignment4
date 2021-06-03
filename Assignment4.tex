@@ -32,15 +32,6 @@
 \usepackage{longtable,booktabs}
 % Fix footnotes in tables (requires footnote package)
 \IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
-\usepackage{graphicx,grffile}
-\makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 \IfFileExists{parskip.sty}{%
 \usepackage{parskip}
 }{% else
@@ -285,6 +276,7 @@
 \setstretch{1.5}
 
 %% Any special functions or other packages can be loaded here.
+\usepackage{dcolumn} 
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -311,7 +303,6 @@
 This data set is \href{https://data.gov.au/dataset/ds-qld-3f90a4c3-23df-49dc-b243-9a29c0b23dd5/details?q=Practical\%20driving}{Practical driving examination results for customers} which is provided by local government authority (LGA) of Queensland. It records the license class, booking type, examination results and driver age group during 2005 to 2019.
 
 \textbf{Research aims:}
-
 We divided into three parts, the first part focuses on the annual pass rate of different local government authority.
 
 The second part mainly aims to compare the age group with different license.
@@ -324,11 +315,14 @@ Using \textcite{R}, we ran analysis to explore our research goals. This analysis
 
 The first part focuses on the annual pass rate of different local government authority.
 
-\begin{figure}
-\centering
-\includegraphics{Assignment4_files/figure-latex/Fig1-1.pdf}
-\caption{\label{fig:Fig1}Year Pass Percentage(year\_percentage) and Percentage of Local Government Authority annual passing rates exceeding the total annual passing rate(num\_percentage)}
-\end{figure}
+\textbackslash begin\{figure\}
+
+\{\centering \includegraphics{Assignment4_files/figure-latex/Fig1-1}
+
+\}
+
+\textbackslash caption\{Year Pass Percentage(year\_percentage) and Percentage of Local Government Authority annual passing rates exceeding the total annual passing rate(num\_percentage)\}\label{fig:Fig1}
+\textbackslash end\{figure\}
 
 In the figure \ref{fig:Fig1}, as for the annual pass rate, it does not fluctuate greatly, and basically remained at 62.5\% but the percentage of the number exceeding the annual pass rate fluctuates greatly, which may be due to missing data in some regions, however, from the data point of view, it has been in an upward phase in recent years.
 
@@ -373,17 +367,23 @@ KOWANYAMA ABORIGINAL SHIRE CONUNCIL & 1\\
 In the table \ref{tab:Tab1}, BLACKALL-TAMBO REGIONAL COUNCIL has the most number of first (5 times). In the table \ref{tab:Tab2}, MAREEBA SHIRE COUNCIL, NAPRANUM ABORIGINAL SHIRE COUNCIL, REDLAND CITY COUNCIL have won the last 2 times.
 
 \begin{figure}
-\centering
-\includegraphics{Assignment4_files/figure-latex/Fig2-1.pdf}
-\caption{\label{fig:Fig2}Year Pass Percentage in BLACKALL-TAMBO REGIONAL COUNCIL, BLACKALL-TAMBO REGIONAL COUNCIL, and REDLAND CITY COUNCIL}
+
+{\centering \includegraphics{Assignment4_files/figure-latex/Fig2-1} 
+
+}
+
+\caption{Year Pass Percentage in BLACKALL-TAMBO REGIONAL COUNCIL, BLACKALL-TAMBO REGIONAL COUNCIL, and REDLAND CITY COUNCIL}\label{fig:Fig2}
 \end{figure}
 
 According to the figure \ref{fig:Fig2}, the annual pass rate of BLACKALL-TAMBO REGIONAL COUNCIL has been on the rise after 2007, even reaching 100\%, while the annual pass rate of MAREEBA SHIRE COUNCIL is in a downward state, and the annual pass rate of REDLAND CITY COUNCIL basically fluctuates at 55\%. Especially, MAREEBA SHIRE COUNCIL and REDLAND CITY COUNCIL have been lower than the annual pass rate since 2015, which the gold line is year pass rate.
 
 \begin{figure}
-\centering
-\includegraphics{Assignment4_files/figure-latex/Fig3-1.pdf}
-\caption{\label{fig:Fig3}Year Pass Number in BLACKALL-TAMBO REGIONAL COUNCIL, MAREEBA SHIRE COUNCIL, and REDLAND CITY COUNCIL}
+
+{\centering \includegraphics{Assignment4_files/figure-latex/Fig3-1} 
+
+}
+
+\caption{Year Pass Number in BLACKALL-TAMBO REGIONAL COUNCIL, MAREEBA SHIRE COUNCIL, and REDLAND CITY COUNCIL}\label{fig:Fig3}
 \end{figure}
 
 In the figure \ref{fig:Fig3}, the number of pass for three government authorities basically has little fluctuation. Interestingly, the ranking of the number of passes and the ranking of the pass rate are completely opposite.
@@ -434,15 +434,146 @@ CLASS R - MOTORCYCLE (OVER 250CC) & 86\%\\
 Figure \ref{fig:failrate}, describes the failing rate of different age groups. It can be seen that the fail rate is increasing with the age grows older. Because people is 81 years old and over has the highest fail rate, which means it is hard for people to pass the driving license after 61 years old. However, there is one interesting point for young people with high rate at 41\%. Basically, the people in this range takes the highest number of examinations. While in the original data set, some young people around these ages have 200- or 300-times test, but still failed. Australia government has more restrictions on young people driving license, so the rate is high.
 
 \begin{figure}
-\centering
-\includegraphics{Assignment4_files/figure-latex/license-1.pdf}
-\caption{\label{fig:license}Compare the fail and pass in different license}
+
+{\centering \includegraphics{Assignment4_files/figure-latex/license-1} 
+
+}
+
+\caption{Compare the fail and pass in different license}\label{fig:license}
 \end{figure}
 
 In Figure \ref{fig:license}, for most drive license, the number of pass all exceeds 50\% of all age, except the automatic car license. People who fails at an older age. The number of fails is much more than pass.
 Another interesting point is that in motorcycle and heavy vehicle, people over 70 years old get 100\% pass rate. This is mainly because there are only one or two people join the test and he pass. So, the pass rate is 100\%. This doesn't mean all old people can get the license for one time.
 
 \section*{Part 3}
+
+In the following section, we will be analyzing the relationship between \emph{Booking Type} and \emph{Exam Result}.
+
+\begin{figure}
+
+{\centering \includegraphics{Assignment4_files/figure-latex/frequency-1} 
+
+}
+
+\caption{Frequency Plot between Booking Type and Exam Result}\label{fig:frequency}
+\end{figure}
+
+The frequency plot, Figure \ref{fig:frequency}, between \emph{Booking Type} and \emph{Exam Result} shows that the percentages of people who passed the exam are similar for both driving school and private.
+
+Since the response variable and predictor variable are categorical variables, they will have to be converted into dummy variables(0 \& 1). Then, following regression analysis \textcite{logisticregregression}, I ran a logistic regression to analyze their relationship. The following is the formula for the regression \emph{logmodel}:
+
+\(Y~B(p)\), \(log(\frac{p}{1-p}) = \beta_0 +\beta_1 X + \epsilon\)
+
+\begin{itemize}
+\item
+  \(\beta_0\) is the intercept.
+\item
+  \(\beta_1\) is the coefficient of \emph{Booking Type\_Private}
+\item
+  X is \emph{Booking Type\_Private} taking values 0 or 1
+\end{itemize}
+
+\begin{table}[!h]
+
+\caption{\label{tab:results1}Regression Result for logmodel}
+\centering
+\begin{tabular}[t]{ll}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{1}{c}{Dependent Variable:} \\
+\cmidrule(l{3pt}r{3pt}){2-2}
+term & 'Exam Result\_PASS'\\
+\midrule
+\cellcolor{gray!6}{(Intercept)} & \cellcolor{gray!6}{0.533407196218835 ***}\\
+`Booking Type\_Private` & -0.0179325664251033 *\\
+\addlinespace[0.3em]
+\multicolumn{2}{l}{\textbf{ }}\\
+\cellcolor{gray!6}{\hspace{1em}nobs} & \cellcolor{gray!6}{337084}\\
+\hspace{1em}AIC & 444926.751217685\\
+\cellcolor{gray!6}{\hspace{1em}logLik} & \cellcolor{gray!6}{-222461.375608843}\\
+\bottomrule
+\multicolumn{2}{l}{\rule{0pt}{1em}\textit{Note: }}\\
+\multicolumn{2}{l}{\rule{0pt}{1em}makecell[l]{p-value: '+' 0.05 - 0.1;\           '*' 0.01 - 0.05; '**' 0.001 - 0.01; '***' 0 - 0.001}}\\
+\end{tabular}
+\end{table}
+
+Table \ref{tab:logtable1} shows the regression summary. \emph{Booking Type\_Private} has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that \emph{Booking Type\_Private} affects the passing of an exam negatively compared to \emph{Booking Type\_Driving School}. Private booking reduces the log odds by 0.061.
+
+\begin{table}
+
+\caption{\label{tab:anova}Anova for logmodel}
+\centering
+\begin{tabular}[t]{lrrrrr}
+\toprule
+  & Df & Deviance & Resid. Df & Resid. Dev & Pr(>Chi)\\
+\midrule
+NULL & NA & NA & 337083 & 444929.1 & NA\\
+`Booking Type\_Private` & 1 & 6.315064 & 337082 & 444922.8 & 0.0119716\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+ANOVA test, Table \ref{tab:anova}, on the \emph{logmodel} analyzes the table of deviance which shows how well the x variable is doing in comparison to the null model. Here we can see that the drop in deviance is quite small despite having low p-value.
+
+Next, we test the fit of the model by looking at the receiver operating characteristic (ROC) curve.
+
+\begin{figure}
+
+{\centering \includegraphics{Assignment4_files/figure-latex/roc-1} 
+
+}
+
+\caption{ROC Cuve of logmodel1}\label{fig:roc}
+\end{figure}
+
+Figure \ref{fig:roc} shows the ROC curve of the \emph{logmodel}. It is basically a 45 degree diagonal line which indicates the model has no discrimination ability.
+
+Area under the curve ``\ldots gives the probability that the model correctly ranks such pairs of observations'' \textcite{bartlett_2014}. The area under the curve for this model is 0.5022363. In conclusion, the predictor just makes random guesses.
+
+We try to improve the model by adding more variables to the function:
+
+\(Y\)\textasciitilde{}\(B(p)\), \(log(\frac{p}{1-p}) = \beta_0 +\beta_1 X_1 +\beta_2 X_2 + \epsilon\)
+
+\begin{itemize}
+\tightlist
+\item
+  \(X_2\) is \emph{Number of Examinations} taken by each examinee.
+\end{itemize}
+
+\begin{table}[!h]
+
+\caption{\label{tab:comparison}Regression Result Comparison}
+\centering
+\begin{tabular}[t]{lll}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Dependent Variable:} \\
+\cmidrule(l{3pt}r{3pt}){2-3}
+term & 'Exam Result\_PASS' (logmodel2) & 'Exam Result\_PASS'(logmodel)\\
+\midrule
+\cellcolor{gray!6}{(Intercept)} & \cellcolor{gray!6}{0.522573474570028 ***} & \cellcolor{gray!6}{0.533407196218835 ***}\\
+`Booking Type\_Private` & -0.0157422192951367 * & -0.0179325664251033 *\\
+\addlinespace[0.3em]
+\multicolumn{3}{l}{\textbf{ }}\\
+\cellcolor{gray!6}{\hspace{1em}`Number of Examinations`} & \cellcolor{gray!6}{0.00169271410738006 ***} & \cellcolor{gray!6}{}\\
+\hspace{1em}nobs & 337084 & 337084\\
+\cellcolor{gray!6}{\hspace{1em}AIC} & \cellcolor{gray!6}{444885.718925042} & \cellcolor{gray!6}{444926.751217685}\\
+logLik & -222439.859462521 & 222461.375608843\\
+\bottomrule
+\multicolumn{3}{l}{\rule{0pt}{1em}\textit{Note: }}\\
+\multicolumn{3}{l}{\rule{0pt}{1em}makecell[l]{p-value: '+' 0.05 - 0.1;\           '*' 0.01 - 0.05; '**' 0.001 - 0.01; '***' 0 - 0.001}}\\
+\end{tabular}
+\end{table}
+
+Table \ref{tab:comparison} shows the two regression summary side-by-side. The regression with \emph{Number of Examinations} has AIC of 333404. It is slightly lower than the AIC of the previous regression which was 333483. Thus, in comparison, having this one extra variable improved the function significantly (statistically). However, a simple calculation of area under ROC curve for logmodel2,0.4859687,indicates that the model is even worse than the first.
+
+\section*{Conclusion}
+
+In conclusion, we've shown that higher pass rate in certain districts is not always an absolute reflection on whether the district has better driving program. Rather, it is an outcome of locations with lower examinees in general. For locations with more examinees, there would be more variations in their outcome thus more fails.
+
+Next, we shown that automatic cars have the lowest pass rate overall, and that motorcycle (over 250cc) has the highest pass rate. Older people (66 and above) also tend to fail their vehicle tests more. But ultimately pass rate for each vehicle type and majority of the age group is over 50\%.
+
+Last but not least, although, there is statistical relationship between the booking type and the exam outcome, the affect is pretty small. Furthermore, the current variables are inadequate in creating a good model to predict the outcome.
+
+This is also a shortcoming with the data we currently have. Because it contains very limited variables, it is hard to create a better fit model that can predict the outcome accurately.
 
 \printbibliography
 

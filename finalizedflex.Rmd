@@ -1,0 +1,454 @@
+---
+title: "PANDA"
+output: 
+  flexdashboard::flex_dashboard:
+    vertical_layout: fill
+    source_code: embed
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+```{r ,echo = FALSE, message = FALSE, warning = FALSE}
+# Libraries
+library(tidyverse)
+library(readr)
+library(kableExtra)
+library(bookdown)
+library(plotly)
+library(scales)
+library(flexdashboard)
+library(fastDummies)
+library(broom)
+library(bslib)
+drive <- read_csv(here::here("Data/practicaldrivingexaminationresults.csv"))
+```
+
+Introduction {data-icon="fa-car"}
+==================================
+
+Column {data-width=600}
+-----------------------------------------------
+
+### Introduction about our analysis:
+
+**Data Description**:
+
+This data set is [Practical driving examination results for customers](https://data.gov.au/dataset/ds-qld-3f90a4c3-23df-49dc-b243-9a29c0b23dd5/details?q=Practical%20driving) which is provided by local government authority (LGA) of Queensland. It records the license class, booking type, examination results and driver age group during 2005 to 2019.
+
+**Research aims**:
+
+We divided into three parts:
+
+  + First part focuses on the annual pass rate of different local government authority. 
+
+  + Second part mainly aims to compare the age group with different license. 
+
+  + Third part calculates the correlation between the examination results and booking type.
+
+Column {data-width=400}
+-------------------------------------------
+
+![Retrieved from: https://www.screentime.com.au/watch/wp-content/uploads/2017/11/driving-test.jpg](https://www.screentime.com.au/watch/wp-content/uploads/2017/11/driving-test.jpg)
+
+
+Part A {data-navmenu="Pass Rate"}
+===================================== 
+
+Column {data-width=500}
+---------------------------------------------------
+
+```{r Q3Filter, message = FALSE, warning= FALSE, echo=FALSE, fig.height= 10, fig.width=15 }
+year_drive <- drive %>% 
+ separate(col = Month, into = c("Year","Month"),"-") %>% 
+  select(Year,`Local Government Authority`)  
+num_year_drive <- year_drive %>% count(Year)
+
+num_year_drive_percentage <- drive %>% 
+  separate(col = Month, into = c("Year","Month"),"-") %>% 
+  select(Year,Month,`Local Government Authority`,`Exam Result`) %>% 
+  count(Year,`Exam Result`) %>% 
+  arrange(desc(Year)) %>% 
+  rename(num = n) %>% 
+  right_join(num_year_drive) %>% 
+  mutate(year_percentage = num/n) %>% 
+  filter(`Exam Result` == 'PASS') %>% 
+  rename(pass_num = num, total_num = n) %>% 
+  select(Year,year_percentage)
+
+num_drive <- year_drive %>% 
+  count(Year,`Local Government Authority`) %>% 
+  arrange(desc(Year)) 
+
+percentage_num_drive <- drive %>% 
+ separate(col = Month, into = c("Year","Month"),"-") %>% 
+  select(Year,Month,`Local Government Authority`,`Exam Result`) %>% 
+  count(Year,`Local Government Authority`,`Exam Result`) %>% 
+  arrange(desc(Year)) %>% 
+  rename(num = n) %>% 
+  right_join(num_drive)  %>% 
+  mutate(percentage = num/n)%>% 
+  filter(`Exam Result` == 'PASS') %>% 
+  rename(pass_num = num, total_num = n)%>% 
+  left_join(num_year_drive_percentage)
+
+num_dict <- percentage_num_drive %>% count(Year) %>% rename(total_num = n)
+```
+
+
+### Figure 1.1:  Year Pass Percentage(year_percentage) and Percentage of Local Government Authority annual passing rates exceeding the total annual passing rate(num_percentage)
+```{r Fig8, message = FALSE, warning= FALSE, echo=FALSE, fig.height= 15, fig.width=10}
+over_percentage <- percentage_num_drive %>% 
+  filter(percentage > year_percentage) %>% 
+  count(Year,year_percentage) %>% 
+  left_join(num_dict) %>% 
+  mutate(num_percentage = n / total_num) %>% 
+  select(-n,-total_num) 
+
+over_percentage_longer <-over_percentage %>% 
+  pivot_longer(cols = year_percentage:num_percentage,
+               names_to = "percentage",
+               values_to = "vlues")
+
+total_year <- ggplot(over_percentage_longer) +
+  geom_line(aes(x= as.numeric(Year),
+                y = vlues*100,
+                colour = percentage,
+                group = percentage))+
+  xlab("Year")+
+  ylab("Percentage")+
+scale_y_continuous(labels = scales::percent_format(scale = 1))+
+   theme_minimal() 
+ggplotly(total_year)
+```
+
+
+Column {data-width=400}
+---------------------------------------------------
+### Table1.1: The number of times the Local Government Authority obtains the highest or lowest pass rate per year
+```{r Tab5, message = FALSE, warning= FALSE, echo=FALSE, fig.width= 8}
+count_function <- function(x){percentage_num_drive %>% 
+  select(Year,`Local Government Authority`,percentage) %>% 
+  group_by(Year) %>% 
+  filter(percentage == x(percentage)) %>% 
+  group_by(`Local Government Authority`) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count))}
+
+max_percetage <- count_function(max) %>% head(6)
+min_percetage <- count_function(min) %>% head(6)
+
+knitr::kable(max_percetage,
+             caption = "Number of time getteing the highest pass rate per year",
+             booktabs = TRUE) %>%
+   kable_styling(bootstrap_options  = c("striped", "hold_position")) 
+
+knitr::kable(min_percetage,
+             caption = "Number of time getteing the lowest pass rate per year",
+             booktabs = TRUE) %>%
+   kable_styling(bootstrap_options  = c("striped", "hold_position"))
+```
+
+
+Part B {data-navmenu="Pass Rate"}
+===================================== 
+
+Column {data-height=450}
+-------------------------------------
+
+### Figure 1.2:  Year Pass Percentage in BLACKALL-TAMBO REGIONAL COUNCIL, BLACKALL-TAMBO REGIONAL COUNCIL, and REDLAND CITY COUNCIL
+```{r Fig9, fig.height= 10, fig.width=18, message = FALSE, warning= FALSE, echo=FALSE}
+max_min_percentage2 <- percentage_num_drive %>% 
+  filter(`Local Government Authority` %in% c("BLACKALL-TAMBO REGIONAL COUNCIL",
+                                             "MAREEBA SHIRE COUNCIL",
+                                             "REDLAND CITY COUNCIL")) 
+percentage_rate <- ggplot()+
+  geom_line(max_min_percentage2,mapping = aes(x= as.numeric(Year),
+                y = percentage*100,
+                group = `Local Government Authority`,
+                colour = `Local Government Authority`))+
+  geom_line(over_percentage,mapping = aes(x = as.numeric(Year), y = year_percentage*100), 
+            size = 1, color = "gold", linetype = "dashed")+
+  scale_y_continuous(name = "Year Pass Percentage",labels = scales::percent_format(scale = 1))+ 
+  xlab("Year")+
+   theme_minimal()
+
+ggplotly(percentage_rate)
+
+```
+
+### Figure 1.3:  Year Pass Number in BLACKALL-TAMBO REGIONAL COUNCIL, MAREEBA SHIRE COUNCIL, and REDLAND CITY COUNCIL
+```{r Tab6, message = FALSE, warning= FALSE, echo=FALSE, fig.height= 10, fig.width=18,}
+pass_percentage <- ggplot()+
+  geom_line(max_min_percentage2,mapping = aes(x= as.numeric(Year),
+                y = pass_num,
+                group = `Local Government Authority`,
+                colour = `Local Government Authority`))+ 
+  ylab("Number of Pass")+
+  xlab("Year") +
+   theme_minimal() 
+
+ggplotly(pass_percentage)
+```
+
+
+Column {data-height=270}
+-------------------------------------
+
+### Analyisis
+
+
++ From Figure 1.1, The annual pass rate did not fluctuate greatly, and basically remained at 62.5% The percentage of the number exceeding the annual pass rate fluctuates greatly, which may be due to missing data in some regions in some years, but from the data point of view, it has been in an upward phase in recent years.
+
+
++ From Figure 1.2, The annual pass rate of BLACKALL-TAMBO REGIONAL COUNCIL has been on the rise after 2007, even reaching 100%, while the annual pass rate of MAREEBA SHIRE COUNCIL is in a downward state as a whole, and the annual pass rate of REDLAND CITY COUNCIL basically fluctuates at 55%.
+
++ From Figure 1.3, The number of passes for BLACKALL-TAMBO REGIONAL COUNCIL, MAREEBA SHIRE COUNCIL, and REDLAND CITY COUNCIL basically has little fluctuation. BLACKALL-TAMBO REGIONAL COUNCIL rises briefly and then falls again.
+
++ Hence, The annual pass rate has not changed much, the percentage of the number exceeding the annual pass rate fluctuates greatly. Areas with sparsely populated areas may have fewer people participating, resulting in a higher overall pass rate than areas with densely populated areas.
+
+Age {data-icon="fa-birthday-cake"}
+==================================
+
+Column {data-width=300}
+-----------------------------------------------------------
+### passrate
+```{r}
+### The whole pass rate of Queensland
+wholerate <- drive %>%
+  group_by(`Exam Result`) %>%
+  count() %>%
+  pivot_wider(id_cols = `Exam Result`,
+              names_from = `Exam Result`,
+              values_from = n) %>%
+  mutate(passrate = PASS/(FAIL+PASS))
+
+passrate = percent(wholerate$passrate)
+valueBox(passrate,icon = "fa-user-plus",caption = "The driving examination pass rate of Queensland",color = "green")
+```
+
+
+
+
+### Tab 2.1: The pass rate of different license
+```{r}
+#count the pass rate of each product type
+type <- drive %>%
+  group_by(`Product Type Name`, `Exam Result`) %>%
+  count() %>%
+  pivot_wider(id_cols = -`Exam Result`,
+              names_from = `Exam Result`,
+              values_from = n) %>%
+  mutate(sum = FAIL + PASS,
+         pass_rate = round(PASS /sum,2))%>%
+  select(`Product Type Name`, pass_rate) %>%
+  arrange(pass_rate) %>%
+  mutate(pass_rate = percent(pass_rate))
+
+kable(type)
+
+
+```
+
+Column {data-width=700}
+-----------------------------------------------------------
+### Figure 2.1: The fail rate of different ages
+```{r}
+fail <- drive %>%
+ separate(col = Month,
+          into = c("year",
+                   "month"),
+          "-") %>%
+  mutate(year = as.numeric(year)) %>%
+  filter(year %in% c("2005" : "2019" ))%>%
+  group_by(`Driver Age Group`, `Exam Result`) %>%
+  count() %>%
+  pivot_wider(id_cols = -`Exam Result`,
+              names_from = `Exam Result`,
+              values_from = n) %>%
+  mutate(sum = FAIL + PASS,
+         fail_rate = round(FAIL /sum * 100, 3)) %>%
+  mutate(Age_group1 = str_remove(`Driver Age Group`, "Aged"),
+         Age_group2 = str_remove(Age_group1, "years")) %>%
+  rename(age_group = Age_group2) %>%
+  select(age_group, fail_rate) 
+```
+
+```{r}
+# plot the fail rate 
+fail_rate <- ggplot(fail,
+       aes(x = age_group,
+           y = fail_rate,
+           group = 1))+
+  geom_line(color = "#8FBC94", size = 1)+
+  geom_point(color = "#548687", size = 2)+
+  ggtitle("Queensland driving test fail rates by age")+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90))
+
+ggplotly(fail_rate)
+```
+
+
+License {data-icon="fa-id-badge"}
+==================================
+Row
+---------------------------------------------------------
+
+### Figure 2.2: Compare the pass and fail in different driver license
+```{r}
+# select the age group
+age <- drive %>%
+  select(`Product Type Name`, `Driver Age Group`, `Exam Result`, `Number of Examinations`) %>%
+  mutate(Age_group1 = str_remove(`Driver Age Group`, "Aged"),
+         Age_group2 = str_remove(Age_group1, "years"),
+         licence = str_remove(`Product Type Name`, "CLASS")) %>%
+  rename(age_group = Age_group2) %>%
+# count the pass rate by different product type
+  group_by(licence, age_group, `Exam Result`) %>%
+  count()
+```
+
+```{r}
+# plot the age group by license
+license <- ggplot(age,
+       aes(x = age_group,
+           y = n,
+           fill = `Exam Result`))+
+  geom_bar(stat = "identity", position = "fill", width=2)+
+  geom_hline(yintercept = 0.5, color = "black")+
+  facet_wrap(~licence, scales = "free_x", nrow = 2)+
+  scale_fill_manual(values=c("#6E7783", "#77AAAD"))+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90))
+ggplotly(license) 
+```
+
+Part A {data-navmenu="Booking Type" data-icon="fa-id-schhol"}
+==================================
+Column {data-width=400}
+-----------------------------------------------------------
+### Table 3.1: Frequency Table
+A quick look at the frequency table between *Booking Type* and *Exam Result* and we saw that the number of people who passed the exam is similar for both driving school and private.
+```{r frequency table}
+table <- table(drive$`Booking Type`,drive$`Exam Result`)
+addmargins(table)
+tab.prop <-  prop.table(table, 1)
+```
+
+### Chi-Square Test
+However, when we run a chi-square test, the p-value is 0.0121 so we have statistical evidence that there is a relationship between *Booking Type* and *Exam Result*.
+```{r chisq.test}
+chisq.test(drive$`Booking Type`,drive$`Exam Result`)
+```
+
+Column {data-width=600}
+-----------------------------------------------------------
+### Figure 3.1: Frequency Plotted
+```{r}
+tab.df <- as.data.frame(tab.prop)#make frequency table into data frame
+names(tab.df) <- c("Booking Type", "Result", "frequency")
+
+freq <- ggplot(tab.df, 
+       aes(x=`Booking Type`, y = frequency, fill=Result)) + 
+        geom_col() +theme_minimal()
+
+ggplotly(freq)
+```
+
+
+Part B {data-navmenu="Booking Type" data-icon="fa-id-check-circle"}
+==================================
+
+Column {data-width=500}
+-----------------------------------------------------------
+### Logistic Regression Model
+```{r}
+drivedum <- dummy_cols(drive, select_columns =  c('Booking Type', 'Exam Result', 'Product Type Name'),
+                       remove_selected_columns = TRUE)
+train <- drivedum[1:252813,]
+test <- drivedum[252814:337084,]
+
+logmodel <- glm(`Exam Result_PASS` ~`Booking Type_Private`, family=binomial(link='logit'),data=train)
+
+summary(logmodel)
+```
+
+Column {data-width=500}
+-----------------------------------------------------------
+
+### ANOVA
+```{r ANOVA}
+anova(logmodel, test="Chisq")
+```
+
+### Accuracy Test
+```{r Accuracy}
+fitted.results <- predict(logmodel,newdata=test,type='response')
+fitted.results <- ifelse(fitted.results > 0.5,1,0)
+misClasificError <- mean(fitted.results != test$`Exam Result_PASS`)
+print(paste('Accuracy',1-misClasificError))
+```
+
+
+Conclusion {data-icon="fa-id-flag-checkered"}
+==================================
+Column {data-width=400}
+-----------------------------------------------
+
+### Conclusion:
+
++ Higher pass rate in certain districts is not always an absolute reflection on whether the district has better driving program. 
+
++ Automatic cars have the lowest pass rate overall, and that motorcycle (over 250cc) has the highest pass rate. 
+
++ Older people (66 and above) also tend to fail their vehicle tests more. But ultimately pass rate for each vehicle type and majority of the age group is over 50%.
+
++ Statistical relationship between the booking type and the exam outcome, the effect is pretty small. 
+
++ This is also a shortcoming with the data we currently have. Because it contains very limited variables, it is hard to create a better fit model that can predict the outcome accurately.
+
+Column {data-width=600}
+-------------------------------------------
+
+### Image
+
+![Retrieved from: https://images.pexels.com/photos/13861/IMG_3496bfree.jpg](https://images.pexels.com/photos/13861/IMG_3496bfree.jpg)
+
+Reference {data-icon="fa-adjust"}
+==================================
+
++ R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical
+Computing, Vienna, Austria. URL. Retrieved from https://www.R-project.org
+
++ Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686,
+  https://doi.org/10.21105/joss.01686
+
++ Hadley Wickham and Jim Hester (2020). readr: Read Rectangular Text Data. R package version 1.4.0.
+  https://CRAN.R-project.org/package=readr
+
++ Hao Zhu (2021). kableExtra: Construct Complex Table with 'kable' and Pipe Syntax. R package
+  version 1.3.4. https://CRAN.R-project.org/package=kableExtra
+  
++ Yihui Xie (2021). bookdown: Authoring Books and Technical Documents with R Markdown. R package version 0.22.
+
++ C. Sievert. Interactive Web-Based Data Visualization with R, plotly, and shiny. Chapman and
+  Hall/CRC Florida, 2020.
+  
++ Hadley Wickham and Dana Seidel (2020). scales: Scale Functions for Visualization. R package
+  version 1.1.1. https://CRAN.R-project.org/package=scales
+
++ Richard Iannone, JJ Allaire and Barbara Borges (2020). flexdashboard: R Markdown Format for
+  Flexible Dashboards. R package version 0.5.2. https://CRAN.R-project.org/package=flexdashboard
+  
++ Jacob Kaplan (2020). fastDummies: Fast Creation of Dummy (Binary) Columns and Rows from
+  Categorical Variables. R package version 1.6.3. https://CRAN.R-project.org/package=fastDummies
+  
++ David Robinson, Alex Hayes and Simon Couch (2021). broom: Convert Statistical Objects into Tidy
+  Tibbles. R package version 0.7.6. https://CRAN.R-project.org/package=broom
+  
++ Carson Sievert and Joe Cheng (2021). bslib: Custom 'Bootstrap' 'Sass' Themes for 'shiny' and
+  'rmarkdown'. R package version 0.2.5.1. https://CRAN.R-project.org/package=bslib
+  
++ Australian Government(2019). Practical driving tests(2019). Retrieved from https://data.gov.au/dataset/ds-qld-3f90a4c3-23df-49dc-b243-9a29c0b23dd5/details?q=Practical%20driving
