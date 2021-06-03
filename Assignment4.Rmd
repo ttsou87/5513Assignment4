@@ -68,7 +68,7 @@ The second part mainly aims to compare the age group with different license.
 
 The third part calculates the correlation between the examination results and booking type.
 
-Using @R, we ran analysis to explore our research goals. This analysis uses R packages @tidyverse, @readr, @kableExtra, @bookdown, @ggplot2, @fastDummies, @scales, @stargazer, @broom, and @pROC.
+Using @R, we ran analysis to explore our research goals. This analysis uses R packages @tidyverse, @readr, @kableExtra, @bookdown, @ggplot2, @fastDummies, @scales, @broom, and @pROC.
 
 \section*{Part 1}
 
