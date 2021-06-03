@@ -444,6 +444,128 @@ Another interesting point is that in motorcycle and heavy vehicle, people over 7
 
 \section*{Part 3}
 
+In the following section, we will be analyzing the relationship between \emph{Booking Type} and \emph{Exam Result}.
+
+\begin{figure}
+\centering
+\includegraphics{Assignment4_files/figure-latex/frequency-1.pdf}
+\caption{\label{fig:frequency}Frequency Plot between Booking Type and Exam Result}
+\end{figure}
+
+The frequency plot, Figure \ref{fig:frequency}, between \emph{Booking Type} and \emph{Exam Result} shows that the percentages of people who passed the exam are similar for both driving school and private.
+
+Since the response variable and predictor variable are categorical variables, they will have to be converted into dummy variables(0 \& 1). Then, following regression analysis \textcite{logisticregregression}, I ran a logistic regression to analyze their relationship. The following is the formula for the regression \emph{logmodel}:
+
+\(Y~B(p)\), \(log(\frac{p}{1-p}) = \beta_0 +\beta_1 X + \epsilon\)
+
+\begin{itemize}
+\item
+  \(\beta_0\) is the intercept.
+\item
+  \(\beta_1\) is the coefficient of \emph{Booking Type\_Private}
+\item
+  X is \emph{Booking Type\_Private} taking values 0 or 1
+\end{itemize}
+
+\begin{table}[!h]
+
+\caption{\label{tab:results1}Regression Result for logmodel}
+\centering
+\begin{tabular}[t]{ll}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{1}{c}{Dependent Variable:} \\
+\cmidrule(l{3pt}r{3pt}){2-2}
+term & 'Exam Result\_PASS'\\
+\midrule
+\cellcolor{gray!6}{(Intercept)} & \cellcolor{gray!6}{0.533407196218835 ***}\\
+`Booking Type\_Private` & -0.0179325664251033 *\\
+\addlinespace[0.3em]
+\multicolumn{2}{l}{\textbf{ }}\\
+\cellcolor{gray!6}{\hspace{1em}nobs} & \cellcolor{gray!6}{337084}\\
+\hspace{1em}AIC & 444926.751217685\\
+\cellcolor{gray!6}{\hspace{1em}logLik} & \cellcolor{gray!6}{-222461.375608843}\\
+\bottomrule
+\multicolumn{2}{l}{\rule{0pt}{1em}\textit{Note: }}\\
+\multicolumn{2}{l}{\rule{0pt}{1em}makecell[l]{p-value: '+' 0.05 - 0.1;\           '*' 0.01 - 0.05; '**' 0.001 - 0.01; '***' 0 - 0.001}}\\
+\end{tabular}
+\end{table}
+
+Table \ref{tab:results1} shows the regression summary. \emph{Booking Type\_Private} has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that \emph{Booking Type\_Private} affects the passing of an exam negatively compared to \emph{Booking Type\_Driving School}. Private booking reduces the log odds by 0.061.
+
+\begin{table}
+
+\caption{\label{tab:anova}Anova for logmodel}
+\centering
+\begin{tabular}[t]{lrrrrr}
+\toprule
+  & Df & Deviance & Resid. Df & Resid. Dev & Pr(>Chi)\\
+\midrule
+NULL & NA & NA & 337083 & 444929.1 & NA\\
+`Booking Type\_Private` & 1 & 6.315064 & 337082 & 444922.8 & 0.0119716\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+ANOVA test, Table \ref{tab:anova}, on the \emph{logmodel} analyzes the table of deviance which shows how well the x variable is doing in comparison to the null model. Here we can see that the drop in deviance is quite small despite having low p-value.
+
+Next, we test the fit of the model by looking at the receiver operating characteristic (ROC) curve.
+
+\begin{figure}
+\centering
+\includegraphics{Assignment4_files/figure-latex/roc-1.pdf}
+\caption{\label{fig:roc}ROC Cuve of logmodel1}
+\end{figure}
+
+Figure \ref{fig:roc} shows the ROC curve of the \emph{logmodel}. It is basically a 45 degree diagonal line which indicates the model has no discrimination ability.
+
+Area under the curve ``\ldots gives the probability that the model correctly ranks such pairs of observations'' \textcite{bartlett_2014}. The area under the curve for this model is 0.5022363. In conclusion, the predictor just makes random guesses.
+
+We try to improve the model by adding more variables to the function:
+
+\(Y\)\textasciitilde{}\(B(p)\), \(log(\frac{p}{1-p}) = \beta_0 +\beta_1 X_1 +\beta_2 X_2 + \epsilon\)
+
+\begin{itemize}
+\tightlist
+\item
+  \(X_2\) is \emph{Number of Examinations} taken by each examinee.
+\end{itemize}
+
+\begin{table}[!h]
+
+\caption{\label{tab:comparison}Regression Result Comparison}
+\centering
+\begin{tabular}[t]{lll}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Dependent Variable:} \\
+\cmidrule(l{3pt}r{3pt}){2-3}
+term & 'Exam Result\_PASS' (logmodel2) & 'Exam Result\_PASS'(logmodel)\\
+\midrule
+\cellcolor{gray!6}{(Intercept)} & \cellcolor{gray!6}{0.522573474570028 ***} & \cellcolor{gray!6}{0.533407196218835 ***}\\
+`Booking Type\_Private` & -0.0157422192951367 * & -0.0179325664251033 *\\
+\addlinespace[0.3em]
+\multicolumn{3}{l}{\textbf{ }}\\
+\cellcolor{gray!6}{\hspace{1em}`Number of Examinations`} & \cellcolor{gray!6}{0.00169271410738006 ***} & \cellcolor{gray!6}{}\\
+\hspace{1em}nobs & 337084 & 337084\\
+\cellcolor{gray!6}{\hspace{1em}AIC} & \cellcolor{gray!6}{444885.718925042} & \cellcolor{gray!6}{444926.751217685}\\
+logLik & -222439.859462521 & 222461.375608843\\
+\bottomrule
+\multicolumn{3}{l}{\rule{0pt}{1em}\textit{Note: }}\\
+\multicolumn{3}{l}{\rule{0pt}{1em}makecell[l]{p-value: '+' 0.05 - 0.1;\           '*' 0.01 - 0.05; '**' 0.001 - 0.01; '***' 0 - 0.001}}\\
+\end{tabular}
+\end{table}
+
+Table \ref{tab:comparison} shows the two regression summary side-by-side. The regression with \emph{Number of Examinations} has AIC of 333404. It is slightly lower than the AIC of the previous regression which was 333483. Thus, in comparison, having this one extra variable improved the function significantly (statistically). However, a simple calculation of area under ROC curve for logmodel2,0.4859687,indicates that the model is even worse than the first.
+
+\section*{Conclusion}
+
+In conclusion, we've shown that higher pass rate in certain districts is not always an absolute reflection on whether the district has better driving program. Rather, it is an outcome of locations with lower examinees in general. For locations with more examinees, there would be more variations in their outcome thus more fails.
+
+Next, we shown that automatic cars have the lowest pass rate overall, and that motorcycle (over 250cc) has the highest pass rate. Older people (66 and above) also tend to fail their vehicle tests more. But ultimately pass rate for each vehicle type and majority of the age group is over 50\%.
+
+Last but not least, although, there is statistical relationship between the booking type and the exam outcome, the affect is pretty small. Furthermore, the current variables are inadequate in creating a good model to predict the outcome.
+
+This is also a shortcoming with the data we currently have. Because it contains very limited variables, it is hard to create a better fit model that can predict the outcome accurately.
+
 \printbibliography
 
 \end{document}
