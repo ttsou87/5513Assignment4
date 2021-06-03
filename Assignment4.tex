@@ -277,6 +277,20 @@
 
 %% Any special functions or other packages can be loaded here.
 \usepackage{dcolumn} 
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 
 
 \begin{document}
@@ -316,31 +330,28 @@ Since the response variable and predictor variable are categorical variables, th
   X is \emph{Booking Type\_Private} taking values 0 or 1
 \end{itemize}
 
-\textbackslash begin\{table\}{[}!htbp{]} \centering 
-\textbackslash caption\{Regression with \emph{Booking Type\_Private}\}
-\label{}
+\begin{table}[!h]
 
-\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} } 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-2} 
-\\[-1.8ex] & \multicolumn{1}{c}{`Exam Result\_PASS`} \\ 
-\hline \\[-1.8ex] 
- `Booking Type\_Private` & -0.061^{***} \\ 
-  & (0.008) \\ 
-  Constant & 0.559^{***} \\ 
-  & (0.006) \\ 
- \hline \\[-1.8ex] 
-Observations & \multicolumn{1}{c}{252,813} \\ 
-Log Likelihood & \multicolumn{1}{c}{-166,739.600} \\ 
-Akaike Inf. Crit. & \multicolumn{1}{c}{333,483.300} \\ 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\caption{\label{tab:results1}Regression Result for logmodel}
+\centering
+\begin{tabular}[t]{ll}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{1}{c}{Dependent Variable:} \\
+\cmidrule(l{3pt}r{3pt}){2-2}
+term & 'Exam Result\_PASS'\\
+\midrule
+\cellcolor{gray!6}{(Intercept)} & \cellcolor{gray!6}{0.533407196218835 ***}\\
+`Booking Type\_Private` & -0.0179325664251033 *\\
+\addlinespace[0.3em]
+\multicolumn{2}{l}{\textbf{ }}\\
+\cellcolor{gray!6}{\hspace{1em}nobs} & \cellcolor{gray!6}{337084}\\
+\hspace{1em}AIC & 444926.751217685\\
+\cellcolor{gray!6}{\hspace{1em}logLik} & \cellcolor{gray!6}{-222461.375608843}\\
+\bottomrule
+\multicolumn{2}{l}{\rule{0pt}{1em}\textit{Note: }}\\
+\multicolumn{2}{l}{\rule{0pt}{1em}makecell[l]{p-value: '+' 0.05 - 0.1;\           '*' 0.01 - 0.05; '**' 0.001 - 0.01; '***' 0 - 0.001}}\\
 \end{tabular}
-
-\textbackslash end\{table\}
+\end{table}
 
 Table \ref{tab:results1} shows the regression summary. \emph{Booking Type\_Private} has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that \emph{Booking Type\_Private} affects the passing of an exam negatively compared to \emph{Booking Type\_Driving School}. Private booking reduces the log odds by 0.061.
 
@@ -352,8 +363,8 @@ Table \ref{tab:results1} shows the regression summary. \emph{Booking Type\_Priva
 \toprule
   & Df & Deviance & Resid. Df & Resid. Dev & Pr(>Chi)\\
 \midrule
-NULL & NA & NA & 252812 & 333534.7 & NA\\
-`Booking Type\_Private` & 1 & 55.47238 & 252811 & 333479.3 & 0\\
+NULL & NA & NA & 337083 & 444929.1 & NA\\
+`Booking Type\_Private` & 1 & 6.315064 & 337082 & 444922.8 & 0.0119716\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -379,40 +390,37 @@ We try to improve the model by adding more variables to the function:
 
 \(Y\)\textasciitilde{}\(B(p)\), \(log(\frac{p}{1-p}) = \beta_0 +\beta_1 X_1 +\beta_2 X_2 + \epsilon\)
 
-\(X_2\) is \emph{Number of Examinations} taken by each examinee.
+\begin{itemize}
+\tightlist
+\item
+  \(X_2\) is \emph{Number of Examinations} taken by each examinee.
+\end{itemize}
 
-\begin{table}[!htbp] \centering 
-  \caption{Regression Results} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} } 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-3} 
-\\[-1.8ex] & \multicolumn{2}{c}{`Exam Result\_PASS`} \\ 
-\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)}\\ 
-\hline \\[-1.8ex] 
- `Booking Type\_Private` & -0.061^{***} & -0.060^{***} \\ 
-  & (0.008) & (0.008) \\ 
-  `Number of Examinations` &  & 0.003^{***} \\ 
-  &  & (0.0003) \\ 
-  Constant & 0.559^{***} & 0.542^{***} \\ 
-  & (0.006) & (0.006) \\ 
- \hline \\[-1.8ex] 
-Observations & \multicolumn{1}{c}{252,813} & \multicolumn{1}{c}{252,813} \\ 
-Log Likelihood & \multicolumn{1}{c}{-166,739.600} & \multicolumn{1}{c}{-166,699.100} \\ 
-Akaike Inf. Crit. & \multicolumn{1}{c}{333,483.300} & \multicolumn{1}{c}{333,404.200} \\ 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-\end{tabular} 
+\begin{table}[!h]
+
+\caption{\label{tab:comparison}Regression Result for logmodel}
+\centering
+\begin{tabular}[t]{lll}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Dependent Variable:} \\
+\cmidrule(l{3pt}r{3pt}){2-3}
+term & 'Exam Result\_PASS' (logmodel2) & 'Exam Result\_PASS'(logmodel)\\
+\midrule
+\cellcolor{gray!6}{(Intercept)} & \cellcolor{gray!6}{0.522573474570028 ***} & \cellcolor{gray!6}{0.533407196218835 ***}\\
+`Booking Type\_Private` & -0.0157422192951367 * & -0.0179325664251033 *\\
+\addlinespace[0.3em]
+\multicolumn{3}{l}{\textbf{ }}\\
+\cellcolor{gray!6}{\hspace{1em}`Number of Examinations`} & \cellcolor{gray!6}{0.00169271410738006 ***} & \cellcolor{gray!6}{}\\
+\hspace{1em}nobs & 337084 & 337084\\
+\cellcolor{gray!6}{\hspace{1em}AIC} & \cellcolor{gray!6}{444885.718925042} & \cellcolor{gray!6}{444926.751217685}\\
+logLik & -222439.859462521 & 222461.375608843\\
+\bottomrule
+\multicolumn{3}{l}{\rule{0pt}{1em}\textit{Note: }}\\
+\multicolumn{3}{l}{\rule{0pt}{1em}makecell[l]{p-value: '+' 0.05 - 0.1;\           '*' 0.01 - 0.05; '**' 0.001 - 0.01; '***' 0 - 0.001}}\\
+\end{tabular}
 \end{table}
 
-Table \ref{tab:comparison} shows the two regression summary side-by-side. The regression with \emph{Number of Examinations} has AIC of 333404. It is slightly lower than the AIC of the previous regression which was 333483. Thus, in comparison, having this one extra variable improved the function significantly (statistically). However, a simple calculation of area under ROC curve for logmodel2 indicates that the model is even worse than the first.
-
-\begin{verbatim}
-## Area under the curve: 0.486
-\end{verbatim}
+Table \ref{tab:comparison} shows the two regression summary side-by-side. The regression with \emph{Number of Examinations} has AIC of 333404. It is slightly lower than the AIC of the previous regression which was 333483. Thus, in comparison, having this one extra variable improved the function significantly (statistically). However, a simple calculation of area under ROC curve for logmodel2,0.4859687,indicates that the model is even worse than the first.
 
 \section*{Conclusion}
 
