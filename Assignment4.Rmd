@@ -158,7 +158,7 @@ min_percetage <- count_function(min) %>% head(6)
 knitr::kable(max_percetage,
              caption = "Number of time getteing the highest pass rate per year",
              booktabs = TRUE) %>%
-   kable_styling(bootstrap_options  = c("striped", "hold_position")) 
+   kable_styling(latex_options  = c("striped", "hold_position")) 
 
 ```
 
@@ -166,7 +166,7 @@ knitr::kable(max_percetage,
 knitr::kable(min_percetage,
              caption = "Number of time getteing the lowest pass rate per year",
              booktabs = TRUE) %>%
-   kable_styling(bootstrap_options  = c("striped", "hold_position"))
+   kable_styling(latex_options  = c("striped", "hold_position"))
 ```
 
 In the table \@ref(tab:Tab1), BLACKALL-TAMBO REGIONAL COUNCIL has the most number of first (`r max_percetage$count[1]` times). In the table \@ref(tab:Tab2), MAREEBA SHIRE COUNCIL, NAPRANUM ABORIGINAL SHIRE COUNCIL, REDLAND CITY COUNCIL have won the last `r min_percetage$count[1]` times.
