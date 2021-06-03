@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.5.12)  3 JUN 2021 20:15
+=======
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.6.3)  3 JUN 2021 20:25
+>>>>>>> Stashed changes
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1572,10 +1576,17 @@ Package logreq Info: Writing requests to 'Assignment4.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
+<<<<<<< Updated upstream
  26401 strings out of 480806
  440681 string characters out of 5904033
  1182157 words of memory out of 5000000
  42952 multiletter control sequences out of 15000+600000
+=======
+ 26499 strings out of 480517
+ 442284 string characters out of 5899186
+ 1190626 words of memory out of 5000000
+ 43345 multiletter control sequences out of 15000+600000
+>>>>>>> Stashed changes
  514240 words of font info for 340 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,14n,93p,744b,1448s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1595,7 +1606,11 @@ nts/type1/public/mathdesign/mdbch/md-chr7t.pfb></Users/ciciduan/Library/TinyTeX
 ibrary/TinyTeX/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chr8t.pfb></Us
 ers/ciciduan/Library/TinyTeX/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-
 chri7m.pfb>
+<<<<<<< Updated upstream
 Output written on Assignment4.pdf (11 pages, 7580269 bytes).
+=======
+Output written on Assignment4.pdf (11 pages, 7588127 bytes).
+>>>>>>> Stashed changes
 PDF statistics:
  221 PDF objects out of 1000 (max. 8388607)
  180 compressed objects within 2 object streams
