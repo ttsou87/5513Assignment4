@@ -478,8 +478,8 @@ Since the response variable and predictor variable are categorical variables, th
 \cmidrule(l{3pt}r{3pt}){2-2}
 term & 'Exam Result\_PASS'\\
 \midrule
-\cellcolor{gray!6}{(Intercept)} & \cellcolor{gray!6}{0.533407196218835 ***}\\
-`Booking Type\_Private` & -0.0179325664251033 *\\
+\cellcolor{gray!6}{(Intercept)} & \cellcolor{gray!6}{0.533407196218835/0}\\
+`Booking Type\_Private` & -0.0179325664251033/0.0119752525590349\\
 \addlinespace[0.3em]
 \multicolumn{2}{l}{\textbf{ }}\\
 \cellcolor{gray!6}{\hspace{1em}nobs} & \cellcolor{gray!6}{337084}\\
@@ -487,7 +487,7 @@ term & 'Exam Result\_PASS'\\
 \cellcolor{gray!6}{\hspace{1em}logLik} & \cellcolor{gray!6}{-222461.375608843}\\
 \bottomrule
 \multicolumn{2}{l}{\rule{0pt}{1em}\textit{Note: }}\\
-\multicolumn{2}{l}{\rule{0pt}{1em}makecell[l]{p-value: '+' 0.05 - 0.1;\           '*' 0.01 - 0.05; '**' 0.001 - 0.01; '***' 0 - 0.001}}\\
+\multicolumn{2}{l}{\rule{0pt}{1em}p-value is the value after /}\\
 \end{tabular}
 \end{table}
 
@@ -514,7 +514,7 @@ Next, we test the fit of the model by looking at the receiver operating characte
 \begin{figure}
 \centering
 \includegraphics{Assignment4_files/figure-latex/roc-1.pdf}
-\caption{\label{fig:roc}ROC Cuve of logmodel1}
+\caption{\label{fig:roc}ROC Cuve of logmodel}
 \end{figure}
 
 Figure \ref{fig:roc} shows the ROC curve of the \emph{logmodel}. It is basically a 45 degree diagonal line which indicates the model has no discrimination ability.
@@ -541,17 +541,17 @@ We try to improve the model by adding more variables to the function:
 \cmidrule(l{3pt}r{3pt}){2-3}
 term & 'Exam Result\_PASS' (logmodel2) & 'Exam Result\_PASS'(logmodel)\\
 \midrule
-\cellcolor{gray!6}{(Intercept)} & \cellcolor{gray!6}{0.522573474570028 ***} & \cellcolor{gray!6}{0.533407196218835 ***}\\
-`Booking Type\_Private` & -0.0157422192951367 * & -0.0179325664251033 *\\
+\cellcolor{gray!6}{(Intercept)} & \cellcolor{gray!6}{0.522573474570028/***} & \cellcolor{gray!6}{0.533407196218835 ***}\\
+`Booking Type\_Private` & -0.0157422192951367/* & -0.0179325664251033 *\\
 \addlinespace[0.3em]
 \multicolumn{3}{l}{\textbf{ }}\\
-\cellcolor{gray!6}{\hspace{1em}`Number of Examinations`} & \cellcolor{gray!6}{0.00169271410738006 ***} & \cellcolor{gray!6}{}\\
+\cellcolor{gray!6}{\hspace{1em}`Number of Examinations`} & \cellcolor{gray!6}{0.00169271410738006/***} & \cellcolor{gray!6}{}\\
 \hspace{1em}nobs & 337084 & 337084\\
 \cellcolor{gray!6}{\hspace{1em}AIC} & \cellcolor{gray!6}{444885.718925042} & \cellcolor{gray!6}{444926.751217685}\\
 logLik & -222439.859462521 & 222461.375608843\\
 \bottomrule
 \multicolumn{3}{l}{\rule{0pt}{1em}\textit{Note: }}\\
-\multicolumn{3}{l}{\rule{0pt}{1em}makecell[l]{p-value: '+' 0.05 - 0.1;\           '*' 0.01 - 0.05; '**' 0.001 - 0.01; '***' 0 - 0.001}}\\
+\multicolumn{3}{l}{\rule{0pt}{1em}p-value is the value after /}\\
 \end{tabular}
 \end{table}
 

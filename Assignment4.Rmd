@@ -358,8 +358,7 @@ logmodel <- glm(`Exam Result_PASS` ~`Booking Type_Private`,
 
 ```{r results1}
 top <- tidy(logmodel) %>%
-  mutate(p.value = stars.pval(p.value))%>%
-  mutate("'Exam Result_PASS'" = paste(estimate, p.value, sep = " "))%>%
+  mutate("'Exam Result_PASS'" = paste(estimate, p.value, sep = "/"))%>%
   select(term,"'Exam Result_PASS'")
 bottom <- glance(logmodel) %>%
   select(c(nobs, AIC, logLik))%>%
@@ -373,8 +372,7 @@ table1 %>%kable(booktabs =TRUE,
         caption = "Regression Result for logmodel")%>%
   add_header_above(c(" ", "Dependent Variable:" = 1))%>%
   pack_rows(" ", 3, 5)%>%
-  footnote(general = "p-value: '+' 0.05 - 0.1;
-           '*' 0.01 - 0.05; '**' 0.001 - 0.01; '***' 0 - 0.001") %>%
+  footnote(general = "p-value is the value after /") %>%
   kable_styling(latex_options = c("striped", "hold_position"))
 ```
 
@@ -392,7 +390,7 @@ ANOVA test, Table \@ref(tab:anova), on the *logmodel* analyzes the table of devi
 
 Next, we test the fit of the model by looking at the receiver operating characteristic (ROC) curve.
 
-```{r roc, fig.cap="ROC Cuve of logmodel1", fig.width=5, fig.height= 4}
+```{r roc, fig.cap="ROC Cuve of logmodel", fig.width=5, fig.height= 4}
 predpr <- predict(logmodel,type=c("response"))
 roccurve <- roc(drivedum$`Exam Result_PASS` ~ predpr)
 
@@ -417,7 +415,7 @@ logmodel2 <- glm(`Exam Result_PASS` ~`Booking Type_Private` + `Number of Examina
 ```{r comparison}
 top2 <- tidy(logmodel2) %>%
   mutate(p.value = stars.pval(p.value))%>%
-  mutate("'Exam Result_PASS' (logmodel2)" = paste(estimate, p.value, sep = " "))%>%
+  mutate("'Exam Result_PASS' (logmodel2)" = paste(estimate, p.value, sep = "/"))%>%
   select(term,"'Exam Result_PASS' (logmodel2)")
 bottom2 <- glance(logmodel2) %>%
   select(c(nobs, AIC, logLik))%>%
@@ -436,8 +434,7 @@ table2 %>%kable(booktabs =TRUE,
         caption = "Regression Result Comparison")%>%
   add_header_above(c(" ", "Dependent Variable:" = 2))%>%
   pack_rows(" ", 3, 5)%>%
-  footnote("p-value: '+' 0.05 - 0.1;
-           '*' 0.01 - 0.05; '**' 0.001 - 0.01; '***' 0 - 0.001") %>%
+  footnote("p-value is the value after /") %>%
   kable_styling(latex_options = c("striped", "hold_position"))
 ```
 
