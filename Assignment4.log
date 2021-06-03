@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.6.3)  3 JUN 2021 17:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.6.3)  3 JUN 2021 18:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Assignment4.tex
 (./Assignment4.tex
-LaTeX2e <2021-06-01> pre-release-0 (develop 2021-6-3 branch)
+LaTeX2e <2021-06-01>
 L3 programming layer <2021-06-01> (/Users/tinatsou/Library/TinyTeX/texmf-dist/t
 ex/latex/base/article.cls
 Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
@@ -67,7 +67,7 @@ LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )) (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2020/09/23 v2.17i AMS math features
+Package: amsmath 2021/04/20 v2.17j AMS math features
 \@mathmargin=\skip49
 For additional information on amsmath, use the `?' option.
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
@@ -580,17 +580,38 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 Package: footnote 1997/01/28 1.13 Save footnotes around boxes
 \fn@notes=\box57
 \fn@width=\dimen175
+) (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
+(/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+(/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+(/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen176
+\Gin@req@width=\dimen177
+) (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/grffile/grffile.sty
+Package: grffile 2019/11/11 v2.1 Extended file name support for graphics (legac
+y)
+Package grffile Info: This package is an empty stub for compatibility on input 
+line 40.
 ) (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2020/10/26 v3.5g Customizing captions (AR)
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
-\captionmargin=\dimen176
-\captionmargin@=\dimen177
-\captionwidth=\dimen178
-\caption@tempdima=\dimen179
-\caption@indent=\dimen180
-\caption@parindent=\dimen181
-\caption@hangindent=\dimen182
+\captionmargin=\dimen178
+\captionmargin@=\dimen179
+\captionwidth=\dimen180
+\caption@tempdima=\dimen181
+\caption@indent=\dimen182
+\caption@parindent=\dimen183
+\caption@hangindent=\dimen184
 Package caption Info: Standard document class detected.
 )
 \c@caption@flags=\count418
@@ -840,22 +861,6 @@ Package: bm 2021/04/25 v1.2e Bold Symbol Support (DPC/FMi)
 Package bm Info: No bold for \U/msa/m/n, using \pmb.
 Package bm Info: No bold for \U/msb/m/n, using \pmb.
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 149.
-) (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
-(/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
-(/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
-Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-)
-(/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
-File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
-)
-Package graphics Info: Driver file: pdftex.def on input line 107.
-(/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
-))
-\Gin@req@height=\dimen183
-\Gin@req@width=\dimen184
 ) (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2019/10/16 v2.13 Sectioning titles
 \ttl@box=\box58
@@ -883,11 +888,11 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
-Package hyperref Info: Option `breaklinks' set `true' on input line 151.
-Package hyperref Info: Option `bookmarksopen' set `true' on input line 151.
-Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 151.
+Package hyperref Info: Option `breaklinks' set `true' on input line 160.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 160.
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 160.
 
-Package hyperref Info: Option `colorlinks' set `true' on input line 151.
+Package hyperref Info: Option `colorlinks' set `true' on input line 160.
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/mathtools/mathtools.sty
 Package: mathtools 2021/04/12 v1.27 mathematical typesetting tools
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
@@ -1053,46 +1058,46 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 (./Assignment4.aux)
 \openout1 = `Assignment4.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 296.
-LaTeX Font Info:    ... okay on input line 296.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 296.
-LaTeX Font Info:    ... okay on input line 296.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 296.
-LaTeX Font Info:    ... okay on input line 296.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 296.
-LaTeX Font Info:    ... okay on input line 296.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 296.
-LaTeX Font Info:    ... okay on input line 296.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 296.
-LaTeX Font Info:    ... okay on input line 296.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 296.
-LaTeX Font Info:    ... okay on input line 296.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 296.
-LaTeX Font Info:    ... okay on input line 296.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 296.
-LaTeX Font Info:    ... okay on input line 296.
-LaTeX Font Info:    Checking defaults for MDA/cmr/m/n on input line 296.
-LaTeX Font Info:    Trying to load font information for MDA+cmr on input line 2
-96.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 305.
+LaTeX Font Info:    ... okay on input line 305.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 305.
+LaTeX Font Info:    ... okay on input line 305.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 305.
+LaTeX Font Info:    ... okay on input line 305.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 305.
+LaTeX Font Info:    ... okay on input line 305.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 305.
+LaTeX Font Info:    ... okay on input line 305.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 305.
+LaTeX Font Info:    ... okay on input line 305.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 305.
+LaTeX Font Info:    ... okay on input line 305.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 305.
+LaTeX Font Info:    ... okay on input line 305.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 305.
+LaTeX Font Info:    ... okay on input line 305.
+LaTeX Font Info:    Checking defaults for MDA/cmr/m/n on input line 305.
+LaTeX Font Info:    Trying to load font information for MDA+cmr on input line 3
+05.
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/mathdesign/mdacmr.fd
 File: mdacmr.fd 
 )
-LaTeX Font Info:    ... okay on input line 296.
-LaTeX Font Info:    Checking defaults for MDB/cmr/m/n on input line 296.
-LaTeX Font Info:    Trying to load font information for MDB+cmr on input line 2
-96.
+LaTeX Font Info:    ... okay on input line 305.
+LaTeX Font Info:    Checking defaults for MDB/cmr/m/n on input line 305.
+LaTeX Font Info:    Trying to load font information for MDB+cmr on input line 3
+05.
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/mathdesign/mdbcmr.fd
 File: mdbcmr.fd 
 )
-LaTeX Font Info:    ... okay on input line 296.
-LaTeX Info: Redefining \microtypecontext on input line 296.
+LaTeX Font Info:    ... okay on input line 305.
+LaTeX Info: Redefining \microtypecontext on input line 305.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 296.
+LaTeX Info: Redefining \showhyphens on input line 305.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1100,7 +1105,7 @@ Package microtype Info: No adjustment of character kerning.
 File: mt-bch.cfg 2007/03/03 v1.5 microtype config. file: Bitstream Charter (RS)
 
 )
-Package hyperref Info: Link coloring ON on input line 296.
+Package hyperref Info: Link coloring ON on input line 305.
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1112,9 +1117,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count444
 )
-LaTeX Info: Redefining \ref on input line 296.
-LaTeX Info: Redefining \pageref on input line 296.
-LaTeX Info: Redefining \nameref on input line 296.
+LaTeX Info: Redefining \ref on input line 305.
+LaTeX Info: Redefining \pageref on input line 305.
+LaTeX Info: Redefining \nameref on input line 305.
 (./Assignment4.out) (./Assignment4.out)
 \@outlinefile=\write4
 \openout4 = `Assignment4.out'.
@@ -1186,21 +1191,8 @@ Package biblatex Warning: The following entry could not be found
 (biblatex)                LaTeX afterwards.
 
 )
-Package biblatex Info: Reference section=0 on input line 296.
-Package biblatex Info: Reference segment=0 on input line 296.
-Package caption Info: Begin \AtBeginDocument code.
-Package caption Info: float package is loaded.
-Package caption Info: threeparttable package is loaded.
-Package caption Info: wrapfig package is loaded.
-Package caption Info: End \AtBeginDocument code.
-
-Package mathdesign/mdbch Warning: Package 'amssymb' shouldn't be used in conjon
-ction with package mdbch, on input line 296.
-
-
-Package mathdesign/mdbch Warning: Package 'amsfonts' shouldn't be used in conjo
-nction with package mdbch, on input line 296.
-
+Package biblatex Info: Reference section=0 on input line 305.
+Package biblatex Info: Reference segment=0 on input line 305.
 
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-bas
 e.sty
@@ -1213,93 +1205,106 @@ cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: threeparttable package is loaded.
+Package caption Info: wrapfig package is loaded.
+Package caption Info: End \AtBeginDocument code.
+
+Package mathdesign/mdbch Warning: Package 'amssymb' shouldn't be used in conjon
+ction with package mdbch, on input line 305.
+
+
+Package mathdesign/mdbch Warning: Package 'amsfonts' shouldn't be used in conjo
+nction with package mdbch, on input line 305.
+
 <logo.jpg, id=4, 4015.0pt x 6022.5pt>
 File: logo.jpg Graphic file (type jpg)
 <use logo.jpg>
-Package pdftex.def Info: logo.jpg  used on input line 297.
-(pdftex.def)             Requested size: 170.71652pt x 256.02179pt.
+Package pdftex.def Info: logo.jpg  used on input line 306.
+(pdftex.def)             Requested size: 170.68118pt x 256.02179pt.
 LaTeX Font Info:    Font shape `T1/fvs/m/n' will be
-(Font)              scaled to size 9.24173pt on input line 297.
+(Font)              scaled to size 9.24173pt on input line 306.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `fvs' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/fvs/m/n' will be
-(Font)              scaled to size 10.12793pt on input line 297.
+(Font)              scaled to size 10.12793pt on input line 306.
 LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
-(Font)              scaled to size 10.12793pt on input line 297.
+(Font)              scaled to size 10.12793pt on input line 306.
 LaTeX Font Info:    Font shape `T1/fvs/m/n' will be
-(Font)              scaled to size 8.43994pt on input line 297.
+(Font)              scaled to size 8.43994pt on input line 306.
 LaTeX Font Info:    Trying to load font information for OT1+mdbch on input line
- 297.
+ 306.
 
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/mathdesign/mdbch/ot1mdbch
 .fd
 File: ot1mdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OT1/mdbch.
 )
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 9.60007pt on input line 297.
+(Font)              scaled to size 9.60007pt on input line 306.
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 6.72005pt on input line 297.
+(Font)              scaled to size 6.72005pt on input line 306.
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 4.80003pt on input line 297.
+(Font)              scaled to size 4.80003pt on input line 306.
 LaTeX Font Info:    Trying to load font information for OML+mdbch on input line
- 297.
+ 306.
 
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/mathdesign/mdbch/omlmdbch
 .fd
 File: omlmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OML/mdbch.
 )
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 9.60007pt on input line 297.
+(Font)              scaled to size 9.60007pt on input line 306.
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `OML/mdbch/m/it/10'. Switching off
-(microtype)                protrusion for this font on input line 297.
+(microtype)                protrusion for this font on input line 306.
 
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 6.72005pt on input line 297.
+(Font)              scaled to size 6.72005pt on input line 306.
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 4.80003pt on input line 297.
+(Font)              scaled to size 4.80003pt on input line 306.
 LaTeX Font Info:    Trying to load font information for OMS+mdbch on input line
- 297.
+ 306.
 
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/mathdesign/mdbch/omsmdbch
 .fd
 File: omsmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OMS/mdbch.
 )
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 9.60007pt on input line 297.
+(Font)              scaled to size 9.60007pt on input line 306.
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `OMS/mdbch/m/n/10'. Switching off
-(microtype)                protrusion for this font on input line 297.
+(microtype)                protrusion for this font on input line 306.
 
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 6.72005pt on input line 297.
+(Font)              scaled to size 6.72005pt on input line 306.
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 4.80003pt on input line 297.
+(Font)              scaled to size 4.80003pt on input line 306.
 LaTeX Font Info:    Trying to load font information for OMX+mdbch on input line
- 297.
+ 306.
 
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/mathdesign/mdbch/omxmdbch
 .fd
 File: omxmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OMX/mdbch.
 )
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 9.60007pt on input line 297.
+(Font)              scaled to size 9.60007pt on input line 306.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 6.72005pt on input line 297.
+(Font)              scaled to size 6.72005pt on input line 306.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 4.80003pt on input line 297.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 297
+(Font)              scaled to size 4.80003pt on input line 306.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 306
 .
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 297
+LaTeX Font Info:    Trying to load font information for U+msb on input line 306
 .
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1307,175 +1312,175 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 9.60007pt on input line 297.
+(Font)              scaled to size 9.60007pt on input line 306.
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `OML/mdbch/m/n/10'. Switching off
-(microtype)                protrusion for this font on input line 297.
+(microtype)                protrusion for this font on input line 306.
 
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 6.72005pt on input line 297.
+(Font)              scaled to size 6.72005pt on input line 306.
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 4.80003pt on input line 297.
+(Font)              scaled to size 4.80003pt on input line 306.
 LaTeX Font Info:    Trying to load font information for MDA+mdbch on input line
- 297.
+ 306.
 
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/mathdesign/mdbch/mdamdbch
 .fd
 File: mdamdbch.fd 2013/08/29 Fontinst v1.933 font definitions for MDA/mdbch.
 )
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 9.60007pt on input line 297.
+(Font)              scaled to size 9.60007pt on input line 306.
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 6.72005pt on input line 297.
+(Font)              scaled to size 6.72005pt on input line 306.
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 4.80003pt on input line 297.
+(Font)              scaled to size 4.80003pt on input line 306.
 LaTeX Font Info:    Trying to load font information for MDB+mdbch on input line
- 297.
+ 306.
 
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/mathdesign/mdbch/mdbmdbch
 .fd
 File: mdbmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for MDB/mdbch.
 )
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 9.60007pt on input line 297.
+(Font)              scaled to size 9.60007pt on input line 306.
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 6.72005pt on input line 297.
+(Font)              scaled to size 6.72005pt on input line 306.
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 4.80003pt on input line 297.
+(Font)              scaled to size 4.80003pt on input line 306.
 LaTeX Font Info:    Font shape `OT1/mdbch/b/n' will be
-(Font)              scaled to size 9.60007pt on input line 297.
+(Font)              scaled to size 9.60007pt on input line 306.
 LaTeX Font Info:    Font shape `OT1/mdbch/b/n' will be
-(Font)              scaled to size 6.72005pt on input line 297.
+(Font)              scaled to size 6.72005pt on input line 306.
 LaTeX Font Info:    Font shape `OT1/mdbch/b/n' will be
-(Font)              scaled to size 4.80003pt on input line 297.
+(Font)              scaled to size 4.80003pt on input line 306.
 LaTeX Font Info:    Font shape `OML/mdbch/b/it' will be
-(Font)              scaled to size 9.60007pt on input line 297.
+(Font)              scaled to size 9.60007pt on input line 306.
 LaTeX Font Info:    Font shape `OML/mdbch/b/it' will be
-(Font)              scaled to size 6.72005pt on input line 297.
+(Font)              scaled to size 6.72005pt on input line 306.
 LaTeX Font Info:    Font shape `OML/mdbch/b/it' will be
-(Font)              scaled to size 4.80003pt on input line 297.
+(Font)              scaled to size 4.80003pt on input line 306.
 LaTeX Font Info:    Font shape `OMS/mdbch/b/n' will be
-(Font)              scaled to size 9.60007pt on input line 297.
+(Font)              scaled to size 9.60007pt on input line 306.
 LaTeX Font Info:    Font shape `OMS/mdbch/b/n' will be
-(Font)              scaled to size 6.72005pt on input line 297.
+(Font)              scaled to size 6.72005pt on input line 306.
 LaTeX Font Info:    Font shape `OMS/mdbch/b/n' will be
-(Font)              scaled to size 4.80003pt on input line 297.
+(Font)              scaled to size 4.80003pt on input line 306.
 LaTeX Font Info:    Font shape `OMX/mdbch/b/n' will be
-(Font)              scaled to size 9.60007pt on input line 297.
+(Font)              scaled to size 9.60007pt on input line 306.
 LaTeX Font Info:    Font shape `OMX/mdbch/b/n' will be
-(Font)              scaled to size 6.72005pt on input line 297.
+(Font)              scaled to size 6.72005pt on input line 306.
 LaTeX Font Info:    Font shape `OMX/mdbch/b/n' will be
-(Font)              scaled to size 4.80003pt on input line 297.
+(Font)              scaled to size 4.80003pt on input line 306.
 LaTeX Font Info:    Trying to load font information for U+fontawesometwo on inp
-ut line 297.
+ut line 306.
 
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/fontawesome/ufontawesomet
 wo.fd
 File: ufontawesometwo.fd 2016/05/22 Font definitions for U/fontawesometwo.
 )
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 297.
+(Font)              scaled to size 10.51207pt on input line 306.
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 297.
+(Font)              scaled to size 7.68005pt on input line 306.
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 297.
+(Font)              scaled to size 5.76004pt on input line 306.
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 10.51207pt on input line 297.
+(Font)              scaled to size 10.51207pt on input line 306.
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `OML/mdbch/m/it/10.95'. Switching off
-(microtype)                protrusion for this font on input line 297.
+(microtype)                protrusion for this font on input line 306.
 
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 7.68005pt on input line 297.
+(Font)              scaled to size 7.68005pt on input line 306.
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 5.76004pt on input line 297.
+(Font)              scaled to size 5.76004pt on input line 306.
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 297.
+(Font)              scaled to size 10.51207pt on input line 306.
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `OMS/mdbch/m/n/10.95'. Switching off
-(microtype)                protrusion for this font on input line 297.
+(microtype)                protrusion for this font on input line 306.
 
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 297.
+(Font)              scaled to size 7.68005pt on input line 306.
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 297.
+(Font)              scaled to size 5.76004pt on input line 306.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 297.
+(Font)              scaled to size 10.51207pt on input line 306.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 297.
+(Font)              scaled to size 7.68005pt on input line 306.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 297.
+(Font)              scaled to size 5.76004pt on input line 306.
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 297.
+(Font)              scaled to size 10.51207pt on input line 306.
 
 Package microtype Warning: I cannot find a protrusion list for font
 (microtype)                `OML/mdbch/m/n/10.95'. Switching off
-(microtype)                protrusion for this font on input line 297.
+(microtype)                protrusion for this font on input line 306.
 
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 297.
+(Font)              scaled to size 7.68005pt on input line 306.
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 297.
+(Font)              scaled to size 5.76004pt on input line 306.
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 297.
+(Font)              scaled to size 10.51207pt on input line 306.
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 297.
+(Font)              scaled to size 7.68005pt on input line 306.
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 297.
+(Font)              scaled to size 5.76004pt on input line 306.
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 297.
+(Font)              scaled to size 10.51207pt on input line 306.
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 297.
+(Font)              scaled to size 7.68005pt on input line 306.
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 297.
+(Font)              scaled to size 5.76004pt on input line 306.
 LaTeX Font Info:    Font shape `OT1/mdbch/b/n' will be
-(Font)              scaled to size 10.51207pt on input line 297.
+(Font)              scaled to size 10.51207pt on input line 306.
 LaTeX Font Info:    Font shape `OT1/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 297.
+(Font)              scaled to size 7.68005pt on input line 306.
 LaTeX Font Info:    Font shape `OT1/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 297.
+(Font)              scaled to size 5.76004pt on input line 306.
 LaTeX Font Info:    Font shape `OML/mdbch/b/it' will be
-(Font)              scaled to size 10.51207pt on input line 297.
+(Font)              scaled to size 10.51207pt on input line 306.
 LaTeX Font Info:    Font shape `OML/mdbch/b/it' will be
-(Font)              scaled to size 7.68005pt on input line 297.
+(Font)              scaled to size 7.68005pt on input line 306.
 LaTeX Font Info:    Font shape `OML/mdbch/b/it' will be
-(Font)              scaled to size 5.76004pt on input line 297.
+(Font)              scaled to size 5.76004pt on input line 306.
 LaTeX Font Info:    Font shape `OMS/mdbch/b/n' will be
-(Font)              scaled to size 10.51207pt on input line 297.
+(Font)              scaled to size 10.51207pt on input line 306.
 LaTeX Font Info:    Font shape `OMS/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 297.
+(Font)              scaled to size 7.68005pt on input line 306.
 LaTeX Font Info:    Font shape `OMS/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 297.
+(Font)              scaled to size 5.76004pt on input line 306.
 LaTeX Font Info:    Font shape `OMX/mdbch/b/n' will be
-(Font)              scaled to size 10.51207pt on input line 297.
+(Font)              scaled to size 10.51207pt on input line 306.
 LaTeX Font Info:    Font shape `OMX/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 297.
+(Font)              scaled to size 7.68005pt on input line 306.
 LaTeX Font Info:    Font shape `OMX/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 297.
+(Font)              scaled to size 5.76004pt on input line 306.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 23.88496pt on input line 297.
+(Font)              scaled to size 23.88496pt on input line 306.
 LaTeX Font Info:    Font shape `T1/fvs/m/n' will be
-(Font)              scaled to size 20.99857pt on input line 297.
+(Font)              scaled to size 20.99857pt on input line 306.
 LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
-(Font)              scaled to size 20.99857pt on input line 297.
+(Font)              scaled to size 20.99857pt on input line 306.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 11.52008pt on input line 297.
+(Font)              scaled to size 11.52008pt on input line 306.
 LaTeX Font Info:    Font shape `T1/fvs/m/n' will be
-(Font)              scaled to size 12.1535pt on input line 297.
+(Font)              scaled to size 12.1535pt on input line 306.
 LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
-(Font)              scaled to size 12.1535pt on input line 297.
+(Font)              scaled to size 12.1535pt on input line 306.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 13.82408pt on input line 297.
+(Font)              scaled to size 13.82408pt on input line 306.
 
-Overfull \hbox (172.68228pt too wide) detected at line 297
+Overfull \hbox (172.68228pt too wide) detected at line 306
 [] 
  []
 
 
-Overfull \hbox (56.23262pt too wide) detected at line 297
+Overfull \hbox (56.23262pt too wide) detected at line 306
  [] |  [] []
  []
 
@@ -1484,128 +1489,80 @@ Overfull \hbox (56.23262pt too wide) detected at line 297
 {/Users/tinatsou/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map} 
 <./logo.jpg>]
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
-(Font)              scaled to size 10.51207pt on input line 301.
+(Font)              scaled to size 10.51207pt on input line 310.
 <Assignment4_files/figure-latex/Fig1-1.pdf, id=24, 1084.05pt x 505.89pt>
 File: Assignment4_files/figure-latex/Fig1-1.pdf Graphic file (type pdf)
 <use Assignment4_files/figure-latex/Fig1-1.pdf>
 Package pdftex.def Info: Assignment4_files/figure-latex/Fig1-1.pdf  used on inp
-ut line 320.
-(pdftex.def)             Requested size: 1084.04736pt x 505.88875pt.
-
-Overfull \hbox (632.49301pt too wide) in paragraph at lines 320--321
- []\T1/mdbch/m/n/10.95 (-20) {[] 
- []
-
-[2]
-
-Package hyperref Warning: Suppressing empty link on input line 327.
-
+ut line 330.
+(pdftex.def)             Requested size: 455.24828pt x 212.44919pt.
 LaTeX Font Info:    Font shape `T1/mdbch/m/it' will be
 (Font)              scaled to size 10.51207pt on input line 331.
-<Assignment4_files/figure-latex/Fig2-1.pdf, id=44, 1084.05pt x 505.89pt>
+[2 <./Assignment4_files/figure-latex/Fig1-1.pdf>]
+<Assignment4_files/figure-latex/Fig2-1.pdf, id=51, 1084.05pt x 505.89pt>
 File: Assignment4_files/figure-latex/Fig2-1.pdf Graphic file (type pdf)
 <use Assignment4_files/figure-latex/Fig2-1.pdf>
 Package pdftex.def Info: Assignment4_files/figure-latex/Fig2-1.pdf  used on inp
-ut line 371.
-(pdftex.def)             Requested size: 1084.04736pt x 505.88875pt.
-
-Overfull \hbox (628.80328pt too wide) in paragraph at lines 371--372
- [][] 
- []
-
-[3 <./Assignment4_files/figure-latex/Fig1-1.pdf>]
-<Assignment4_files/figure-latex/Fig3-1.pdf, id=55, 1084.05pt x 505.89pt>
+ut line 378.
+(pdftex.def)             Requested size: 455.24828pt x 212.44919pt.
+<Assignment4_files/figure-latex/Fig3-1.pdf, id=53, 1084.05pt x 505.89pt>
 File: Assignment4_files/figure-latex/Fig3-1.pdf Graphic file (type pdf)
 <use Assignment4_files/figure-latex/Fig3-1.pdf>
 Package pdftex.def Info: Assignment4_files/figure-latex/Fig3-1.pdf  used on inp
-ut line 382.
-(pdftex.def)             Requested size: 1084.04736pt x 505.88875pt.
-
-Overfull \hbox (628.80328pt too wide) in paragraph at lines 382--383
- [][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 393--393
-|\T1/fvs/b/n/14.4 (+20) Part 2|
- []
-
+ut line 386.
+(pdftex.def)             Requested size: 455.24828pt x 212.44919pt.
+[3]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Font Info:    Trying to load font information for TS1+mdbch on input line
- 420.
+ 421.
 
 (/Users/tinatsou/Library/TinyTeX/texmf-dist/tex/latex/mathdesign/mdbch/ts1mdbch
 .fd
 File: ts1mdbch.fd 2013/08/29 Fontinst v1.933 font definitions for TS1/mdbch.
 )
 LaTeX Font Info:    Font shape `TS1/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 420.
-[4] [5 <./Assignment4_files/figure-latex/Fig2-1.pdf>]
-<Assignment4_files/figure-latex/failrate-1.pdf, id=77, 578.16pt x 361.35pt>
+(Font)              scaled to size 10.51207pt on input line 421.
+[4 <./Assignment4_files/figure-latex/Fig2-1.pdf> <./Assignment4_files/figure-la
+tex/Fig3-1.pdf>]
+<Assignment4_files/figure-latex/failrate-1.pdf, id=78, 578.16pt x 361.35pt>
 File: Assignment4_files/figure-latex/failrate-1.pdf Graphic file (type pdf)
 <use Assignment4_files/figure-latex/failrate-1.pdf>
 Package pdftex.def Info: Assignment4_files/figure-latex/failrate-1.pdf  used on
- input line 427.
-(pdftex.def)             Requested size: 578.15858pt x 361.34912pt.
-
-Overfull \hbox (122.9145pt too wide) in paragraph at lines 427--428
- [][] 
- []
-
-[6 <./Assignment4_files/figure-latex/Fig3-1.pdf>]
-<Assignment4_files/figure-latex/license-1.pdf, id=89, 578.16pt x 361.35pt>
+ input line 428.
+(pdftex.def)             Requested size: 455.24165pt x 284.52603pt.
+[5 <./Assignment4_files/figure-latex/failrate-1.pdf>]
+<Assignment4_files/figure-latex/license-1.pdf, id=91, 578.16pt x 361.35pt>
 File: Assignment4_files/figure-latex/license-1.pdf Graphic file (type pdf)
 <use Assignment4_files/figure-latex/license-1.pdf>
 Package pdftex.def Info: Assignment4_files/figure-latex/license-1.pdf  used on 
-input line 438.
-(pdftex.def)             Requested size: 578.15858pt x 361.34912pt.
-
-Overfull \hbox (122.9145pt too wide) in paragraph at lines 438--439
- [][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 448--448
-|\T1/fvs/b/n/14.4 (+20) Part 3|
- []
-
-<Assignment4_files/figure-latex/frequency-1.pdf, id=91, 361.35pt x 289.08pt>
+input line 439.
+(pdftex.def)             Requested size: 455.24165pt x 284.52603pt.
+<Assignment4_files/figure-latex/frequency-1.pdf, id=93, 361.35pt x 289.08pt>
 File: Assignment4_files/figure-latex/frequency-1.pdf Graphic file (type pdf)
 <use Assignment4_files/figure-latex/frequency-1.pdf>
 Package pdftex.def Info: Assignment4_files/figure-latex/frequency-1.pdf  used o
-n input line 454.
+n input line 452.
 (pdftex.def)             Requested size: 361.34912pt x 289.07928pt.
-[7]
+[6 <./Assignment4_files/figure-latex/license-1.pdf>]
 
-LaTeX Warning: Reference `tab:logtable1' on page 8 undefined on input line 499.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-[8 <./Assignment4_files/figure-latex/failrate-1.pdf>]
-<Assignment4_files/figure-latex/roc-1.pdf, id=116, 361.35pt x 289.08pt>
+[7 <./Assignment4_files/figure-latex/frequency-1.pdf>]
+<Assignment4_files/figure-latex/roc-1.pdf, id=124, 361.35pt x 289.08pt>
 File: Assignment4_files/figure-latex/roc-1.pdf Graphic file (type pdf)
 <use Assignment4_files/figure-latex/roc-1.pdf>
 Package pdftex.def Info: Assignment4_files/figure-latex/roc-1.pdf  used on inpu
-t line 521.
+t line 516.
 (pdftex.def)             Requested size: 361.34912pt x 289.07928pt.
-[9 <./Assignment4_files/figure-latex/license-1.pdf>] [10 <./Assignment4_files/f
-igure-latex/frequency-1.pdf> <./Assignment4_files/figure-latex/roc-1.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 568--568
-|\T1/fvs/b/n/14.4 (+20) Conclusion|
- []
 
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 579--579
-|\T1/fvs/b/n/14.4 (+20) References|
- []
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+[8] [9 <./Assignment4_files/figure-latex/roc-1.pdf>]
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 9.24173pt on input line 578.
-[12] [13] (./Assignment4.aux)
-
-LaTeX Warning: There were undefined references.
-
+(Font)              scaled to size 9.24173pt on input line 570.
+[10] [11] (./Assignment4.aux)
 Package rerunfilecheck Info: File `Assignment4.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 Package logreq Info: Writing requests to 'Assignment4.run.xml'.
@@ -1613,11 +1570,11 @@ Package logreq Info: Writing requests to 'Assignment4.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26474 strings out of 480517
- 442184 string characters out of 5899186
- 1189366 words of memory out of 5000000
- 43348 multiletter control sequences out of 15000+600000
- 512664 words of font info for 322 fonts, out of 8000000 for 9000
+ 26499 strings out of 480517
+ 442284 string characters out of 5899186
+ 1190627 words of memory out of 5000000
+ 43345 multiletter control sequences out of 15000+600000
+ 514240 words of font info for 340 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,14n,93p,744b,1448s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/tinatsou/Library/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{/Use
@@ -1636,10 +1593,10 @@ nts/type1/public/mathdesign/mdbch/md-chr7t.pfb></Users/tinatsou/Library/TinyTeX
 ibrary/TinyTeX/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chr8t.pfb></Us
 ers/tinatsou/Library/TinyTeX/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-
 chri7m.pfb>
-Output written on Assignment4.pdf (13 pages, 7589689 bytes).
+Output written on Assignment4.pdf (11 pages, 7588527 bytes).
 PDF statistics:
- 238 PDF objects out of 1000 (max. 8388607)
- 184 compressed objects within 2 object streams
- 38 named destinations out of 1000 (max. 500000)
+ 232 PDF objects out of 1000 (max. 8388607)
+ 180 compressed objects within 2 object streams
+ 37 named destinations out of 1000 (max. 500000)
  88105 words of extra memory for PDF output out of 89155 (max. 10000000)
 

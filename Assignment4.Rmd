@@ -39,14 +39,8 @@ output:
 editor_options: 
   chunk_output_type: console
 ---
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = FALSE, 
-                      message = FALSE, 
-                      warning = FALSE,
-                      fig.align = 'center')
-```
 
-```{r load libraries}
+```{r setup, include=FALSE,echo = FALSE, message = FALSE, warning = FALSE,fig.align='center'}
 # Libraries
 library(tidyverse)
 library(readr)
@@ -54,14 +48,9 @@ library(kableExtra)
 library(bookdown)
 library(ggplot2)
 library(fastDummies)
-library(scales)
-library(broom)
 library(pROC)
+library(broom)
 library(gtools)
-```
-
-
-```{r data}
 drive <- read_csv(here::here("Data/practicaldrivingexaminationresults.csv"))
 ```
 
@@ -72,6 +61,7 @@ drive <- read_csv(here::here("Data/practicaldrivingexaminationresults.csv"))
 This data set is [Practical driving examination results for customers](https://data.gov.au/dataset/ds-qld-3f90a4c3-23df-49dc-b243-9a29c0b23dd5/details?q=Practical%20driving) which is provided by local government authority (LGA) of Queensland. It records the license class, booking type, examination results and driver age group during 2005 to 2019.
 
 **Research aims:**
+
 We divided into three parts, the first part focuses on the annual pass rate of different local government authority. 
 
 The second part mainly aims to compare the age group with different license. 
@@ -388,7 +378,7 @@ table1 %>%kable(booktabs =TRUE,
   kable_styling(latex_options = c("striped", "hold_position"))
 ```
 
-Table \@ref(tab:logtable1) shows the regression summary. *Booking Type_Private* has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that *Booking Type_Private* affects the passing of an exam negatively compared to *Booking Type_Driving School*. Private booking reduces the log odds by 0.061.
+Table \@ref(tab:results1) shows the regression summary. *Booking Type_Private* has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that *Booking Type_Private* affects the passing of an exam negatively compared to *Booking Type_Driving School*. Private booking reduces the log odds by 0.061.
 
 ```{r anova, tab.caption = "ANOVA for logmodel1"}
 anova <- anova(logmodel, test="Chisq")
@@ -408,6 +398,7 @@ roccurve <- roc(drivedum$`Exam Result_PASS` ~ predpr)
 
 plot(roccurve)
 ```
+
 Figure \@ref(fig:roc) shows the ROC curve of the *logmodel*. It is basically a 45 degree diagonal line which indicates the model has no discrimination ability. 
 
 Area under the curve "...gives the probability that the model correctly ranks such pairs of observations" @bartlett_2014. The area under the curve for this model is `r pROC::auc(roccurve)`. In conclusion, the predictor just makes random guesses.
@@ -465,3 +456,6 @@ Next, we shown that automatic cars have the lowest pass rate overall, and that m
 Last but not least, although, there is statistical relationship between the booking type and the exam outcome, the affect is pretty small. Furthermore, the current variables are inadequate in creating a good model to predict the outcome. 
 
 This is also a shortcoming with the data we currently have. Because it contains very limited variables, it is hard to create a better fit model that can predict the outcome accurately.
+
+
+

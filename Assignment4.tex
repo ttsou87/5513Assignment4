@@ -32,6 +32,15 @@
 \usepackage{longtable,booktabs}
 % Fix footnotes in tables (requires footnote package)
 \IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 \IfFileExists{parskip.sty}{%
 \usepackage{parskip}
 }{% else
@@ -303,6 +312,7 @@
 This data set is \href{https://data.gov.au/dataset/ds-qld-3f90a4c3-23df-49dc-b243-9a29c0b23dd5/details?q=Practical\%20driving}{Practical driving examination results for customers} which is provided by local government authority (LGA) of Queensland. It records the license class, booking type, examination results and driver age group during 2005 to 2019.
 
 \textbf{Research aims:}
+
 We divided into three parts, the first part focuses on the annual pass rate of different local government authority.
 
 The second part mainly aims to compare the age group with different license.
@@ -315,14 +325,11 @@ Using \textcite{R}, we ran analysis to explore our research goals. This analysis
 
 The first part focuses on the annual pass rate of different local government authority.
 
-\textbackslash begin\{figure\}
-
-\{\centering \includegraphics{Assignment4_files/figure-latex/Fig1-1}
-
-\}
-
-\textbackslash caption\{Year Pass Percentage(year\_percentage) and Percentage of Local Government Authority annual passing rates exceeding the total annual passing rate(num\_percentage)\}\label{fig:Fig1}
-\textbackslash end\{figure\}
+\begin{figure}
+\centering
+\includegraphics{Assignment4_files/figure-latex/Fig1-1.pdf}
+\caption{\label{fig:Fig1}Year Pass Percentage(year\_percentage) and Percentage of Local Government Authority annual passing rates exceeding the total annual passing rate(num\_percentage)}
+\end{figure}
 
 In the figure \ref{fig:Fig1}, as for the annual pass rate, it does not fluctuate greatly, and basically remained at 62.5\% but the percentage of the number exceeding the annual pass rate fluctuates greatly, which may be due to missing data in some regions, however, from the data point of view, it has been in an upward phase in recent years.
 
@@ -367,23 +374,17 @@ KOWANYAMA ABORIGINAL SHIRE CONUNCIL & 1\\
 In the table \ref{tab:Tab1}, BLACKALL-TAMBO REGIONAL COUNCIL has the most number of first (5 times). In the table \ref{tab:Tab2}, MAREEBA SHIRE COUNCIL, NAPRANUM ABORIGINAL SHIRE COUNCIL, REDLAND CITY COUNCIL have won the last 2 times.
 
 \begin{figure}
-
-{\centering \includegraphics{Assignment4_files/figure-latex/Fig2-1} 
-
-}
-
-\caption{Year Pass Percentage in BLACKALL-TAMBO REGIONAL COUNCIL, BLACKALL-TAMBO REGIONAL COUNCIL, and REDLAND CITY COUNCIL}\label{fig:Fig2}
+\centering
+\includegraphics{Assignment4_files/figure-latex/Fig2-1.pdf}
+\caption{\label{fig:Fig2}Year Pass Percentage in BLACKALL-TAMBO REGIONAL COUNCIL, BLACKALL-TAMBO REGIONAL COUNCIL, and REDLAND CITY COUNCIL}
 \end{figure}
 
 According to the figure \ref{fig:Fig2}, the annual pass rate of BLACKALL-TAMBO REGIONAL COUNCIL has been on the rise after 2007, even reaching 100\%, while the annual pass rate of MAREEBA SHIRE COUNCIL is in a downward state, and the annual pass rate of REDLAND CITY COUNCIL basically fluctuates at 55\%. Especially, MAREEBA SHIRE COUNCIL and REDLAND CITY COUNCIL have been lower than the annual pass rate since 2015, which the gold line is year pass rate.
 
 \begin{figure}
-
-{\centering \includegraphics{Assignment4_files/figure-latex/Fig3-1} 
-
-}
-
-\caption{Year Pass Number in BLACKALL-TAMBO REGIONAL COUNCIL, MAREEBA SHIRE COUNCIL, and REDLAND CITY COUNCIL}\label{fig:Fig3}
+\centering
+\includegraphics{Assignment4_files/figure-latex/Fig3-1.pdf}
+\caption{\label{fig:Fig3}Year Pass Number in BLACKALL-TAMBO REGIONAL COUNCIL, MAREEBA SHIRE COUNCIL, and REDLAND CITY COUNCIL}
 \end{figure}
 
 In the figure \ref{fig:Fig3}, the number of pass for three government authorities basically has little fluctuation. Interestingly, the ranking of the number of passes and the ranking of the pass rate are completely opposite.
@@ -434,12 +435,9 @@ CLASS R - MOTORCYCLE (OVER 250CC) & 86\%\\
 Figure \ref{fig:failrate}, describes the failing rate of different age groups. It can be seen that the fail rate is increasing with the age grows older. Because people is 81 years old and over has the highest fail rate, which means it is hard for people to pass the driving license after 61 years old. However, there is one interesting point for young people with high rate at 41\%. Basically, the people in this range takes the highest number of examinations. While in the original data set, some young people around these ages have 200- or 300-times test, but still failed. Australia government has more restrictions on young people driving license, so the rate is high.
 
 \begin{figure}
-
-{\centering \includegraphics{Assignment4_files/figure-latex/license-1} 
-
-}
-
-\caption{Compare the fail and pass in different license}\label{fig:license}
+\centering
+\includegraphics{Assignment4_files/figure-latex/license-1.pdf}
+\caption{\label{fig:license}Compare the fail and pass in different license}
 \end{figure}
 
 In Figure \ref{fig:license}, for most drive license, the number of pass all exceeds 50\% of all age, except the automatic car license. People who fails at an older age. The number of fails is much more than pass.
@@ -450,12 +448,9 @@ Another interesting point is that in motorcycle and heavy vehicle, people over 7
 In the following section, we will be analyzing the relationship between \emph{Booking Type} and \emph{Exam Result}.
 
 \begin{figure}
-
-{\centering \includegraphics{Assignment4_files/figure-latex/frequency-1} 
-
-}
-
-\caption{Frequency Plot between Booking Type and Exam Result}\label{fig:frequency}
+\centering
+\includegraphics{Assignment4_files/figure-latex/frequency-1.pdf}
+\caption{\label{fig:frequency}Frequency Plot between Booking Type and Exam Result}
 \end{figure}
 
 The frequency plot, Figure \ref{fig:frequency}, between \emph{Booking Type} and \emph{Exam Result} shows that the percentages of people who passed the exam are similar for both driving school and private.
@@ -496,7 +491,7 @@ term & 'Exam Result\_PASS'\\
 \end{tabular}
 \end{table}
 
-Table \ref{tab:logtable1} shows the regression summary. \emph{Booking Type\_Private} has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that \emph{Booking Type\_Private} affects the passing of an exam negatively compared to \emph{Booking Type\_Driving School}. Private booking reduces the log odds by 0.061.
+Table \ref{tab:results1} shows the regression summary. \emph{Booking Type\_Private} has p-value close to 0 which means it is statistically significant. Due to the variable being a dummy variable relative to booking type driving school, the coefficient indicates that \emph{Booking Type\_Private} affects the passing of an exam negatively compared to \emph{Booking Type\_Driving School}. Private booking reduces the log odds by 0.061.
 
 \begin{table}
 
@@ -517,12 +512,9 @@ ANOVA test, Table \ref{tab:anova}, on the \emph{logmodel} analyzes the table of 
 Next, we test the fit of the model by looking at the receiver operating characteristic (ROC) curve.
 
 \begin{figure}
-
-{\centering \includegraphics{Assignment4_files/figure-latex/roc-1} 
-
-}
-
-\caption{ROC Cuve of logmodel1}\label{fig:roc}
+\centering
+\includegraphics{Assignment4_files/figure-latex/roc-1.pdf}
+\caption{\label{fig:roc}ROC Cuve of logmodel1}
 \end{figure}
 
 Figure \ref{fig:roc} shows the ROC curve of the \emph{logmodel}. It is basically a 45 degree diagonal line which indicates the model has no discrimination ability.
